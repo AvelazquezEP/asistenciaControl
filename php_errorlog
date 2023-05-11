@@ -1,0 +1,51 @@
+[01-Mar-2023 19:54:39 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=http://ericp136.sg-host.com/wp-admin/
+[01-Mar-2023 21:38:41 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
+[01-Mar-2023 22:26:56 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+[01-Mar-2023 23:26:36 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: invalid_schedule, Error message: Event schedule does not exist., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+[03-Mar-2023 21:39:53 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
+[03-Mar-2023 23:25:29 UTC] Error de evento de reprogramación de cron para el hook: action_scheduler_run_queue. Código de error: invalid_schedule. Mensaje de error: El programa del evento no existe.. Datos: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+[03-Mar-2023 23:26:36 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
+[06-Mar-2023 16:06:41 UTC] Error de evento de reprogramación de cron para el hook: wpforms_email_summaries_cron. Código de error: invalid_schedule. Mensaje de error: El programa del evento no existe.. Datos: {"schedule":"wpforms_email_summaries_weekly","args":[],"interval":604800}
+[06-Mar-2023 16:07:31 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
+[07-Mar-2023 17:52:28 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:52:28 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:53:26 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:53:28 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:53:41 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:53:42 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:54:11 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:54:13 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:54:16 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:54:20 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 17:57:18 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:57:18 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:59:47 UTC] a:5:{s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:59:49 UTC] a:4:{s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:59:50 UTC] a:3:{s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:59:51 UTC] a:2:{s:14:"posts_per_page";i:-1;s:5:"paged";i:1;}
+[07-Mar-2023 17:59:51 UTC] a:1:{s:5:"paged";i:1;}
+[07-Mar-2023 17:59:51 UTC] a:0:{}
+[07-Mar-2023 17:59:59 UTC] a:0:{}
+[07-Mar-2023 18:00:01 UTC] a:0:{}
+[07-Mar-2023 18:00:02 UTC] a:0:{}
+[07-Mar-2023 18:00:03 UTC] a:0:{}
+[07-Mar-2023 18:00:43 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:00:43 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:01:09 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:01:09 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:3:"ASC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:26 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:26 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:59 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:59 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:59 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:12:59 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:13:21 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:13:21 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:17:49 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:17:49 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:18:11 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:18:11 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";i:10;s:5:"paged";i:1;}
+[07-Mar-2023 18:19:12 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";s:1:"2";s:5:"paged";i:1;}
+[07-Mar-2023 18:19:12 UTC] a:6:{s:9:"post_type";a:1:{i:0;s:4:"post";}s:11:"post_status";a:1:{i:0;s:7:"publish";}s:5:"order";s:4:"DESC";s:7:"orderby";s:4:"date";s:14:"posts_per_page";s:1:"2";s:5:"paged";i:1;}
+[08-Mar-2023 17:13:30 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
+[02-May-2023 18:25:25 UTC] wp_auto_login: trying to login user_id==1 loginusername=rterrazas@greencardla.com to admin_url=https://ericp136.sg-host.com/wp-admin/
