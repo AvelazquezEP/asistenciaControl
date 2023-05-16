@@ -17,44 +17,45 @@ class UserController extends Controller
         return View("Users.users")->with('users', $users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function userById($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
+        $user = User::where('id', $id)->first();
+        return view('Users.user', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function updated(Request $request, $id)
     {
-        //
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id]);
+
+        $data = array('name' => $name, "email" => $email, "password" => $password);
+        // User::Table('users')->update($data);
+        // User::whereIn('id', $id)->update($request->all());
+
+        $User = User::findOrFail($id);
+        $User->update($data);        
+
+        return redirect()->route('Users.users')
+            ->with('updated', 'User edited , ' . $request->input('email'));
+    }
+
+    public function insert(Request $request)
+    {
+
+        // $img = $request->input('img');
+        // $title = $request->input('title');
+        // $content = $request->input('content');
+        // $data = array('title' => $title, "content" => $content, "img_url" => $img);
+        // \DB::table('topics')->insert($data);
+
+        // return  redirect()->route('index.topics')
+        //     ->with('created', 'Post created ,new Title: ' . $request->input('title'));
     }
 
     /**
