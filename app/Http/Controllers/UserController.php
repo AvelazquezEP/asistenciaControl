@@ -23,9 +23,7 @@ class UserController extends Controller
         return view('Users.user', ['user' => $user]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function updated(Request $request, $id)
     {
         $name = $request->input('name');
@@ -39,7 +37,7 @@ class UserController extends Controller
         // User::whereIn('id', $id)->update($request->all());
 
         $User = User::findOrFail($id);
-        $User->update($data);        
+        $User->update($data);
 
         return redirect()->route('Users.users')
             ->with('updated', 'User edited , ' . $request->input('email'));
