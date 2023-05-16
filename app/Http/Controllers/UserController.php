@@ -14,17 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-
-        // $users = array(
-        //     'name' => 'Test',
-        //     'email' => 'test@test.com',
-        //     'password' => '700Flower!'
-        // );
-
-        // $users = User::table('users')->get();
         return View("Users.users")->with('users', $users);
-
-        // return view('Users.users')->with('users', $users);
     }
 
     /**

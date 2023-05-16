@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// EL ORDEN DE LA FUNCION DE FLECHA VA AL FINAL (DESPUÉS DE TERMINAR LA FUNCTION)
+Route::get('/', function () {
+    return view('welcome');
+})->name('index.welcome');
 
 // Route::get('/', 'UserController@index')->name('index.topics');
-Route::get('/users', [UserController::class, 'index'])->name('index.topics');
+Route::get('/users', [UserController::class, 'index'])->name('Users.users');

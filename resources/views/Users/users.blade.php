@@ -1,16 +1,29 @@
-<div class="container-fluid">
-    <div class="row">
-        @for ($users as $user)
-            <div class="col-sm-3 margin">
-                {{-- <img src="  {{ URL::asset('/img/' . $topic->img_url) }} " class="img-circle myimg"
-                    alt="cinque terre"> --}}
-                <section>
-                    <h1 class="center"> {{ $user->name }}</h1>
-                    <p class="center maxlength"> {{ $user->email }} </p>
-                    <p class="center maxlength"> {{ $user->password }} </p>
-                    {{-- <center> <a href="{{ route('index.topic', [$topic->id]) }}">Read More...</a></center> --}}
-                </section>
-            </div>
-        @endforeach
+@extends('utilities.master')
+@section('content')
+    <style>
+        .tableContainer {
+            width: 85%;
+            margin: 0 auto;
+        }
+    </style>
+    <div class="tableContainer">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-</div>
+@endsection
