@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::controller(UserController::class)->group(function () {
+    // Rutas USERS
+});
 // All USERS
 Route::get('/users', [UserController::class, 'index'])->name('Users.users');
 // UPDATED USER
@@ -30,3 +34,13 @@ Route::get('/user/create', [UserController::class, 'create'])->name('Users.creat
 Route::post('/user/insert', [UserController::class, 'insert'])->name('Users.insert_ok');
 // DELETE USER
 Route::get('/user/remove/{id}', [UserController::class, 'destroy'])->name('Users.deleted_ok');
+
+
+Route::controller(LoginRegisterController::class)->group(function () {
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/logout', 'logout')->name('logout');
+});
