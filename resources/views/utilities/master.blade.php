@@ -11,6 +11,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Fontawsome - ICONS -->
+    <script src="https://kit.fontawesome.com/4f12dacfd7.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <style>
@@ -129,12 +131,13 @@
             background: linear-gradient(0deg, rgba(235, 204, 209, 1) 0%, rgba(235, 204, 221, 0.927608543417367) 100%);
         }
     </style>
-
 </head>
 
 <body>
     @include('utilities.header')
     @yield('content')
+    @stack('scripts')
+    {{-- <script type="text/javascript" src="{{ asset('js/table.js') }}"></script> --}}
 </body>
 
 </html>

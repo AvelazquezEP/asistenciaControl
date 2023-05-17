@@ -7,7 +7,20 @@
             margin: 0 auto;
             padding-top: 3rem;
         }
+
+        .backButton>svg {
+            width: 2rem;
+        }
     </style>
+    {{-- <a href="index.html" class="backButton">
+        <svg xmlns="http://www.w3.org/2000/svg" class="" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        </svg>
+        <span class="">
+            back
+        </span>
+    </a> --}}
     <form class="form" method="POST" action="{{ route('Users.update_ok', [$user->id]) }}">
         @csrf
         <!-- {{ csrf_field() }} -->
@@ -25,5 +38,6 @@
             <input type="password" name="password" class="form-control" id="password" value="{{ $user->password }}">
         </div>
         <button type="submit" class="btn btn-default">Update</button>
+        <a class="btn btn-danger" href="{{ url('/users') }}">Cancel</a>
     </form>
 @endsection

@@ -8,9 +8,9 @@
             padding-top: 3rem;
         }
     </style>
-    <form class="form" method="POST" action="{{ route('Users.insert_ok') }}">
-        {{-- <input hidden type="text" value="{{ $user->id }}"> --}}
-        @csrf <!-- {{ csrf_field() }} -->
+    <form class="form" method="POST" action="{{ route('Users.insert_ok') }}">        
+        @csrf
+        <!-- {{ csrf_field() }} -->
         <div class="form-group">
             <label for="email">Name:</label>
             <input type="text" name="name" class="form-control" id="name">
@@ -24,5 +24,6 @@
             <input type="password" name="password" class="form-control" id="password">
         </div>
         <button type="submit" class="btn btn-default">Create</button>
+        <a class="btn btn-danger" href="{{ url('/users') }}">Cancel</a>
     </form>
 @endsection

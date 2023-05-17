@@ -29,4 +29,4 @@ Route::get('/user/create', [UserController::class, 'create'])->name('Users.creat
 // CREATE USER
 Route::post('/user/insert', [UserController::class, 'insert'])->name('Users.insert_ok');
 // DELETE USER
-Route::post('/user/remove/{id}', [UserController::class, 'destroy'])->name('Users.deleted_ok');
+Route::get('/user/remove/{id}', [UserController::class, 'destroy'])->name('Users.deleted_ok');

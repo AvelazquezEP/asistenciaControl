@@ -80,6 +80,8 @@ class UserController extends Controller
 
         $user->delete();
 
+        
+
         return  redirect()->route('Users.users')
             ->with('deleted', 'User deleted: ');
     }
