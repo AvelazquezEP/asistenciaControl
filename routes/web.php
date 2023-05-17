@@ -14,14 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// EL ORDEN DE LA FUNCION DE FLECHA VA AL FINAL (DESPUÉS DE TERMINAR LA FUNCTION)
 // MAIN (index.html)
 Route::get('/', function () {
     return view('welcome');
-})->name('index.welcome');
+})->name('welcome');
 // All USERS
 Route::get('/users', [UserController::class, 'index'])->name('Users.users');
-// USER by ID
-Route::get('/user/{id}', [UserController::class, 'userById'])->name(('Users.user'));
 // UPDATED USER
-Route::get('/user/update_ok/{id}', [UserController::class, 'updated'])->name(('Users.update_ok'));
+Route::get('/edit/{id}', [UserController::class, 'edit'])->name('Users.edit');
+// UPDATED USER
+Route::post('/user/update_ok/{id}', [UserController::class, 'updated'])->name('Users.update_ok');
+// CREATE USER
+Route::get('/user/create', [UserController::class, 'create'])->name('Users.create');
+// CREATE USER
+Route::post('/user/insert', [UserController::class, 'insert'])->name('Users.insert_ok');
+// DELETE USER
+Route::post('/user/remove/{id}', [UserController::class, 'destroy'])->name('Users.deleted_ok');

@@ -8,7 +8,9 @@
             padding-top: 3rem;
         }
     </style>
-    <form class="form" action="{{ route('Users.update_ok', [$user->id]) }}">
+    <form class="form" method="POST" action="{{ route('Users.update_ok', [$user->id]) }}">
+        @csrf
+        <!-- {{ csrf_field() }} -->
         <input hidden type="text" value="{{ $user->id }}">
         <div class="form-group">
             <label for="email">Name:</label>
@@ -20,7 +22,7 @@
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" name="password" class="form-control" id="pwd" value="{{ $user->password }}">
+            <input type="password" name="password" class="form-control" id="password" value="{{ $user->password }}">
         </div>
         <button type="submit" class="btn btn-default">Update</button>
     </form>

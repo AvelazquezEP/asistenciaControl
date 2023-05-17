@@ -12,5 +12,6 @@
     </style>
     <div class="mainDiv">
         <h1>Main</h1>
+        <p> Count: 1 user</p>
     </div>
 @endsection

@@ -36,7 +36,7 @@
 <body>
 
     <ul>
-        <li><a href="{{ route('index.welcome') }}">Home</a></li>
+        <li><a href="{{ route('welcome') }}">Home</a></li>
         <li><a href="{{ route('Users.users') }}">Users</a></li>
         {{-- <li><a href="#">Otros</a></li> --}}
         {{-- {{-- <li><a href="{{ route('admin.create') }}">Create topic</a></li> --}}
