@@ -7,17 +7,21 @@
             margin: 0 auto;
             padding-top: 3rem;
         }
+
+        .radioContainer {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .radioButtonStatus {
+            display: flex;
+            align-items: center;
+            align-content: center;
+        }
     </style>
     <form class="form" method="POST" action="{{ route('Users.insert_ok') }}">
         @csrf
         <!-- {{ csrf_field() }} -->
-        <div class="form-group">
-            <label>Status:</label>
-            <label for="true">True</label><br>
-            <input type="radio" id="true" name="status_user" value="true">
-            <label for="css">False</label><br>
-            <input type="radio" id="false" name="status_user" value="false">
-        </div>
         <div class="form-group">
             <label for="email">Name:</label>
             <input type="text" name="name" class="form-control" id="name">

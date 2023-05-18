@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,6 +32,7 @@ class UserController extends Controller
         $password = $request->input('password');
         $status = $request->input('status');
 
+        // $status
         User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id, $status]);
 
         $data = array(
@@ -55,24 +57,36 @@ class UserController extends Controller
 
     public function insert(Request $request)
     {
-        $date = date('Y-m-d H:i:s');
+        // $request->validate([
+        //     'name' => 'required|string|max:250',
+        //     'email' => 'required|email|max:250|unique:users',
+        //     'password' => 'required|min:8|confirmed',
+        // ]);
 
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $createdAt = $request->$date;
-        $data = array(
-            'name' => $name,
-            "email" => $email,
-            "password" => $password,
-            "create_at" => $createdAt,
-        );
+        // User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        //     'status' => true,
+        // ]);
 
-        // User::table('topics')->insert($data);
-        User::create($data);
+        // return  redirect()->route('Users.users')
+        //     ->with('created', 'User created ' . $request->input('email'));
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8',
+        ]);
+
+        User::create([
+            'status' => true,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         return  redirect()->route('Users.users')
-            ->with('created', 'User created ' . $request->input('email'));
+            ->with('created', 'User created ');
     }
 
     public function destroy($id)

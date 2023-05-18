@@ -26,6 +26,30 @@
         <!-- {{ csrf_field() }} -->
         <input hidden type="text" value="{{ $user->id }}">
         <div class="form-group">
+            <div class="radioContainer">
+                <label>Status:</label>
+                @if ($user->status == true)
+                    <div class="radioButtonStatus">
+                        <input type="radio" id="status" name="status" value="true" checked>
+                        <label for="true">True</label>
+                    </div>
+                    <div class="radioButtonStatus">
+                        <input type="radio" id="status" name="status" value="false">
+                        <label for="false">false</label>
+                    </div>
+                @else
+                    <div class="radioButtonStatus">
+                        <input type="radio" id="status" name="status" value="true">
+                        <label for="true">True</label>
+                    </div>
+                    <div class="radioButtonStatus">
+                        <input type="radio" id="status" name="status" value="false" checked>
+                        <label for="false">false</label>
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="form-group">
             <label for="email">Name:</label>
             <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}">
         </div>

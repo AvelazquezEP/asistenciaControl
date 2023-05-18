@@ -105,8 +105,7 @@
             <!-- Trigger the modal with a button -->
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
-            </button>
-            {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
+            </button>            
             <a href="{{ route('Users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
             <input hidden type="text" value="" id="idUser">
             <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
