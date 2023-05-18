@@ -14,6 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
+
         return View("Users.users")->with('users', $users);
     }
 
@@ -80,7 +81,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        
+
 
         return  redirect()->route('Users.users')
             ->with('deleted', 'User deleted: ');

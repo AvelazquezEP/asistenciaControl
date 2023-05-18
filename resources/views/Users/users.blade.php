@@ -123,7 +123,8 @@
                         <td>*</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->password }}</td>
+                        {{-- @php($decryptedPassword = Crypt::decrypt($user->password)) --}}
+                        <td>{{ Crypt::decrypt($user->password) }}</td>
                     </tr>
                 @endforeach
             </tbody>
