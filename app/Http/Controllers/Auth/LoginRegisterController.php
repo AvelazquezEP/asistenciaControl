@@ -17,7 +17,9 @@ class LoginRegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except([
-            'logout', 'dashboard'
+            'logout',
+            'dashboard',
+            'welcome',
         ]);
     }
 
@@ -48,7 +50,8 @@ class LoginRegisterController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'status' => true,
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -83,7 +86,7 @@ class LoginRegisterController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')
+            return redirect()->route('welcome')
                 ->withSuccess('You have successfully logged in!');
         }
 

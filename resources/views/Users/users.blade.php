@@ -67,12 +67,13 @@
             display: flex;
             flex-direction: column;
         }
+
+        .statusIcon {
+            font-size: 2rem;
+        }
     </style>
 
-    {{-- #region t --}}
-
-
-    {{-- #endregion --}}
+    {{-- ALERTS --}}
     @if (Session::has('created'))
         <div class="alert-wrap">
             <div class="alert alert-success">
@@ -97,6 +98,8 @@
             </div>
         </div>
     @endif
+
+    {{-- USERS DATA --}}
     <div class="tableContainer">
         <div class="btn_container">
             <!-- Trigger the modal with a button -->
@@ -114,17 +117,27 @@
                     <th>Estatus</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Password</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
                     <tr id="{{ $user->id }}" onclick="changeBG({{ $user->id }})">
-                        <td>*</td>
+                        <td>
+                            @if ($user->status == true)
+                                <i class="fa-solid fa-check statusIcon" style="color: #48b11b;"></i>
+                            @else
+                                <i class="fa-sharp fa-solid fa-xmark statusIcon" style="color: #f27263;"></i>
+                            @endif
+                        </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         {{-- @php($decryptedPassword = Crypt::decrypt($user->password)) --}}
-                        <td>{{ Crypt::decrypt($user->password) }}</td>
+                        <td>
+                            <a href="">
+                                <i class="fa-solid fa-calendar-week"></i>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

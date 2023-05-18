@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// The configuration to auth login is in -> app\Providers\RouteServiceProvider.php
 // MAIN (index.html)
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/', 'index')->name('welcome');
+});
 
 Route::controller(UserController::class)->group(function () {
     // Route::get('/users', [UserController::class, 'index'])->name('Users.users');
@@ -39,3 +46,30 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
 });
+
+/* #region pass */
+
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
+/* #endregion */

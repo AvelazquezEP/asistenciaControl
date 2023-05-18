@@ -1,5 +1,14 @@
 @extends('auth.layouts')
 @section('content')
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .rPassword:hover {
+            scale: 1.1;
+        }
+    </style>
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
 
@@ -31,7 +40,11 @@
                         <div class="mb-3 row">
                             <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Login">
                         </div>
-
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ URL('/forgot-password') }}" class="rPassword">
+                                <small class="text-secondary" style="font-size: 0.8rem;">remember password</small>
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -29,23 +29,23 @@ class UserController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         $password = $request->input('password');
-        // $createdBy = $request->input('created_at');
+        $status = $request->input('status');
 
-        User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id]);
+        User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id, $status]);
 
         $data = array(
             'name' => $name,
             "email" => $email,
-            "password" => $password
+            "password" => $password,
+            "status" => $status,
         );
-        // User::Table('users')->update($data);
-        // User::whereIn('id', $id)->update($request->all());
 
         $User = User::findOrFail($id);
         $User->update($data);
 
         return redirect()->route('Users.users')
-            ->with('updated', 'User edited , ' . $request->input('email'));
+            ->with('updated', 'User edited');
+        // ->with('updated', 'User edited , ' . $request->input('email'));
     }
 
     public function create()

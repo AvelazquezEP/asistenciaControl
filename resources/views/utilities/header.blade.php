@@ -1,50 +1,86 @@
-<!DOCTYPE html>
-<html>
+<style>
+    .header {
+        display: flex;
+        align-items: center;
+        background-color: #333333;
+    }
 
-<head>
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
+    .logo {
+        color: white;
+    }
 
-        li {
-            float: left;
-        }
+    .logo:hover {
+        font-weight: bold;
+        color: bisque;
+    }
 
-        li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
+    .navDividers {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
 
-        li a:hover:not(.active) {
-            background-color: #111;
-        }
+    .nav {
+        display: flex;
+        justify-content: space-between;
+    }
 
-        .active {
-            background-color: #4CAF50;
-        }
-    </style>
-</head>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
 
-<body>
+    li {
+        float: left;
+    }
 
-    <ul>
-        <li><a href="{{ route('welcome') }}">Home</a></li>
-        <li><a href="{{ route('Users.users') }}">Users</a></li>
-        {{-- <li><a href="#">Otros</a></li> --}}
-        {{-- {{-- <li><a href="{{ route('admin.create') }}">Create topic</a></li> --}}
-        {{-- <li><a href="{{ route('admin.edit') }}">Edit topic</a></li>
-        <li><a href="{{ route('admin.delete') }}">Delete</a></li>
-        <li style="float:right"><a class="active" href="{{ route('other.about') }}">About</a></li> --}} --}}
-    </ul>
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
 
-</body>
+    li a:hover:not(.active) {
+        /* background-color: #111; */
+        background-color: rgb(245, 245, 245);
+        color: #333333;
+    }
 
-</html>
+    .active {
+        background-color: #4CAF50;
+    }
+
+    /* .btn_logout:hover {
+        background-color: rgb(219, 159, 131);
+    } */
+</style>
+
+<header class="header">
+    <a class="navbar-brand logo" href="{{ URL('/') }}">{{ $_ENV['APP_NAME'] }}</a>
+    <div class="navDividers">
+        {{-- NAV 1 --}}
+        <div>
+            <ul>
+                <li><a href="{{ route('Users.users') }}">Users</a></li>
+                <li><a href="#">Scheduler</a></li>
+            </ul>
+        </div>
+        {{-- NAV 2 --}}
+        <div>
+            <ul>
+                <li class="btn_logout">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
