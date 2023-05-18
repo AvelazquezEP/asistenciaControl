@@ -66,7 +66,10 @@
         {{-- NAV 1 --}}
         <div>
             <ul>
-                <li><a href="{{ route('Users.users') }}">Users</a></li>
+                @can('role-create')
+                    <li><a href="{{ URL('/users') }}">Users</a></li>
+                @endcan
+                {{-- <li><a href="{{ route('Users.users') }}">Users2</a></li> --}}
                 <li><a href="#">Scheduler</a></li>
             </ul>
         </div>

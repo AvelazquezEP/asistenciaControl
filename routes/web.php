@@ -47,7 +47,14 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 });
 
-/* #region pass */
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', RoleController::class);
+    // Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+});
+
+
+/* #region AUTH */
 
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');

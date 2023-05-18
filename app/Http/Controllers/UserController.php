@@ -57,21 +57,6 @@ class UserController extends Controller
 
     public function insert(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:250',
-        //     'email' => 'required|email|max:250|unique:users',
-        //     'password' => 'required|min:8|confirmed',
-        // ]);
-
-        // User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'status' => true,
-        // ]);
-
-        // return  redirect()->route('Users.users')
-        //     ->with('created', 'User created ' . $request->input('email'));
         $request->validate([
             'name' => 'required|string|max:250',
             'email' => 'required|email|max:250|unique:users',
@@ -83,7 +68,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ])->assignRole($request->input('roles'));
 
         return  redirect()->route('Users.users')
             ->with('created', 'User created ');
@@ -99,5 +84,58 @@ class UserController extends Controller
 
         return  redirect()->route('Users.users')
             ->with('deleted', 'User deleted: ');
+    }
+}
+
+
+class test
+{
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+
+        return view('users.edit', compact('user', 'roles', 'userRole'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully');
     }
 }
