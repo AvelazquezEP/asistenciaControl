@@ -29,7 +29,7 @@ class UserController extends Controller
 
         $data = User::latest()->paginate(5);
 
-        return view('Users.index', compact('data'))
+        return view('Users.users', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -103,7 +103,7 @@ class UserController extends Controller
         return view('users.create', compact('roles'));
     }
 
-    public function insert(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         /* #region  CREATE METHOD*/
 
@@ -125,7 +125,7 @@ class UserController extends Controller
 
         // /* #endregion */
 
-        $this->validate($request, [
+        $this->validate($request, [            
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',

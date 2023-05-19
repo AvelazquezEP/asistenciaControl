@@ -4,29 +4,24 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
-// use App\config\auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
+// MAIN (index.html)
+
+/* #region OLD ROUTES */
 
 // The configuration to auth login is in -> app\Providers\RouteServiceProvider.php
-// MAIN (index.html)
-// Auth::routes(); //<--- Este necesita de una clase 
+
+Auth::routes(); //<--- Este necesita de una clase 
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,8 +32,8 @@ Route::controller(DashboardController::class)->group(function () {
 });
 
 Route::controller(UserController::class)->group(function () {
-    // Route::get('/users', [UserController::class, 'index'])->name('Users.users');
-    // Route::get('/users', 'index')->name('Users.users');
+    Route::get('/users', [UserController::class, 'index'])->name('Users.users');
+    Route::get('/users', 'index')->name('Users.users');
     Route::get('/edit/{id}', 'edit')->name('Users.edit');
     Route::post('/user/update_ok/{id}', 'updated')->name('Users.update_ok');
     Route::get('/user/create', 'create')->name('Users.create');
@@ -62,9 +57,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
 });
 
-
-/* #region AUTH */
-
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
@@ -72,9 +64,6 @@ Route::get('/forgot-password', function () {
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
@@ -88,6 +77,35 @@ Route::post('/forgot-password', function (Request $request) {
         : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /* #endregion */
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* #region TEST */
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Auth::routes();
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('users', UserController::class);
+//     Route::resource('products', ProductController::class);
+// });
+
+/*  #endregion */

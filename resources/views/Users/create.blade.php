@@ -31,8 +31,15 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                {{-- <strong>status:</strong> --}}
+                {{-- {!! Form::hidden('status', null, ['placeholder' => 'status', 'class' => 'form-control']) !!} --}}
+                {!! Form::hidden('status', 'true') !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Name:</strong>
-                {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control', 'value' => true]) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -65,6 +72,4 @@
     </div>
     {!! Form::close() !!}
 
-
-    <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
