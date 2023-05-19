@@ -66,7 +66,7 @@
         {{-- NAV 1 --}}
         <div>
             <ul>
-                @can('role-create')
+                @can('Admin')
                     <li><a href="{{ URL('/users') }}">Users</a></li>
                 @endcan
                 {{-- <li><a href="{{ route('Users.users') }}">Users2</a></li> --}}
