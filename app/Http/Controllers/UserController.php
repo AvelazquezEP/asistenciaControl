@@ -4,85 +4,161 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller\RoleController;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+// use Spatie\Permission\Models\Role;
+// use DB;
+use Illuminate\Support\Facades\DB; //<--- this line fix the DB call
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
         $users = User::get();
 
-        return View("Users.users")->with('users', $users);
+        // return View("Users.users")->with('users', $users);
+
+        $data = User::latest()->paginate(5);
+
+        return view('Users.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function edit($id)
     {
-        $user = User::where('id', $id)->first();
-        return view('Users.edit', ['user' => $user]);
+        // $user = User::where('id', $id)->first();
+        // return view('Users.edit', ['user' => $user]);
+
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+
+        return view('users.edit', compact('user', 'roles', 'userRole'));
     }
 
     public function updated(Request $request, $id)
     {
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $status = $request->input('status');
+        /* #region UPDATE FUNCTION */
 
-        // $status
-        User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id, $status]);
+        // $name = $request->input('name');
+        // $email = $request->input('email');
+        // $password = $request->input('password');
+        // $status = $request->input('status');
 
-        $data = array(
-            'name' => $name,
-            "email" => $email,
-            "password" => $password,
-            "status" => $status,
-        );
+        // // $status
+        // User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id, $status]);
 
-        $User = User::findOrFail($id);
-        $User->update($data);
+        // $data = array(
+        //     'name' => $name,
+        //     "email" => $email,
+        //     "password" => $password,
+        //     "status" => $status,
+        // );
 
-        return redirect()->route('Users.users')
-            ->with('updated', 'User edited');
+        // $User = User::findOrFail($id);
+        // $User->update($data);
+
+        // return redirect()->route('Users.users')
+        //     ->with('updated', 'User edited');
         // ->with('updated', 'User edited , ' . $request->input('email'));
-    }
+        /* #endregion */
 
-    public function create()
-    {
-        return view('Users.create');
-    }
-
-    public function insert(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:250',
-            'email' => 'required|email|max:250|unique:users',
-            'password' => 'required|min:8',
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'same:confirm-password',
+            'roles' => 'required'
         ]);
 
-        User::create([
-            'status' => true,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ])->assignRole($request->input('roles'));
+        $input = $request->all();
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
+        }
 
-        return  redirect()->route('Users.users')
-            ->with('created', 'User created ');
+        $user = User::find($id);
+        $user->update($input);
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully');
+    }
+
+    public function create(): View
+    {
+        // return view('Users.create');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('users.create', compact('roles'));
+    }
+
+    public function insert(Request $request): RedirectResponse
+    {
+        /* #region  CREATE METHOD*/
+
+        // $request->validate([
+        //     'name' => 'required|string|max:250',
+        //     'email' => 'required|email|max:250|unique:users',
+        //     'password' => 'required|min:8',
+        // ]);
+
+        // User::create([
+        //     'status' => true,
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ])->assignRole($request->input('roles'));
+
+        // return  redirect()->route('Users.users')
+        //     ->with('created', 'User created ');
+
+        // /* #endregion */
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+            'roles' => 'required'
+        ]);
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')
+            ->with('success', 'User created successfully');
+    }
+
+    public function show($id): View
+    {
+        $user = User::find($id);
+        return view('users.show', compact('user'));
     }
 
     public function destroy($id)
     {
-        $user = User::where('id', $id)->first();
+        // $user = User::where('id', $id)->first();
 
-        $user->delete();
+        // $user->delete();
 
+        // return  redirect()->route('Users.users')
+        //     ->with('deleted', 'User deleted: ');
 
-
-        return  redirect()->route('Users.users')
-            ->with('deleted', 'User deleted: ');
+        User::find($id)->delete();
+        return redirect()->route('users.index')
+            ->with('success', 'User deleted successfully');
     }
 }

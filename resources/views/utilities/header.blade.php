@@ -66,9 +66,9 @@
         {{-- NAV 1 --}}
         <div>
             <ul>
-                @can('Admin')
-                    <li><a href="{{ URL('/users') }}">Users</a></li>
-                @endcan
+                {{-- @can('Admin') --}}
+                {{-- @endcan --}}
+                <li><a href="{{ URL('/users') }}">Users</a></li>
                 {{-- <li><a href="{{ route('Users.users') }}">Users2</a></li> --}}
                 <li><a href="#">Scheduler</a></li>
             </ul>

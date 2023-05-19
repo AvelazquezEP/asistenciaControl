@@ -4,7 +4,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProductController;
+// use App\config\auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +26,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // The configuration to auth login is in -> app\Providers\RouteServiceProvider.php
 // MAIN (index.html)
+// Auth::routes(); //<--- Este necesita de una clase 
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -29,7 +38,7 @@ Route::controller(DashboardController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     // Route::get('/users', [UserController::class, 'index'])->name('Users.users');
-    Route::get('/users', 'index')->name('Users.users');
+    // Route::get('/users', 'index')->name('Users.users');
     Route::get('/edit/{id}', 'edit')->name('Users.edit');
     Route::post('/user/update_ok/{id}', 'updated')->name('Users.update_ok');
     Route::get('/user/create', 'create')->name('Users.create');
@@ -49,7 +58,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
-    // Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 });
 
@@ -80,3 +89,5 @@ Route::post('/forgot-password', function (Request $request) {
 })->middleware('guest')->name('password.email');
 
 /* #endregion */
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

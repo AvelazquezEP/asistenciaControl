@@ -1,40 +1,70 @@
-{{-- CREATE NEW USER --}}
-@extends('utilities.master')
+@extends('layouts.app')
+
+
 @section('content')
-    <style>
-        .form {
-            width: 80%;
-            margin: 0 auto;
-            padding-top: 3rem;
-        }
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Create New User</h2>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+            </div>
+        </div>
+    </div>
 
-        .radioContainer {
-            display: flex;
-            gap: 2rem;
-        }
 
-        .radioButtonStatus {
-            display: flex;
-            align-items: center;
-            align-content: center;
-        }
-    </style>
-    <form class="form" method="POST" action="{{ route('Users.insert_ok') }}">
-        @csrf
-        <!-- {{ csrf_field() }} -->
-        <div class="form-group">
-            <label for="email">Name:</label>
-            <input type="text" name="name" class="form-control" id="name">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" class="form-control" id="email">
+    @endif
+
+
+
+    {!! Form::open(['route' => 'users.store', 'method' => 'POST']) !!}
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+            </div>
         </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" name="password" class="form-control" id="password">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Email:</strong>
+                {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+            </div>
         </div>
-        <button type="submit" class="btn btn-default">Create</button>
-        <a class="btn btn-danger" href="{{ url('/users') }}">Cancel</a>
-    </form>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Password:</strong>
+                {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Confirm Password:</strong>
+                {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Role:</strong>
+                {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+
+    <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection

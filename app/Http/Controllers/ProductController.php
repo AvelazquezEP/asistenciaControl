@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -15,6 +18,11 @@ class ProductController extends Controller
      */
     function __construct()
     {
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+
         $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
         $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:product-edit', ['only' => ['edit', 'update']]);
@@ -25,8 +33,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
+        // $products = Product::latest()->paginate(5);
+        // return view('products.index', compact('products'))
+        //     ->with('i', (request()->input('page', 1) - 1) * 5);
         $products = Product::latest()->paginate(5);
         return view('products.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -37,7 +48,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('products.create');
     }
@@ -48,7 +59,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         request()->validate([
             'name' => 'required',
@@ -67,7 +78,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product): View
     {
         return view('products.show', compact('product'));
     }
@@ -78,11 +89,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         return view('products.edit', compact('product'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -90,7 +100,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product): RedirectResponse
     {
         request()->validate([
             'name' => 'required',
@@ -109,7 +119,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
