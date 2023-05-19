@@ -9,7 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    <title>{{ $_ENV['APP_NAME'] }}</title>
+    @guest
+        <title>{{ $_ENV['APP_NAME'] }}</title>
+    @else
+        <title>{{ $_ENV['APP_NAME'] }} - {{ Auth::user()->name }}</title>
+    @endguest
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

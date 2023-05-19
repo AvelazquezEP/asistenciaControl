@@ -23,7 +23,7 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            {{-- <th>No</th> --}}
             <th>Name</th>
             <th>Email</th>
             <th>Roles</th>
@@ -31,7 +31,7 @@
         </tr>
         @foreach ($data as $key => $user)
             <tr>
-                <td>{{ ++$i }}</td>
+                {{-- <td>{{ ++$i }}</td> --}}
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>
@@ -51,7 +51,6 @@
             </tr>
         @endforeach
     </table>
-
 
     {!! $data->render() !!}
 @endsection

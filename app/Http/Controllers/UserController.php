@@ -45,33 +45,8 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'roles', 'userRole'));
     }
 
-    public function updated(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        /* #region UPDATE FUNCTION */
-
-        // $name = $request->input('name');
-        // $email = $request->input('email');
-        // $password = $request->input('password');
-        // $status = $request->input('status');
-
-        // // $status
-        // User::query('update topics set title = ?,content=?,img_url=? where id = ?', [$name, $email, $password, $id, $status]);
-
-        // $data = array(
-        //     'name' => $name,
-        //     "email" => $email,
-        //     "password" => $password,
-        //     "status" => $status,
-        // );
-
-        // $User = User::findOrFail($id);
-        // $User->update($data);
-
-        // return redirect()->route('Users.users')
-        //     ->with('updated', 'User edited');
-        // ->with('updated', 'User edited , ' . $request->input('email'));
-        /* #endregion */
-
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
@@ -125,7 +100,7 @@ class UserController extends Controller
 
         // /* #endregion */
 
-        $this->validate($request, [            
+        $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
