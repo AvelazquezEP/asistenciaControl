@@ -52,5 +52,5 @@
         @endforeach
     </table>
 
-    {!! $data->render() !!}
+    {{-- {!! $data->render() !!} --}}
 @endsection
