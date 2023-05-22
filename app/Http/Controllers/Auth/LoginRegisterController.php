@@ -18,8 +18,8 @@ class LoginRegisterController extends Controller
     {
         $this->middleware('guest')->except([
             'logout',
-            'dashboard',
             'welcome',
+            // 'dashboard',
         ]);
     }
 
@@ -93,24 +93,7 @@ class LoginRegisterController extends Controller
         return back()->withErrors([
             'email' => 'Your provided credentials do not match in our records.',
         ])->onlyInput('email');
-    }
-
-    /**
-     * Display a dashboard to authenticated users.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard()
-    {
-        if (Auth::check()) {
-            return view('auth.dashboard');
-        }
-
-        return redirect()->route('login')
-            ->withErrors([
-                'email' => 'Please login to access the dashboard.',
-            ])->onlyInput('email');
-    }
+    }    
 
     /**
      * Log out the user from application.
