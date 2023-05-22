@@ -58,11 +58,12 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
+    // return view('auth.forgot-password');
+    return view('auth.passwords.email');
 })->middleware('guest')->name('password.request');
 
 Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.reset-password', ['token' => $token]);
+    return view('auth.passwords.reset', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
 Route::post('/forgot-password', function (Request $request) {

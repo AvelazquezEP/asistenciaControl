@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 @can('product-create')
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
+                    <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
                 @endcan
             </div>
         </div>
@@ -30,31 +30,30 @@
             <th>Details</th>
             <th width="280px">Action</th>
         </tr>
-	    @foreach ($products as $product)
-	    <tr>
-	        <td>{{ ++$i }}</td>
-	        <td>{{ $product->name }}</td>
-	        <td>{{ $product->detail }}</td>
-	        <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a>
-                    @can('product-edit')
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
-                    @endcan
+        @foreach ($products as $product)
+            <tr>
+                <td>{{ ++$i }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->detail }}</td>
+                <td>
+                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                        <a class="btn btn-info" href="{{ route('products.show', $product->id) }}">Show</a>
+                        @can('product-edit')
+                            <a class="btn btn-primary" href="{{ route('products.edit', $product->id) }}">Edit</a>
+                        @endcan
 
+                        @csrf
 
-                    @csrf
-                    @method('DELETE')
-                    @can('product-delete')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                    @endcan
-                </form>
-	        </td>
-	    </tr>
-	    @endforeach
+                        @method('DELETE')
+                        @can('product-delete')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        @endcan
+                    </form>
+                </td>
+            </tr>
+        @endforeach
     </table>
 
 
     {!! $products->links() !!}
-
 @endsection
