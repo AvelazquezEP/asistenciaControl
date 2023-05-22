@@ -19,13 +19,127 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- ICONS (fontawssome) -->
+    <script src="https://kit.fontawesome.com/4f12dacfd7.js" crossorigin="anonymous"></script>
+
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
+<style>
+    .customNav {
+        border-radius: 0;
+        /* background-color: gray; */
+    }
+</style>
+{{-- <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li> --}}
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-inverse customNav">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ url('/') }}">{{ $_ENV['APP_NAME'] }}</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    @guest
+                        <ul class="nav navbar-nav navbar-right">
+                            @if (Route::has('login'))
+                                <li>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+                            @if (Route::has('register'))
+                                <li>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        </ul>
+                    @else
+                        <ul class="nav navbar-nav">
+                            @can('dashboard-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Dashboard
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('dashboard') }}">Manage Dashboard</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                            @can('post-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Posts
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('posts.index') }}">Manage Post</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                            @can('user-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Users
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('users.index') }}">Manage Users</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                            @can('role-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Roles
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('roles.index') }}">Manage Roles</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {{ Auth::user()->name }}
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @endguest
+                </div>
+            </div>
+        </nav>
+
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ $_ENV['APP_NAME'] }}
@@ -37,8 +151,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        {{-- <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li> --}}
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -51,7 +163,17 @@
                                 </li>
                             @endif
                         @else
-                            {{-- DASHBOARD --}}
+                            @can('post-list')
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Post
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('posts.index') }}">Manage Posts</a>
+                                    </div>
+                                </li>
+                            @endcan
                             @can('dashboard-list')
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -63,7 +185,6 @@
                                     </div>
                                 </li>
                             @endcan
-                            {{-- USERS --}}
                             @can('user-list')
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -76,7 +197,6 @@
                                     </div>
                                 </li>
                             @endcan
-                            {{-- ROLES --}}
                             @can('role-list')
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -89,7 +209,6 @@
                                     </div>
                                 </li>
                             @endcan
-                            {{-- PRODUCTS --}}
                             @can('product-list')
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -102,7 +221,6 @@
                                     </div>
                                 </li>
                             @endcan
-                            {{-- USER OPTIONS --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -115,7 +233,8 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -124,7 +243,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <main class="py-4">
             <div class="container">
@@ -141,6 +260,8 @@
         </main>
 
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
 
 </html>

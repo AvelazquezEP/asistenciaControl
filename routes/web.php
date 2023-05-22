@@ -9,12 +9,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostHomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-
+use PHPUnit\Framework\Attributes\Group;
 
 // MAIN (index.html)
 
@@ -59,14 +60,16 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/user/remove/{id}', 'destroy')->name('Users.deleted_ok');
 });
 
-// Route::get('/login', [LoginRegisterController::class, 'login'])->name('login');
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
     Route::get('/login', 'login')->name('login');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
-    // Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
+});
+
+Route::controller(PostHomeController::class)->Group(function () {
+    Route::get('/posts', 'index')->name('posts.index');
 });
 
 Route::group(['middleware' => ['auth']], function () {

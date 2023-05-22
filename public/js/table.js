@@ -10,7 +10,7 @@ const changeBG = (id) => {
     let rowSelected = document.getElementById(`${id}`);
     rowSelected.style.backgroundColor = "lightblue";
 
-    let table = document.getElementById("UserTable");
+    let table = document.getElementById("userTable");
 
     for (var i = 1, row; row = table.rows[i]; i++) {
         if (row != rowSelected) {
@@ -19,7 +19,6 @@ const changeBG = (id) => {
     }
 
     document.getElementById('idUser').value = id;
-
 }
 
 const editUser = () => {
@@ -36,4 +35,14 @@ const deleteUser = () => {
     var id = idUser;
 
     window.location.href = `${baseUrl}${id}`;
+}
+
+const openModal = () => {
+    // document.getElementById('myModal').setAttribute('hidden', true);
+    document.getElementById('myModal').removeAttribute('hidden');
+}
+
+const closeModal = () => {
+    document.getElementById('myModal').removeAttribute('hidden');
+    // document.getElementById('myModal').setAttribute('hidden', true);
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('post_home', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('picture');
             $table->string('description');
             $table->timestamps();
             // $table->img('picture');
