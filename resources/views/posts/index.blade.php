@@ -93,9 +93,8 @@
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->description }}</td>
-                <td>
-                    <img src="{{ Storage::url($post->picture) }}" alt="{{ $post->title }}" class="card-img-top">
-                    {{-- {{ $post->picture }} --}}
+                <td style="width=20%;">
+                    <img src="data:image/png;base64,{{ $post->picture }}" alt="Picture">
                 </td>
             </tr>
         @endforeach

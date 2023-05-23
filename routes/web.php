@@ -59,7 +59,9 @@ Route::controller(PostHomeController::class)->Group(function () {
     Route::get('/post/create', 'create')->name('post.create');
     Route::post('/post/store', 'store')->name('post.store');
     Route::get('/post/edit/{i}', 'edit')->name('post.edit');
-    Route::post('/post/update/{id}', 'updated')->name('post.update');
+    // Route::get('/post/edit/{i}', 'edit')->name('post.edit');
+    Route::post('/post/update/{id}', 'update')->name('post.update');
+    // Route::get('/post/update/{id}', 'update')->name('post.update');
     Route::post('/post/remove/{id}', 'remove')->name('post.remove');
 });
 

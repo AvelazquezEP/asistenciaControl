@@ -14,7 +14,7 @@
 
     <div class="container">
         {{-- <h2>Image Upload</h2> --}}
-        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data" files="yes">
+        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="title">Title</label>
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="picture">picture</label>
-                <input type="file" name="picture" id="picture" class="form-control" required>
+                <input type="file" accept=".png,.jpg" name="picture" id="picture" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
