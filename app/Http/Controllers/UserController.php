@@ -27,7 +27,7 @@ class UserController extends Controller
 
         // return View("Users.users")->with('users', $users);
 
-        $data = User::latest()->paginate(5);
+        $data = User::latest()->paginate(8);
 
         return view('Users.users', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);

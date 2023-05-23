@@ -110,6 +110,8 @@
         @endforeach
     </table>
 
+    {!! $data->render() !!}
+
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
