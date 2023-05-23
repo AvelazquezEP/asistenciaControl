@@ -10,7 +10,7 @@ const changeBG = (id) => {
     let rowSelected = document.getElementById(`${id}`);
     rowSelected.style.backgroundColor = "lightblue";
 
-    let table = document.getElementById("userTable");
+    let table = document.getElementById("myTable");
 
     for (var i = 1, row; row = table.rows[i]; i++) {
         if (row != rowSelected) {
@@ -18,12 +18,16 @@ const changeBG = (id) => {
         }
     }
 
-    document.getElementById('idUser').value = id;
+    document.getElementById('id').value = id;
 }
+
+// #region REDIRECTION
+
+// #region User
 
 const editUser = () => {
     let baseUrl = '/edit/';
-    let idUser = document.getElementById('idUser').value;
+    let idUser = document.getElementById('id').value;
     var id = idUser;
 
     window.location.href = `${baseUrl}${id}`;
@@ -31,18 +35,49 @@ const editUser = () => {
 
 const deleteUser = () => {
     let baseUrl = '/user/remove/';
-    let idUser = document.getElementById('idUser').value;
+    let idUser = document.getElementById('id').value;
     var id = idUser;
 
     window.location.href = `${baseUrl}${id}`;
 }
 
-const openModal = () => {
-    // document.getElementById('myModal').setAttribute('hidden', true);
-    document.getElementById('myModal').removeAttribute('hidden');
+// #endregion
+
+// #region Post
+const editPost = () => {
+    let baseUrl = '/post/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    window.location.href = `${baseUrl}${id}`;
 }
 
-const closeModal = () => {
-    document.getElementById('myModal').removeAttribute('hidden');
-    // document.getElementById('myModal').setAttribute('hidden', true);
+const deletePost = () => {
+    let baseUrl = '/post/remove/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    window.location.href = `${baseUrl}${id}`;
 }
+// #endregion
+
+// #region Post
+const editRole = () => {
+    let baseUrl = '/role/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    window.location.href = `${baseUrl}${id}`;
+}
+
+const deleteRole = () => {
+    let baseUrl = '/role/remove/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    window.location.href = `${baseUrl}${id}`;
+}
+// #endregion
+
+// #endregion
+

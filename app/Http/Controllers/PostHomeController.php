@@ -27,10 +27,10 @@ class PostHomeController extends Controller
     public function index(): View
     {
         // $posts = DB::table("post_home")->orderBy('title')->paginate(5);
-        $posts = post_home::latest()->orderBy('title');
+        // $posts = post_home::latest()->paginate(5);
+        $posts = DB::table("post_home")->get();
         return view('posts.index', compact('posts'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
-        // return view('posts.index')->with($posts);
     }
 
     /**
@@ -52,7 +52,7 @@ class PostHomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $postHome)
+    public function show(post_home $postHome)
     {
         //
     }
@@ -60,7 +60,7 @@ class PostHomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $postHome)
+    public function edit(post_home $postHome)
     {
         //
     }
@@ -68,7 +68,7 @@ class PostHomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $postHome)
+    public function update(Request $request, post_home $postHome)
     {
         //
     }
@@ -76,7 +76,7 @@ class PostHomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $postHome)
+    public function destroy(post_home $postHome)
     {
         //
     }

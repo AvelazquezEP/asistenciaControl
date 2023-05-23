@@ -2,19 +2,59 @@
 
 
 @section('content')
-    {{-- <h1>POSTS</h1> --}}
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Post</h2>
-            </div>
-            <div class="pull-right">
-                @can('product-create')
-                    <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Post</a>
-                @endcan
-            </div>
-        </div>
-    </div>
+    <style>
+        .btn_container {
+            display: flex;
+            flex-direction: row-reverse;
+            padding-bottom: 1rem;
+            column-gap: 1rem;
+        }
+
+        i {
+            font-size: 2.8rem;
+            text-decoration: none;
+            background-color: white;
+        }
+
+        button,
+        input[type="submit"],
+        input[type="reset"] {
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+        }
+
+        .fa-trash {
+            color: rgb(230, 84, 84);
+        }
+
+        .fa-trash:hover {
+            scale: 1.3;
+            color: rgb(177, 46, 46);
+        }
+
+        .fa-plus {
+            color: rgb(84, 230, 162);
+        }
+
+        .fa-plus:hover {
+            scale: 1.3;
+            color: rgb(46, 177, 101);
+        }
+
+        .fa-pen-to-square {
+            color: rgb(84, 164, 230);
+        }
+
+        .fa-pen-to-square:hover {
+            scale: 1.3;
+            color: rgb(46, 92, 177);
+        }
+    </style>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -22,39 +62,59 @@
         </div>
     @endif
 
+    <div class="btn_container">
+        <!-- Trigger the modal with a button -->
+        {{-- <button class="btnAction btn_delete" onclick="openModal()"> --}}
+        <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+            <i class="fa-solid fa-trash" id="deleteBtn"></i>
+        </button>
+        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
+        <a href="{{ route('posts.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+        <input hidden type="text" value="" id="id">
+        <a class="btnAction btn_edit" id="editButton" onclick="editPost()"><i class="fa-solid fa-pen-to-square"></i></a>
+    </div>
 
-    <table class="table table-bordered">
+
+    <table class="table table-bordered" id="myTable">
         <tr>
             <th>Date</th>
             <th>title</th>
             <th>Description</th>
             <th>Picture</th>
-            <th width="280px">Action</th>
         </tr>
         @foreach ($posts as $post)
-            <tr>
+            <input hidden type="text" value="{{ $post->id }}">
+            <tr id="{{ $post->id }}" onclick="changeBG({{ $post->id }})">
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->description }}</td>
                 <td>{{ $post->picture }}</td>
-                <td>
-                    <form action="{{ route('post.destroy', $post->id) }}" method="POST">
-                        @can('post-edit')
-                            <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
-                        @endcan
-
-                        @csrf
-
-                        @method('DELETE')
-                        @can('product-delete')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        @endcan
-                    </form>
-                </td>
             </tr>
         @endforeach
     </table>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delet User</h4>
+                </div>
+                <div class="modal-body">
+                    <p>are you secure to delete this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="deletePost()">Delete</button>
+                    {{-- <form class="form" action="{{ route('Users.deleted_ok', [$user->id]) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form> --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    {{-- {!! $post->links() !!} --}}
+    <script src="{{ asset('js/table.js') }}"></script>
 @endsection

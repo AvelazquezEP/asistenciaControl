@@ -2,18 +2,6 @@
 
 
 @section('content')
-    {{-- <input hidden type="text" id="idUser"> --}}
-    {{-- <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Users Management</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-            </div>
-        </div>
-    </div> --}}
-
     <style>
         .btn_container {
             display: flex;
@@ -23,7 +11,7 @@
         }
 
         i {
-            font-size: 2rem;
+            font-size: 2.8rem;
             text-decoration: none;
             background-color: white;
         }
@@ -68,43 +56,25 @@
         }
     </style>
 
-    <div class="btn_container">
-        <!-- Trigger the modal with a button -->
-        {{-- <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal"> --}}
-        <button class="btnAction btn_delete" onclick="openModal()">
-            <i class="fa-solid fa-trash" id="deleteBtn"></i>
-        </button>
-        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
-        <a href="{{ route('users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
-        <input hidden type="text" value="" id="idUser">
-        <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
-    </div>
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             {{ $message }}
         </div>
     @endif
 
-    <!-- Modal -->
-    <div hidden id="myModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" onclick="closeModal()">&times;</button>
-                <h4 class="modal-title">Delet User</h4>
-            </div>
-            <div class="modal-body">
-                <p>are you secure to delete this user?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" onclick="closeModal()">Close</button>
-                <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete</button>
-            </div>
-        </div>
+    <div class="btn_container">
+        <!-- Trigger the modal with a button -->
+        {{-- <button class="btnAction btn_delete" onclick="openModal()"> --}}
+        <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+            <i class="fa-solid fa-trash" id="deleteBtn"></i>
+        </button>
+        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
+        <a href="{{ route('users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+        <input hidden type="text" value="" id="id">
+        <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
     </div>
 
-
-    <table class="table table-bordered" id="userTable">
+    <table class="table table-bordered" id="myTable">
         <tr>
             {{-- <th>No</th> --}}
             <th>Name</th>
@@ -136,18 +106,27 @@
         @endforeach
     </table>
 
-    <!-- Trigger/Open The Modal -->
-    {{-- <button id="myBtn">Open Modal</button> --}}
-
-    <!-- The Modal -->
-    {{-- <div hidden id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&amp;times;</span>
-            <p>Some text in the Modal..</p>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delet User</h4>
+                </div>
+                <div class="modal-body">
+                    <p>are you secure to delete this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete</button>
+                    {{-- <form class="form" action="{{ route('Users.deleted_ok', [$user->id]) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form> --}}
+                </div>
+            </div>
         </div>
-
-    </div> --}}
-
+    </div>
     <script src="{{ asset('js/table.js') }}"></script>
 @endsection
