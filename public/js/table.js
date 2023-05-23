@@ -61,9 +61,9 @@ const deletePost = () => {
 }
 // #endregion
 
-// #region Post
+// #region Roles
 const editRole = () => {
-    let baseUrl = '/role/edit/';
+    let baseUrl = '/roles/edit/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
@@ -71,7 +71,7 @@ const editRole = () => {
 }
 
 const deleteRole = () => {
-    let baseUrl = '/role/remove/';
+    let baseUrl = '/roles/destroy/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 

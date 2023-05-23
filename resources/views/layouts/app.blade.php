@@ -58,11 +58,12 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            @if (Route::has('register'))
+                            {{-- NO SE NECESITA REGISTER PORQUE EL ADMINISTRADOR CREA CADA UNO DE LOS USUARIOS --}}
+                            {{-- @if (Route::has('register'))
                                 <li>
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         </ul>
                     @else
                         <ul class="nav navbar-nav">

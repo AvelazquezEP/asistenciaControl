@@ -58,20 +58,24 @@
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
-            {{ $message }}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ $message }}</strong>.
         </div>
     @endif
 
     <div class="btn_container">
-        <!-- Trigger the modal with a button -->
-        {{-- <button class="btnAction btn_delete" onclick="openModal()"> --}}
-        <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
-            <i class="fa-solid fa-trash" id="deleteBtn"></i>
-        </button>
-        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
-        <a href="{{ route('users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
         <input hidden type="text" value="" id="id">
-        <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @can('user-delete')
+            <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                <i class="fa-solid fa-trash" id="deleteBtn"></i>
+            </button>
+        @endcan
+        @can('user-create')
+            <a href="{{ route('users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+        @endcan
+        @can('user-edit')
+            <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @endcan
     </div>
 
     <table class="table table-bordered" id="myTable">

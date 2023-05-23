@@ -56,33 +56,40 @@
         }
     </style>
 
-    @if ($message = Session::get('success'))
+    @if ($message = Session::get('success'))        
         <div class="alert alert-success">
-            {{ $message }}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ $message }}</strong>.
         </div>
     @endif
 
     <div class="btn_container">
-        <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
-            <i class="fa-solid fa-trash" id="deleteBtn"></i>
-        </button>
-        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
-        <a href="{{ route('roles.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
         <input hidden type="text" value="" id="id">
-        <a class="btnAction btn_edit" id="editButton" onclick="editRole()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @can('role-delete')
+            <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                <i class="fa-solid fa-trash" id="deleteBtn"></i>
+            </button>
+        @endcan
+        @can('role-create')
+            <a href="{{ route('roles.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+        @endcan
+        @can('role-edit')
+            <a class="btnAction btn_edit" id="editButton" onclick="editRole()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @endcan
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="myTable">
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th width="280px">Action</th>
+            {{-- <th width="280px">Action</th> --}}
         </tr>
         @foreach ($roles as $key => $role)
-            <tr>
+            <input hidden type="text" value="{{ $role->id }}">
+            <tr id="{{ $role->id }}" onclick="changeBG({{ $role->id }})">
                 <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
-                <td>
+                {{-- <td>
                     <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Show</a>
                     @can('role-edit')
                         <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a>
@@ -92,7 +99,7 @@
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     @endcan
-                </td>
+                </td> --}}
             </tr>
         @endforeach
     </table>

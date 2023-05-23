@@ -17,25 +17,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use PHPUnit\Framework\Attributes\Group;
 
-// MAIN (index.html)
-
 /* #region OLD ROUTES */
 
 // The configuration to auth login is in -> app\Providers\RouteServiceProvider.php
 
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
-
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-
-// Route::get('/welcome', function () {
-//     return view('/welcome');
-// })->name('welcome');
-
-// Route::get('/home', function () {
-//     return view('/welcome');
-// })->name('welcome');
 
 Route::controller(WelcomeController::class)->group(function () {
     // routes to main site
@@ -72,13 +58,23 @@ Route::controller(PostHomeController::class)->Group(function () {
     Route::get('/posts', 'index')->name('posts.index');
     Route::get('/post/create', 'create')->name('posts.create');
     Route::post('/post/store', 'store')->name('post.store');
-    Route::get('/post/edit', 'edit')->name('posts.edit');
+    Route::get('/post/edit/{i}', 'edit')->name('posts.edit');
     Route::post('/post/update/{id}', 'updated')->name('post.update');
     Route::post('/post/remove/{id}', 'remove')->name('post.remove');
 });
 
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/roles', 'index')->name('roles.index');
+    Route::get('/roles/create', 'create')->name('roles.create');
+    Route::post('/roles/store', 'store')->name('roles.store');
+    Route::get('/roles/edit/{i}', 'edit')->name('roles.edit');
+    Route::patch('/roles/update/{i}', 'update')->name('roles.update');
+    Route::get('/roles/destroy/{i}', 'destroy')->name('roles.remove');
+});
+
+// CUSTOM MIDDLEWARE FOR SOME TABLES (Controllers)
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('roles', RoleController::class);
+    // Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 });

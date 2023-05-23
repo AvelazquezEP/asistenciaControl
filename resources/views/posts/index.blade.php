@@ -58,20 +58,25 @@
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
-            {{ $message }}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ $message }}</strong>.
         </div>
     @endif
 
     <div class="btn_container">
-        <!-- Trigger the modal with a button -->
-        {{-- <button class="btnAction btn_delete" onclick="openModal()"> --}}
-        <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
-            <i class="fa-solid fa-trash" id="deleteBtn"></i>
-        </button>
-        {{-- <a href="#" class="btnAction btn_delete"><i class="fa-solid fa-trash" id="deleteBtn"></i></a> --}}
-        <a href="{{ route('posts.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
         <input hidden type="text" value="" id="id">
-        <a class="btnAction btn_edit" id="editButton" onclick="editPost()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @can('post-delete')
+            <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                <i class="fa-solid fa-trash" id="deleteBtn"></i>
+            </button>
+        @endcan
+
+        @can('post-create')
+            <a href="{{ route('posts.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+        @endcan
+        @can('post-edit')
+            <a class="btnAction btn_edit" id="editButton" onclick="editPost()"><i class="fa-solid fa-pen-to-square"></i></a>
+        @endcan
     </div>
 
 
@@ -100,10 +105,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delet User</h4>
+                    <h4 class="modal-title">Delet Post</h4>
                 </div>
                 <div class="modal-body">
-                    <p>are you secure to delete this user?</p>
+                    <p>are you secure to delete this Post?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
