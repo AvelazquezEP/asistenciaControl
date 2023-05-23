@@ -72,7 +72,7 @@
         @endcan
 
         @can('post-create')
-            <a href="{{ route('posts.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ route('post.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
         @endcan
         @can('post-edit')
             <a class="btnAction btn_edit" id="editButton" onclick="editPost()"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -93,7 +93,10 @@
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->description }}</td>
-                <td>{{ $post->picture }}</td>
+                <td>
+                    <img src="{{ Storage::url($post->picture) }}" alt="{{ $post->title }}" class="card-img-top">
+                    {{-- {{ $post->picture }} --}}
+                </td>
             </tr>
         @endforeach
     </table>

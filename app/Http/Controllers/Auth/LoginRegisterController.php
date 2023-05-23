@@ -19,7 +19,7 @@ class LoginRegisterController extends Controller
         $this->middleware('guest')->except([
             'logout',
             'welcome',
-            // 'dashboard',
+            '/',
         ]);
     }
 
@@ -93,7 +93,7 @@ class LoginRegisterController extends Controller
         return back()->withErrors([
             'email' => 'Your provided credentials do not match in our records.',
         ])->onlyInput('email');
-    }    
+    }
 
     /**
      * Log out the user from application.

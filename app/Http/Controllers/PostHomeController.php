@@ -19,8 +19,6 @@ class PostHomeController extends Controller
         $this->middleware('permission:post-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:post-delete', ['only' => ['destroy']]);
     }
-
-
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +26,7 @@ class PostHomeController extends Controller
     {
         // $posts = DB::table("post_home")->orderBy('title')->paginate(5);
         // $posts = post_home::latest()->paginate(5);
-        $posts = DB::table("post_home")->get();
+        $posts = DB::table("post_homes")->get();
         return view('posts.index', compact('posts'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -36,17 +34,45 @@ class PostHomeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'picture' => 'required|image|max:2048',
+            'description' => 'required',
+        ]);
+
+        // $imagePath = $request->file('picture')->store('public');
+        // $imagePath = $request->file('picture');
+        // $format = $request->file('picture')->extension();
+        // $patch = $request->file('picture')->store('/storage/images');
+
+        $imagePath = request()->file('picture');
+        $imagePath->store('toPath', ['disk' => 'my_files']);
+
+
+        $post = new post_home([
+            'title' => $request->get('title'),
+            'picture' => $imagePath,
+            'description' => $request->get('description'),
+        ]);
+
+        // $postTable = DB::table("post_home");
+        // $postTable::create($request->all());
+        // DB::table("post_home")::create($request->all());
+
+        $post->save();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post created successfully');
     }
 
     /**

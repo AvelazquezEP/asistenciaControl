@@ -1,14 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            padding-top: 1.3rem;
+        }
+
+        .loginForm {
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            row-gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn-login {
+            font-size: 1.8rem;
+            width: 10rem;
+        }
+    </style>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header title">{{ __('Login') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('login') }}" class="loginForm">
                             @csrf
 
                             <div class="row mb-3">
@@ -58,9 +80,10 @@
                                 </div>
                             </div> --}}
 
-                            <div class="row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                            <div class="">
+                                {{-- <div class="col-md-8 offset-md-4"> --}}
+                                <div class="">
+                                    <button type="submit" class="btn btn-primary btn-login">
                                         {{ __('Login') }}
                                     </button>
 
