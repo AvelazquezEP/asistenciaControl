@@ -54,6 +54,10 @@
             scale: 1.3;
             color: rgb(46, 92, 177);
         }
+
+        .td_picture {
+            /* width: 50px; */
+        }
     </style>
 
     @if ($message = Session::get('success'))
@@ -90,11 +94,12 @@
         @foreach ($posts as $post)
             <input hidden type="text" value="{{ $post->id }}">
             <tr id="{{ $post->id }}" onclick="changeBG({{ $post->id }})">
-                <td>{{ $post->created_at }}</td>
+                <td style="width: 100px;">{{ $post->created_at }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->description }}</td>
-                <td style="width=20%;">
-                    <img src="data:image/png;base64,{{ $post->picture }}" alt="Picture">
+                {{-- <td class="td_picture"> --}}
+                <td style="width: 150px;">
+                    <img src="data:image/png;base64,{{ $post->picture }}" alt="Picture" style="max-width: 100%;">
                 </td>
             </tr>
         @endforeach

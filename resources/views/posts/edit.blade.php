@@ -14,7 +14,7 @@
 
     <div class="container">
         <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
-            {{-- @csrf --}}
+            @csrf
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}"

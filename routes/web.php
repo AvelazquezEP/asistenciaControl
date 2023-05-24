@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -17,24 +18,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use PHPUnit\Framework\Attributes\Group;
 
-/* #region OLD ROUTES */
-
-// The configuration to auth login is in -> app\Providers\RouteServiceProvider.php
-
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
+
+/* #region WELCOMECONTROLLER / HOME */
 
 Route::controller(WelcomeController::class)->group(function () {
     // routes to main site
     Route::get('/', 'index')->name('welcome');
-    Route::get('/welcome', 'index')->name('welcome');
-    Route::get('/home', 'index')->name('welcome');
+    // Route::get('/welcome', 'index')->name('welcome');
+    // Route::get('/home', 'index')->name('welcome');
 });
 
 Route::get('/home', [App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
 
+/* #ENDREGION */
+
+/* #region DASHBOARDCONTROLLER */
+
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'index')->name('dashboard');
 });
+
+/* #ENDREGION */
+
+/* #region USERCONTROLLER */
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('Users.users');
@@ -46,6 +53,10 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/user/remove/{id}', 'destroy')->name('Users.deleted_ok');
 });
 
+/* #ENDREGION */
+
+/* #region LOGINCONTROLLER */
+
 Route::controller(LoginRegisterController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -54,16 +65,22 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::post('/logout', 'logout')->name('logout');
 });
 
+/* #ENDREGION */
+
+/* #region POSTCONTROLLER */
+
 Route::controller(PostHomeController::class)->Group(function () {
     Route::get('/posts', 'index')->name('posts.index');
     Route::get('/post/create', 'create')->name('post.create');
     Route::post('/post/store', 'store')->name('post.store');
     Route::get('/post/edit/{i}', 'edit')->name('post.edit');
-    // Route::get('/post/edit/{i}', 'edit')->name('post.edit');
     Route::post('/post/update/{id}', 'update')->name('post.update');
-    // Route::get('/post/update/{id}', 'update')->name('post.update');
-    Route::post('/post/remove/{id}', 'remove')->name('post.remove');
+    Route::get('/post/remove/{id}', 'destroy')->name('post.remove');
 });
+
+/* #ENDREGION */
+
+/* #region ROLECONTROLLER */
 
 Route::controller(RoleController::class)->group(function () {
     Route::get('/roles', 'index')->name('roles.index');
@@ -81,55 +98,28 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
 });
 
-Route::get('/forgot-password', function () {
-    // return view('auth.forgot-password');
-    return view('auth.passwords.email');
-})->middleware('guest')->name('password.request');
+/* #ENDREGION */
 
-Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.passwords.reset', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+/* #region FORGOT PASSWORD */
 
-Route::post('/forgot-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
+// Route::get('/forgot-password', function () {
+//     return view('auth.passwords.email');
+// })->middleware('guest')->name('password.request');
 
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
+// Route::get('/reset-password/{token}', function ($token) {
+//     return view('auth.passwords.reset', ['token' => $token]);
+// })->middleware('guest')->name('password.reset');
 
-    return $status === Password::RESET_LINK_SENT
-        ? back()->with(['status' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');
+// Route::post('/forgot-password', function (Request $request) {
+//     $request->validate(['email' => 'required|email']);
 
+//     $status = Password::sendResetLink(
+//         $request->only('email')
+//     );
+
+//     return $status === Password::RESET_LINK_SENT
+//         ? back()->with(['status' => __($status)])
+//         : back()->withErrors(['email' => __($status)]);
+// })->middleware('guest')->name('password.email');
+        
 /* #endregion */
-
-
-/* #region TEST */
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-// Route::group(['middleware' => ['auth']], function () {
-//     Route::resource('roles', RoleController::class);
-//     Route::resource('users', UserController::class);
-//     Route::resource('products', ProductController::class);
-// });
-
-/*  #endregion */

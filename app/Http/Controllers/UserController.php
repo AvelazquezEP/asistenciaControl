@@ -80,26 +80,6 @@ class UserController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        /* #region  CREATE METHOD*/
-
-        // $request->validate([
-        //     'name' => 'required|string|max:250',
-        //     'email' => 'required|email|max:250|unique:users',
-        //     'password' => 'required|min:8',
-        // ]);
-
-        // User::create([
-        //     'status' => true,
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        // ])->assignRole($request->input('roles'));
-
-        // return  redirect()->route('Users.users')
-        //     ->with('created', 'User created ');
-
-        // /* #endregion */
-
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\post_home;
-// use App\Models\Post;
+// use App\Models\post_home;
+use App\Models\posts;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; //<--- this line fix the DB call
 use Illuminate\View\View;
@@ -20,50 +21,36 @@ class PostHomeController extends Controller
         $this->middleware('permission:post-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:post-delete', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
+
+    public function index(Request $request): View
     {
-        // $posts = DB::table("post_home")->orderBy('title')->paginate(5);
-        // $posts = post_home::latest()->paginate(5);
-        $posts = DB::table("post_homes")->get();
+        $posts = posts::latest()->paginate(10);
+
         return view('posts.index', compact('posts'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(): View
     {
         return view('posts.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required',
             'picture' => 'required',
-            // 'picture' => 'required|image|max:2048',
             'description' => 'required',
         ]);
 
-        // $my_bytea = stream_get_contents($request->get('picture'));
-        // $my_string = pg_unescape_bytea($my_bytea);
         $image = base64_encode(file_get_contents($request->file('picture')->path()));
 
-        // $html_data = htmlspecialchars($my_string);
-
-        $imagePath = $image;
-
-        $post = new post_home([
+        $post = new posts([
             'title' => $request->get('title'),
             'picture' => $image,
             'description' => $request->get('description'),
+            // 'created_at' => $request->get('created_at'),
+            'created_at' => Carbon::now()->timespan('GMT-5'),
         ]);
 
         $post->save();
@@ -72,31 +59,28 @@ class PostHomeController extends Controller
             ->with('success', 'Post created successfully');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id): View
     {
-        $post = DB::table('post_homes')->where('id', $id)->first();
+        // $post = DB::table('post_homes')->where('id', $id)->first();
+        $post = posts::find($id);
         return view('posts.edit', compact('post'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'title' => 'required',
             'picture' => 'required',
-            // 'picture' => 'required|image|max:2048',
-            'description' => 'required',
+            'description' => 'required',            
         ]);
 
-        $post = DB::table('post_homes')->where('id', $id)->first();
+        // $post = DB::table('posts')->where('id', $id)->first();
+        $post = posts::find($id);
+
         $post->title = $request->input('title');
         $post->picture = base64_encode(file_get_contents($request->file('picture')->path()));
         $post->description = $request->input('description');
+        // $post->updated_at = Carbon::now()->timespan('GMT-5');
 
         $post->save();
 
@@ -104,11 +88,13 @@ class PostHomeController extends Controller
             ->with('success', 'Post updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(post_home $postHome)
+    public function destroy($id)
     {
-        //
+        // $post = DB::table('post_homes')->where('id', $id)->first();
+
+        posts::find($id)->delete();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post deleted');
     }
 }
