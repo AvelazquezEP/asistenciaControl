@@ -86,6 +86,7 @@
 
     <table class="table table-bordered" id="myTable">
         <tr>
+            <th>Status</th>
             <th>Date</th>
             <th>title</th>
             <th>Description</th>
@@ -94,6 +95,13 @@
         @foreach ($posts as $post)
             <input hidden type="text" value="{{ $post->id }}">
             <tr id="{{ $post->id }}" onclick="changeBG({{ $post->id }})">
+                <td>
+                    @if ($post->status == true)
+                        <i class="fa-solid fa-check" style="color: #1bc546; background-color: transparent;"></i>
+                    @else
+                        <i class="fa-sharp fa-solid fa-xmark" style="color: #ce2e1c; background-color: transparent;"></i>
+                    @endif
+                </td>
                 <td style="width: 100px;">{{ $post->created_at }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->description }}</td>

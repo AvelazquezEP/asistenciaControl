@@ -49,7 +49,7 @@ class PostHomeController extends Controller
             'title' => $request->get('title'),
             'picture' => $image,
             'description' => $request->get('description'),
-            // 'created_at' => $request->get('created_at'),
+            'status' => true,
             'created_at' => Carbon::now()->timespan('GMT-5'),
         ]);
 
@@ -68,19 +68,29 @@ class PostHomeController extends Controller
 
     public function update(Request $request, $id): RedirectResponse
     {
+        $image = '';
         $request->validate([
             'title' => 'required',
-            'picture' => 'required',
-            'description' => 'required',            
+            // 'picture' => 'required',
+            'description' => 'required',
         ]);
 
         // $post = DB::table('posts')->where('id', $id)->first();
         $post = posts::find($id);
 
+        if ($_FILES['picture']['size'] == 0) {
+            $oldImage = $post->picture;
+            $image = $oldImage;
+        } else {
+            $newImage = base64_encode(file_get_contents($request->file('picture')->path()));
+            $image = $newImage;
+        }
+
         $post->title = $request->input('title');
-        $post->picture = base64_encode(file_get_contents($request->file('picture')->path()));
+        $post->picture = $image;
         $post->description = $request->input('description');
-        // $post->updated_at = Carbon::now()->timespan('GMT-5');
+        $post->status = $request->input('status');
+        $post->updated_at = Carbon::now()->timespan('GMT-5');
 
         $post->save();
 

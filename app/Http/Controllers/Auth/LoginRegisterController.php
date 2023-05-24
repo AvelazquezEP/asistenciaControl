@@ -19,7 +19,7 @@ class LoginRegisterController extends Controller
         $this->middleware('guest')->except([
             'logout',
             'welcome',
-            '/',
+            // '/',
         ]);
     }
 

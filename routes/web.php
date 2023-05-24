@@ -23,13 +23,13 @@ Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
 /* #region WELCOMECONTROLLER / HOME */
 
 Route::controller(WelcomeController::class)->group(function () {
-    // routes to main site
+    // remember comment the las 2 routes if we need clear the cache
     Route::get('/', 'index')->name('welcome');
-    // Route::get('/welcome', 'index')->name('welcome');
+    Route::get('/welcome', 'index')->name('welcome');
     // Route::get('/home', 'index')->name('welcome');
 });
 
-Route::get('/home', [App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
 
 /* #ENDREGION */
 
@@ -91,35 +91,38 @@ Route::controller(RoleController::class)->group(function () {
     Route::get('/roles/destroy/{i}', 'destroy')->name('roles.remove');
 });
 
-// CUSTOM MIDDLEWARE FOR SOME TABLES (Controllers)
+/* #ENDREGION */
+
+/* #region CUSTOM MIDDLEWARE FOR SOME TABLES (Controllers) */
+
 Route::group(['middleware' => ['auth']], function () {
     // Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 });
 
-/* #ENDREGION */
+/* #endregion */
 
 /* #region FORGOT PASSWORD */
 
-// Route::get('/forgot-password', function () {
-//     return view('auth.passwords.email');
-// })->middleware('guest')->name('password.request');
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+})->middleware('guest')->name('password.request');
 
-// Route::get('/reset-password/{token}', function ($token) {
-//     return view('auth.passwords.reset', ['token' => $token]);
-// })->middleware('guest')->name('password.reset');
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.passwords.reset', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
 
-// Route::post('/forgot-password', function (Request $request) {
-//     $request->validate(['email' => 'required|email']);
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
 
-//     $status = Password::sendResetLink(
-//         $request->only('email')
-//     );
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
 
-//     return $status === Password::RESET_LINK_SENT
-//         ? back()->with(['status' => __($status)])
-//         : back()->withErrors(['email' => __($status)]);
-// })->middleware('guest')->name('password.email');
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
         
 /* #endregion */

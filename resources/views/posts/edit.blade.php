@@ -16,13 +16,28 @@
         <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
+                <label for="title">Show this post in the Welcome section</label>
+                </br>
+                @if ($post->status == true)
+                    <input type="radio" name="status" id="status" class="" value="true" checked>
+                    <label for="">Yes</label>
+                    <input type="radio" name="status" id="status" class="" value="false">
+                    <label for="">No</label>
+                @else
+                    <input type="radio" name="status" id="status" class="" value="true">
+                    <label for="">Yes</label>
+                    <input type="radio" name="status" id="status" class="" value="false" checked>
+                    <label for="">No</label>
+                @endif
+            </div>
+            <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ $post->title }}"
                     required>
             </div>
             <div class="form-group">
                 <label for="picture">picture</label>
-                <input type="file" accept=".png,.jpg" name="picture" id="picture" class="form-control" required>
+                <input type="file" accept=".png,.jpg" name="picture" id="picture" class="form-control">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>

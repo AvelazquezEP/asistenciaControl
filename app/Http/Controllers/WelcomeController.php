@@ -26,7 +26,7 @@ class WelcomeController extends Controller
      */
     public function index(): View
     {
-        $posts = posts::get()->all();
+        $posts = posts::get()->where('status', true)->all();
         return view('welcome', compact('posts'));
     }
 }

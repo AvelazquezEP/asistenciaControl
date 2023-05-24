@@ -13,6 +13,7 @@ class posts extends Model
         'title',
         'picture',
         'description',
+        'status',
         'created_at',
         'updated_at',
     ];
