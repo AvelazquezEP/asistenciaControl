@@ -79,7 +79,6 @@ Route::controller(PostHomeController::class)->Group(function () {
     Route::post('/post/update/{id}', 'update')->name('post.update');
     Route::get('/post/remove/{id}', 'destroy')->name('post.remove');
 });
-
 /* #ENDREGION */
 
 /* #region ROLECONTROLLER */

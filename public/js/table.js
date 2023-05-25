@@ -1,4 +1,23 @@
+
+/* #region UTILITIES */
+
 var log = console.log;
+
+const open_dangerAlert = (alertElement) => {
+    document.getElementById(alertElement).style.display = 'block';
+}
+
+const close_dangerAlert = (alertElement) => {
+    document.getElementById(alertElement).style.display = 'none';
+}
+
+/* #endregion */
+
+$(document).ready(function () {
+    close_dangerAlert('dangerAlertEdit');
+    close_dangerAlert('dangerAlertDelete');
+});
+
 
 const getId = (id) => {
     changeBG(id);
@@ -26,11 +45,16 @@ const changeBG = (id) => {
 // #region User
 
 const editUser = () => {
+    // let dangerAlert = document.getElementById('dangerAlert');
     let baseUrl = '/edit/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
 }
 
 const deleteUser = () => {
@@ -38,7 +62,11 @@ const deleteUser = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
 }
 
 // #endregion
@@ -49,7 +77,11 @@ const editPost = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
 }
 
 const deletePost = () => {
@@ -57,7 +89,11 @@ const deletePost = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
 }
 // #endregion
 
@@ -67,7 +103,11 @@ const editRole = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
 }
 
 const deleteRole = () => {
@@ -75,7 +115,11 @@ const deleteRole = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    window.location.href = `${baseUrl}${id}`;
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
 }
 // #endregion
 

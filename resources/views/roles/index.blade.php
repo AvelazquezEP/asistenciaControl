@@ -56,12 +56,19 @@
         }
     </style>
 
-    @if ($message = Session::get('success'))        
+    @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>{{ $message }}</strong>.
         </div>
     @endif
+
+    <div class="alert alert-danger" id="dangerAlertEdit">
+        <a class="close" onclick="close_dangerAlert('dangerAlertEdit')">&times;</a>
+        <strong>
+            You need to select a record to edit !!
+        </strong>
+    </div>
 
     <div class="btn_container">
         <input hidden type="text" value="" id="id">
@@ -89,17 +96,6 @@
             <tr id="{{ $role->id }}" onclick="changeBG({{ $role->id }})">
                 <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
-                {{-- <td>
-                    <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">Show</a>
-                    @can('role-edit')
-                        <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a>
-                    @endcan
-                    @can('role-delete')
-                        {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                    @endcan
-                </td> --}}
             </tr>
         @endforeach
     </table>
@@ -108,13 +104,19 @@
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
+            <div class="alert alert-danger" id="dangerAlertDelete">
+                <a class="close" onclick="close_dangerAlert('dangerAlertDelete')">&times;</a>
+                <strong>
+                    You need to select a record to Delete !!
+                </strong>
+            </div>
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delet User</h4>
+                    <h4 class="modal-title">Delet Role</h4>
                 </div>
                 <div class="modal-body">
-                    <p>are you secure to delete this user?</p>
+                    <p>are you secure to delete this Role?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -128,6 +130,4 @@
     </div>
 
     <script src="{{ asset('js/table.js') }}"></script>
-
-    {{-- {!! $roles->render() !!} --}}
 @endsection
