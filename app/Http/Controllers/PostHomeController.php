@@ -107,4 +107,9 @@ class PostHomeController extends Controller
         return redirect()->route('posts.index')
             ->with('success', 'Post deleted');
     }
+
+    public function res(): View
+    {
+        return view('posts.index');
+    }
 }

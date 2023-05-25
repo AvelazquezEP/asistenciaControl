@@ -3,19 +3,20 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostHomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ResourceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\PostController;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\HomeController;
 use PHPUnit\Framework\Attributes\Group;
 
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
@@ -70,6 +71,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 /* #region POSTCONTROLLER */
 
 Route::controller(PostHomeController::class)->Group(function () {
+    // Route::get('/resst', 'resst')->name('res.index');
     Route::get('/posts', 'index')->name('posts.index');
     Route::get('/post/create', 'create')->name('post.create');
     Route::post('/post/store', 'store')->name('post.store');
@@ -92,6 +94,19 @@ Route::controller(RoleController::class)->group(function () {
 });
 
 /* #ENDREGION */
+
+/* #region RESOURCECONTROLLER */
+
+Route::controller(ResourceController::class)->group(function () {
+    Route::get('/resources', 'index')->name('resources.index');
+    // Route::get('/resource/create', 'create')->name('resources.create');
+    // Route::get('/resources/store', 'store')->name('resources.store');
+    // Route::get('/resources/edit/{id}', 'edit')->name('resources.edit');
+    // Route::get('/resources/update/{id}', 'update')->name('resources.update');
+    // Route::get('/resources/remove/{id}', 'remove')->name('resources.remove');
+});
+
+/* #endregion */
 
 /* #region CUSTOM MIDDLEWARE FOR SOME TABLES (Controllers) */
 
