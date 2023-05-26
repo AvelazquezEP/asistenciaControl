@@ -100,16 +100,10 @@ class PostHomeController extends Controller
 
     public function destroy($id)
     {
-        // $post = DB::table('post_homes')->where('id', $id)->first();
-
+        // $post = DB::table('post_homes')->where('id', $id)->first();        
         posts::find($id)->delete();
 
         return redirect()->route('posts.index')
             ->with('success', 'Post deleted');
-    }
-
-    public function res(): View
-    {
-        return view('posts.index');
     }
 }

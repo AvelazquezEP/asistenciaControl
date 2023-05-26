@@ -115,19 +115,21 @@
                                     </ul>
                                 </li>
                             @endcan
-                            {{-- @can('role-list') --}}
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    Resources
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        {{-- {{ route('resources.index') }} --}}
-                                        <a class="dropdown-item" href="#">Manage Resources</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            {{-- @endcan --}}
+                            @can('resource-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Resources
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            {{-- {{ route('resources.index') }} --}}
+                                            <a class="dropdown-item" href="{{ route('resources.index') }}">
+                                                Manage Resources
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">

@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resource', function (Blueprint $table) {
+        Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->text('document');
+            $table->text('resource_file');
+            $table->text('path_resource');
+            $table->text('extension_resource');
             $table->boolean('status');
-            $table->string('role');
+            // $table->string('role');
             $table->timestamps();
         });
     }

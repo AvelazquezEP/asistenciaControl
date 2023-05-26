@@ -123,5 +123,46 @@ const deleteRole = () => {
 }
 // #endregion
 
+/* #region Resources */
+const editResource = () => {
+    let baseUrl = '/resource/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteResource = () => {
+    let baseUrl = '/resource/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    log(idUser);
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
+}
+
+const showResource = () => {
+    let baseUrl = '/resource/show/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
+}
+
+/* #endregion */
+
 // #endregion
 

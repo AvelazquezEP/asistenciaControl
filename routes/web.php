@@ -71,7 +71,6 @@ Route::controller(LoginRegisterController::class)->group(function () {
 /* #region POSTCONTROLLER */
 
 Route::controller(PostHomeController::class)->Group(function () {
-    // Route::get('/resst', 'resst')->name('res.index');
     Route::get('/posts', 'index')->name('posts.index');
     Route::get('/post/create', 'create')->name('post.create');
     Route::post('/post/store', 'store')->name('post.store');
@@ -96,13 +95,14 @@ Route::controller(RoleController::class)->group(function () {
 
 /* #region RESOURCECONTROLLER */
 
-Route::controller(ResourceController::class)->group(function () {
+Route::controller(ResourceController::class)->Group(function () {
     Route::get('/resources', 'index')->name('resources.index');
-    // Route::get('/resource/create', 'create')->name('resources.create');
-    // Route::get('/resources/store', 'store')->name('resources.store');
-    // Route::get('/resources/edit/{id}', 'edit')->name('resources.edit');
-    // Route::get('/resources/update/{id}', 'update')->name('resources.update');
-    // Route::get('/resources/remove/{id}', 'remove')->name('resources.remove');
+    Route::get('/resource/show/{id}', 'show')->name('resource.show');
+    Route::get('/resource/create', 'create')->name('resource.create');
+    Route::post('/resource/store', 'store')->name('resource.store');
+    Route::get('/resource/edit/{id}', 'edit')->name('resource.edit');
+    Route::post('/resource/update/{id}', 'update')->name('resource.update');
+    Route::get('/resource/destroy/{id}', 'destroy')->name('resource.remove');
 });
 
 /* #endregion */
@@ -111,6 +111,7 @@ Route::controller(ResourceController::class)->group(function () {
 
 Route::group(['middleware' => ['auth']], function () {
     // Route::resource('roles', RoleController::class);
+    // Route::resource('resources', ResourceController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
 });
@@ -119,24 +120,24 @@ Route::group(['middleware' => ['auth']], function () {
 
 /* #region FORGOT PASSWORD */
 
-Route::get('/forgot-password', function () {
-    return view('auth.passwords.email');
-})->middleware('guest')->name('password.request');
+// Route::get('/forgot-password', function () {
+//     return view('auth.passwords.email');
+// })->middleware('guest')->name('password.request');
 
-Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.passwords.reset', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+// Route::get('/reset-password/{token}', function ($token) {
+//     return view('auth.passwords.reset', ['token' => $token]);
+// })->middleware('guest')->name('password.reset');
 
-Route::post('/forgot-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
+// Route::post('/forgot-password', function (Request $request) {
+//     $request->validate(['email' => 'required|email']);
 
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
+//     $status = Password::sendResetLink(
+//         $request->only('email')
+//     );
 
-    return $status === Password::RESET_LINK_SENT
-        ? back()->with(['status' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');
+//     return $status === Password::RESET_LINK_SENT
+//         ? back()->with(['status' => __($status)])
+//         : back()->withErrors(['email' => __($status)]);
+// })->middleware('guest')->name('password.email');
         
 /* #endregion */
