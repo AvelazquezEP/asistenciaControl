@@ -78,7 +78,7 @@ class ResourceController extends Controller
     {
         $resource = resources::find($id);
         return view('resources.edit', compact('resource'));
-    }
+    }    
 
     public function update(Request $request, $id): RedirectResponse
     {
