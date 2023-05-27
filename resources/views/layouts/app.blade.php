@@ -74,7 +74,9 @@
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('dashboard') }}">Manage Dashboard</a>
+                                            <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                                Manage Dashboard
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -86,7 +88,9 @@
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('posts.index') }}">Manage Post</a>
+                                            <a class="dropdown-item" href="{{ route('posts.index') }}">
+                                                Manage Post
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -98,7 +102,9 @@
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('users.index') }}">Manage Users</a>
+                                            <a class="dropdown-item" href="{{ route('users.index') }}">
+                                                Manage Users
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -110,7 +116,9 @@
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('roles.index') }}">Manage Roles</a>
+                                            <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                                Manage Roles
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -122,9 +130,14 @@
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            {{-- {{ route('resources.index') }} --}}
                                             <a class="dropdown-item" href="{{ route('resources.index') }}">
                                                 Manage Resources
+                                            </a>
+                                        </li>
+                                        <li>
+                                            {{-- href="{{ route('tests.index') }}" --}}
+                                            <a class="dropdown-item" href="#">
+                                                Manage Exams
                                             </a>
                                         </li>
                                     </ul>
@@ -137,6 +150,11 @@
                                     {{ Auth::user()->name }}
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            Profile
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
