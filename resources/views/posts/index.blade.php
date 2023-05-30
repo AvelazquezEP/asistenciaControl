@@ -78,15 +78,22 @@
         <input hidden type="text" value="" id="id">
         @can('post-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                {{-- delete --}}
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
 
         @can('post-create')
-            <a href="{{ route('post.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ route('post.create') }}" class="btnAction btn_create">
+                {{-- create --}}
+                <i class="fa-solid fa-plus"></i>
+            </a>
         @endcan
         @can('post-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editPost()"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a class="btnAction btn_edit" id="editButton" onclick="editPost()">
+                {{-- edit --}}
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
         @endcan
     </div>
 

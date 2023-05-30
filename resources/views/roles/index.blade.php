@@ -74,14 +74,21 @@
         <input hidden type="text" value="" id="id">
         @can('role-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                {{-- delete --}}
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
         @can('role-create')
-            <a href="{{ route('roles.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ route('roles.create') }}" class="btnAction btn_create">
+                {{-- create --}}
+                <i class="fa-solid fa-plus"></i>
+            </a>
         @endcan
         @can('role-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editRole()"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a class="btnAction btn_edit" id="editButton" onclick="editRole()">
+                {{-- edit --}}
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
         @endcan
     </div>
 

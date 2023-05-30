@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\posts;
+use App\Models\requests;
+use Spatie\Permission\Models\Role;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,6 +29,10 @@ class WelcomeController extends Controller
     public function index(): View
     {
         $posts = posts::get()->where('status', true)->all();
-        return view('welcome', compact('posts'));
+
+
+        return view('welcome', compact(
+            'posts',
+        ));
     }
 }

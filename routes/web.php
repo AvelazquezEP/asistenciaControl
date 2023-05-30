@@ -18,7 +18,9 @@ use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResourceCategoryController;
+use App\Http\Controllers\SchedulerController;
 use PHPUnit\Framework\Attributes\Group;
 
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
@@ -132,6 +134,32 @@ Route::controller(PermissionController::class)->Group(function () {
     Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
     Route::get('/permission/update/{id}', 'updated')->name('permission.update');
     Route::get('/permission/destroy/{id}', 'destroy')->name('permission.remove');
+});
+
+/* #endregion */
+
+/* #region SCHEDULERS */
+
+Route::controller(SchedulerController::class)->Group(function () {
+    Route::get('/schedulers', 'index')->name('scheduler.index');
+    Route::get('/scheduler/create', 'create')->name('scheduler.create');
+    Route::post('/scheduler/store', 'store')->name('scheduler.store');
+    Route::get('/scheduler/edit/{id}', 'edit')->name('scheduler.edit');
+    Route::post('/scheduler/update/{id}', 'updated')->name('scheduler.update');
+    Route::get('/scheduler/destroy/{id}', 'destroy')->name('scheduler.remove');
+});
+
+/* #endregion */
+
+/* #region REQUESTS */
+
+Route::controller(RequestController::class)->Group(function () {
+    Route::get('/requests', 'index')->name('request.index');
+    Route::get('/request/create', 'create')->name('request.create');
+    Route::get('/request/store', 'store')->name('request.store');
+    Route::get('/request/edit/{id}', 'edit')->name('request.edit');
+    Route::get('/request/update/{id}', 'updated')->name('request.update');
+    Route::get('/request/destroy/{id}', 'destroy')->name('request.remove');
 });
 
 /* #endregion */

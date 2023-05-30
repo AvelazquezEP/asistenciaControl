@@ -3,6 +3,10 @@
 
 @section('content')
     <style>
+        .bg-success {
+            background-color: rgb(3, 168, 3);
+        }
+
         .btn_container {
             display: flex;
             flex-direction: row-reverse;
@@ -54,6 +58,15 @@
             scale: 1.3;
             color: rgb(46, 92, 177);
         }
+
+        .fa-calendar-days {
+            color: rgb(84, 164, 230);
+        }
+
+        .fa-calendar-days:hover {
+            scale: 1.3;
+            color: rgb(46, 92, 177);
+        }
     </style>
 
     @if ($message = Session::get('success'))
@@ -74,15 +87,30 @@
         <input hidden type="text" value="" id="id">
         @can('user-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
+                {{-- delete --}}
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
         @can('user-create')
-            <a href="{{ route('users.create') }}" class="btnAction btn_create"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ route('users.create') }}" class="btnAction btn_create">
+                {{-- create --}}
+                <i class="fa-solid fa-plus"></i>
+            </a>
         @endcan
         @can('user-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editUser()"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a class="btnAction btn_edit" id="editButton" onclick="editUser()">
+                {{-- edit --}}
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
         @endcan
+        @if (auth()->user()->can('scheduler-list') ||
+                auth()->user()->can('scheduler-edit') ||
+                auth()->user()->can('scheduler-create'))
+            <a href="{{ route('scheduler.index') }}" class="btnAction btn_scheduler" id="schedulerButton">
+                {{-- scheduler --}}
+                <i class="fa-solid fa-calendar-days"></i>
+            </a>
+        @endif
     </div>
 
     <table class="table table-bordered" id="myTable">
@@ -110,7 +138,7 @@
         @endforeach
     </table>
 
-    {!! $data->render() !!}
+    {{-- {!! $data->render() !!} --}}
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">

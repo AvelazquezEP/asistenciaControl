@@ -12,10 +12,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('resource_categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('Description');
+            $table->text('icon');
+            $table->boolean('status');
+            $table->timestamps();
+        });
+
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('id_category');
+            // $table->unsignedBigInteger('id_category');
             $table->string('description');
             $table->text('resource_file');
             $table->text('path_resource');
@@ -23,11 +32,13 @@ return new class extends Migration
             $table->boolean('status');
             $table->timestamps();
 
-            $table->foreign('id_category')
-                ->references('id') // permission id
-                ->on('resource_categories')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->integer('id_category');
+
+            // $table->foreign('id_category')
+            //     ->references('id') // permission id
+            //     ->on('resource_categories')
+            //     ->onUpdate('cascade')
+            //     ->onDelete('cascade');
         });
     }
     /**
@@ -35,6 +46,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('resource_categories');
         Schema::dropIfExists('resources');
     }
 };

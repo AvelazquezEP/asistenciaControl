@@ -23,14 +23,14 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $users = User::get();
+        $data = User::get()->all();
 
         // return View("Users.users")->with('users', $users);
 
-        $data = User::latest()->paginate(8);
+        // $data = User::latest()->paginate(8);
 
-        return view('Users.users', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('Users.users', compact('data'));
+        // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function edit($id)

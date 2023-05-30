@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <style>
         .btn_container {
@@ -90,20 +89,25 @@
         @can('post-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal" title="Delete">
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
+                {{-- delete --}}
             </button>
         @endcan
 
         @can('post-create')
             <a href="{{ route('resource.create') }}" class="btnAction btn_create" title="Create">
                 <i class="fa-solid fa-plus"></i>
+                {{-- create --}}
             </a>
         @endcan
         <a onclick="showResource()" class="btnAction btn_create" title="Show resource">
             <i class="fa-solid fa-file" style="color: #2e73ea;"></i>
+            {{-- show --}}
         </a>
         @can('post-edit')
             <a class="btnAction btn_edit" id="editButton" onclick="editResource()" title="Edit">
-                <i class="fa-solid fa-pen-to-square"></i></a>
+                <i class="fa-solid fa-pen-to-square"></i>
+                {{-- edit --}}
+            </a>
         @endcan
     </div>
 

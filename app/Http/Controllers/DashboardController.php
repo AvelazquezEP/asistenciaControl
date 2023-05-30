@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\requests;
+use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
@@ -24,13 +26,19 @@ class DashboardController extends Controller
         // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(): View
     {
         if (Auth::check()) {
             $users = User::get();
-            $max_users = count($users);
+            $roles = Role::get()->all();
+            $requests = requests::get()->all();
 
-            return View("dashboard.index")->with('MAX', $max_users);
+            // return View("dashboard.index")->with('MAX', $max_users);
+            return View("dashboard.index", compact(
+                'users',
+                'roles',
+                'requests',
+            ));
         }
 
         return redirect()->route('login')

@@ -208,5 +208,60 @@ const deleteCategory = () => {
 
 /* #endregion */
 
+/* #region SCHEDULER */
+
+const editScheduler = () => {
+    let baseUrl = '/scheduler/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteScheduler = () => {
+    let baseUrl = '/scheduler/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
+}
+
+/* #endregion */
+
+/* #region REQUEST */
+
+const editRequest = () => {
+    let baseUrl = '/request/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteRequest = () => {
+    let baseUrl = '/request/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
+}
+/* #endregion */
+
 // #endregion
 

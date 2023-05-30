@@ -29,10 +29,6 @@ class PermissionTableSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
-            'product-list',
-            'product-create',
-            'product-edit',
-            'product-delete',
             'resource-list',
             'resource-create',
             'resource-edit',
@@ -41,7 +37,24 @@ class PermissionTableSeeder extends Seeder
             'category-create',
             'category-edit',
             'category-delete',
+            'exams-list',
+            'exams-create',
+            'exams-edit',
+            'exams-delete',
+            'assistance-list',
+            'assistance-create',
+            'assistance-edit',
+            'assistance-delete',
+            'request-list',
+            'request-create',
+            'request-edit',
+            'request-delete',
+            'scheduler-list',
+            'scheduler-create',
+            'scheduler-edit',
+            'scheduler-delete',
             // '',
+
         ];
 
         $modules = [
@@ -52,11 +65,15 @@ class PermissionTableSeeder extends Seeder
             'product',
             'resource',
             'category',
+            'exams',
+            'assistance',
+            'request',
+            'scheduler',
         ];
 
         foreach ($permissions as $permission) {
             foreach ($modules as $module) {
-                if (str_contains($permission, $module)) {
+                if (str_contains($permission, $module)) { //<---- si contiene alguna de las palabras se le asigna un este al campo module en cada registro
                     Permission::create([
                         'name' => $permission,
                         'module' => $module,

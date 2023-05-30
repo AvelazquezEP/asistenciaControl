@@ -14,13 +14,11 @@
     @else
         <title>{{ $_ENV['APP_NAME'] }} - {{ Auth::user()->name }}</title>
     @endguest
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- ICONS (fontawssome) -->
-    <script src="https://kit.fontawesome.com/4f12dacfd7.js" crossorigin="anonymous"></script>
 
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
@@ -28,6 +26,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/b50aac37d5.js" crossorigin="anonymous"></script>
 </head>
 
 <style>
@@ -46,7 +46,8 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span class="icon-bar">
+                        </span>
                     </button>
                     <a class="navbar-brand" href="{{ url('/') }}">{{ $_ENV['APP_NAME'] }}</a>
                 </div>
@@ -81,7 +82,7 @@
                                     </ul>
                                 </li>
                             @endcan
-                            @can('post-list')
+                            {{-- @can('post-list')
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                         Posts
@@ -94,7 +95,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endcan
+                            @endcan --}}
                             @can('user-list')
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -120,18 +121,53 @@
                                                 Manage Roles
                                             </a>
                                         </li>
-                                        <li>
+                                        {{-- <li>
                                             <a class="dropdown-item" href="{{ route('permission.index') }}">
                                                 Manage Permissions
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </li>
                             @endcan
-                            @can('resource-list')
+                            @if (auth()->user()->can('resource-list') ||
+                                    auth()->user()->can('exams-list') ||
+                                    auth()->user()->can('post-list'))
+                                {{-- USAR CONDICION SI SE QUIERE AGREGAR MAS DE UN ROL/PERMISO  --}}
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                         Resources
+                                        <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @can('resource-list')
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('category.index') }}">
+                                                    Manage Resources
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('exams-list')
+                                            <li>
+                                                {{-- href="{{ route('tests.index') }}" --}}
+                                                <a class="dropdown-item" href="#">
+                                                    Manage Exams
+                                                </a>
+                                            </li>
+                                        @endcan
+                                        @can('post-list')
+                                            <li class="dropdown">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('posts.index') }}">
+                                                    Manage Post
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                </li>
+                            @endif
+                            @can('request-list')
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Request
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         {{-- <li>
@@ -141,18 +177,26 @@
                                         </li> --}}
                                         <li>
                                             <a class="dropdown-item" href="{{ route('category.index') }}">
-                                                Manage Resources
-                                            </a>
-                                        </li>
-                                        <li>
-                                            {{-- href="{{ route('tests.index') }}" --}}
-                                            <a class="dropdown-item" href="#">
-                                                Manage Exams
+                                                Manage Requests
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                             @endcan
+                            {{-- @can('scheduler-list') --}}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Scheduler
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('scheduler.index') }}">
+                                            Manage Scheduler
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {{-- @endcan --}}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -160,11 +204,11 @@
                                     {{ Auth::user()->name }}
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li>
+                                    {{-- <li>
                                         <a class="dropdown-item" href="#">
                                             Profile
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-        /* ACTIONS */
         .btn_container {
             display: flex;
             flex-direction: row-reverse;
@@ -46,6 +45,15 @@
             color: rgb(46, 177, 101);
         }
 
+        .fa-file {
+            color: rgb(84, 164, 230);
+        }
+
+        .fa-file:hover {
+            scale: 1.3;
+            color: rgb(46, 150, 177);
+        }
+
         .fa-pen-to-square {
             color: rgb(84, 164, 230);
         }
@@ -55,32 +63,12 @@
             color: rgb(46, 92, 177);
         }
 
-        /* CARD ITEMS*/
-        .containerCategory {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            row-gap: 6rem;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .itemCategory {
-            border-radius: 0.8rem;
-            box-shadow: -2px -2px 1.5rem #575757;
-            height: 250px;
-            width: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 1rem;
-        }
-
-        .iconContainer>img {
-            height: 100px;
+        .td_picture {
+            /* width: 50px; */
         }
     </style>
+
+    {{-- <input type="text" name="" value="{{$idCategory}}"> --}}
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -98,45 +86,66 @@
 
     <div class="btn_container">
         <input hidden type="text" value="" id="id">
-        @can('category-delete')
+        @can('scheduler-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
                 {{-- delete --}}
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
-
-        @can('category-create')
-            <a href="{{ route('category.create') }}" class="btnAction btn_create">
+        @can('scheduler-create')
+            <a href="{{ route('scheduler.create') }}" class="btnAction btn_create">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>
         @endcan
-        @can('category-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editCategory()">
+        @can('scheduler-edit')
+            <a class="btnAction btn_edit" id="editButton" onclick="editUser()">
                 {{-- edit --}}
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
-        @endcan
+        @endcan        
+        @if (auth()->user()->can('scheduler-list') ||
+                auth()->user()->can('scheduler-edit') ||
+                auth()->user()->can('scheduler-create'))
+            <a href="{{ route('scheduler.index') }}" class="btnAction btn_scheduler" id="schedulerButton">
+                {{-- scheduler --}}
+                <i class="fa-solid fa-calendar-days"></i>
+            </a>
+        @endif
     </div>
 
-    <div class="containerCategory" id="itemsContainer">
-        @foreach ($categories as $category)
-            <div class="itemCategory" onclick="getID({{ $category->id }})" id="{{ $category->id }}"
-                title="{{ $category->Description }}">
-                <div class="iconContainer">
-                    <img src="data:image/png;base64,{{ $category->icon }}" alt="Picture" style="max-width: 100%;">
-                </div>
-                <div>
-                    <p>{{ $category->title }}</p>
-                    {{-- <p>{{ $category->Description }}</p> --}}
-                </div>
-                <a href="/resources/{{ $category->id }}">
-                    {{-- <a href="{{ route('category.index', $category->id) }}"> --}}
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
+    <table class="table table-bordered" id="myTable">
+        <tr>
+            {{-- <th>No</th> --}}
+            <th>Name</th>
+            <th>Start Time</th>
+            <th>finish Time</th>
+            <th>b #1</th>
+            <th>b #2</th>
+            <th>b #3</th>
+            {{-- <th width="280px">Action</th> --}}
+        </tr>
+        @foreach ($schedulers as $item)
+            <input hidden type="text" value="{{ $item->id }}">
+            <tr id="{{ $item->id }}" onclick="#">
+                {{-- <td>{{ ++$i }}</td> --}}
+                <td>{{ $item->title }}</td>
+                <td>{{ $item->start_time }}</td>
+                <td>{{ $item->finish_time }}</td>
+                <td> - </td>
+                <td> - </td>
+                <td> - </td>
+                {{-- <td>
+                    @if (!empty($user->getRoleNames()))
+                        @foreach ($user->getRoleNames() as $v)
+                            <label class="badge bg-success">{{ $v }}</label>
+                        @endforeach
+                    @endif
+                </td> --}}
+            </tr>
         @endforeach
-    </div>
+    </table>
+
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -158,10 +167,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteCategory()">Delete</button>
-                    {{-- <form class="form" action="{{ route('Users.deleted_ok', [$user->id]) }}">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form> --}}
+                    <button type="button" class="btn btn-danger" onclick="deleteResource()">Delete</button>
                 </div>
             </div>
         </div>
