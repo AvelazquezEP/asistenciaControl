@@ -14,20 +14,20 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedInteger('id_category')->nullable();
-
             $table->string('title');
+            $table->unsignedBigInteger('id_category');
             $table->string('description');
             $table->text('resource_file');
             $table->text('path_resource');
             $table->text('extension_resource');
             $table->boolean('status');
-            // $table->string('role');
             $table->timestamps();
-            // $table->foreign('user_id')->references('id')->on('users');
 
-            // $table->foreign('id_category')->references('id')->on('resource_category');
+            $table->foreign('id_category')
+                ->references('id') // permission id
+                ->on('resource_categories')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
     /**

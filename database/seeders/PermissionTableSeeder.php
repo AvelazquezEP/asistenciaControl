@@ -37,11 +37,33 @@ class PermissionTableSeeder extends Seeder
             'resource-create',
             'resource-edit',
             'resource-delete',
+            'category-list',
+            'category-create',
+            'category-edit',
+            'category-delete',
             // '',
         ];
 
+        $modules = [
+            'dashboard',
+            'post',
+            'user',
+            'role',
+            'product',
+            'resource',
+            'category',
+        ];
+
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            foreach ($modules as $module) {
+                if (str_contains($permission, $module)) {
+                    Permission::create([
+                        'name' => $permission,
+                        'module' => $module,
+                        'status' =>  true,
+                    ]);
+                }
+            }
         }
     }
 }

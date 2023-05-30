@@ -120,6 +120,11 @@
                                                 Manage Roles
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('permission.index') }}">
+                                                Manage Permissions
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endcan
@@ -129,8 +134,13 @@
                                         Resources
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li>
+                                        {{-- <li>
                                             <a class="dropdown-item" href="{{ route('resources.index') }}">
+                                                Manage Resources
+                                            </a>
+                                        </li> --}}
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('category.index') }}">
                                                 Manage Resources
                                             </a>
                                         </li>

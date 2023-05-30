@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\resources;
 use App\Http\Controllers\Controller;
+use App\Models\resource_categories;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,22 +23,21 @@ class ResourceController extends Controller
         $this->middleware('permission:resource-delete', ['only' => ['destroy']]);
     }
 
-    public function index(Request $request): View
+    public function index($id): View
     {
-        // return view('resourcesDoc.index');
-
-        $resources = resources::get()->all();
+        $resources = resources::where('id_category', $id)->get();
+        // $idCategory = $id;
 
         return view('resources.index', compact('resources'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-
     public function create(): View
     {
-        return view('resources.create');
+        $categories = resource_categories::where('status', true)->get()->all();
+        $categories_false = resource_categories::where('status', false)->get()->all();
+        return view('resources.create', compact('categories', 'categories_false'));
     }
-
 
     public function store(Request $request): RedirectResponse
     {
@@ -50,6 +50,7 @@ class ResourceController extends Controller
         $fileResource = $request->file('resource_file')->getClientOriginalName();
         $filename = pathinfo($fileResource, PATHINFO_FILENAME);
         $extension = pathinfo($fileResource, PATHINFO_EXTENSION);
+        $id_category = $request->get('id_category');
 
         $resource = new resources([
             'title' => $request->get('title'),
@@ -59,11 +60,12 @@ class ResourceController extends Controller
             'extension_resource' => $extension,
             'status' => true,
             'created_at' => Carbon::now()->timespan('GMT-5'),
+            'id_category' => $id_category,
         ]);
 
         $resource->save();
 
-        return redirect()->route('resources.index')
+        return redirect()->route('resources.index', $id_category)
             ->with('success', 'Resource created successfully');
     }
 
@@ -76,9 +78,12 @@ class ResourceController extends Controller
 
     public function edit($id): View
     {
+        // $categories = resource_categories::where('status', true)->get()->all();
+        // $categories_false = resource_categories::where('status', false)->get()->all();
+
         $resource = resources::find($id);
         return view('resources.edit', compact('resource'));
-    }    
+    }
 
     public function update(Request $request, $id): RedirectResponse
     {
@@ -93,6 +98,7 @@ class ResourceController extends Controller
         ]);
 
         $resource = resources::find($id);
+        $id_category = $resource->id_category;
 
         if ($_FILES['resource_file']['size'] == 0) {
             $oldResource = $resource->resource_file;
@@ -116,19 +122,21 @@ class ResourceController extends Controller
         $resource->extension_resource = $extension;
         $resource->status = $request->input('status');
         $resource->updated_at = Carbon::now()->timespan('GMT-5');
+        $resource->id_category = $id_category;
 
         $resource->save();
 
-        return redirect()->route('resources.index')
+        return redirect()->route('resources.index', $id_category)
             ->with('success', 'Resource updated successfully');
     }
 
     public function destroy($id): RedirectResponse
     {
         $resource = resources::find($id);
+        $id_category = $resource->id_category;
         $resource->delete();
 
-        return redirect()->route('resources.index')
+        return redirect()->route('resources.index', $id_category)
             ->with('success', 'Resource delete');
     }
 }

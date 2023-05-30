@@ -1,6 +1,5 @@
 
 /* #region UTILITIES */
-
 var log = console.log;
 
 const open_dangerAlert = (alertElement) => {
@@ -154,6 +153,51 @@ const showResource = () => {
     let baseUrl = '/resource/show/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertDelete');
+    }
+}
+
+/* #endregion */
+
+/* #region Category Resource*/
+
+const getID = (id) => {
+    allItems = document.getElementById('itemsContainer').getElementsByClassName('itemCategory');
+    for (var i = 0; i < allItems.length; i++) {
+        if (id != allItems[i].id) {
+            document.getElementById(allItems[i].id).style.scale = '1';
+        } else {
+            document.getElementById(allItems[i].id).style.scale = '1.1';
+        }
+    }
+
+    let id_category = id;
+    document.getElementById('id').value = id_category;
+}
+
+const editCategory = () => {
+
+    let baseUrl = '/category/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteCategory = () => {
+    let baseUrl = '/category/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    log(idUser);
 
     if (id != 0) {
         window.location.href = `${baseUrl}${id}`;

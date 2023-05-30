@@ -17,6 +17,8 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ResourceCategoryController;
 use PHPUnit\Framework\Attributes\Group;
 
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
@@ -96,13 +98,40 @@ Route::controller(RoleController::class)->group(function () {
 /* #region RESOURCECONTROLLER */
 
 Route::controller(ResourceController::class)->Group(function () {
-    Route::get('/resources', 'index')->name('resources.index');
+    Route::get('/resources/{id}', 'index')->name('resources.index');
     Route::get('/resource/show/{id}', 'show')->name('resource.show');
     Route::get('/resource/create', 'create')->name('resource.create');
     Route::post('/resource/store', 'store')->name('resource.store');
     Route::get('/resource/edit/{id}', 'edit')->name('resource.edit');
     Route::post('/resource/update/{id}', 'update')->name('resource.update');
     Route::get('/resource/destroy/{id}', 'destroy')->name('resource.remove');
+});
+
+/* #endregion */
+
+/* #region RESOURCECATEGORYCONTROLLER */
+
+Route::controller(ResourceCategoryController::class)->Group(function () {
+    Route::get('/categories', 'index')->name('category.index');
+    Route::get('/category/show/{id}', 'show')->name('category.show');
+    Route::get('/category/create', 'create')->name('category.create');
+    Route::post('/category/store', 'store')->name('category.store');
+    Route::get('/category/edit/{id}', 'edit')->name('category.edit');
+    Route::post('/category/update/{id}', 'update')->name('category.update');
+    Route::get('/category/destroy/{id}', 'destroy')->name('category.remove');
+});
+
+/* #endregion */
+
+/* #region PERMISSIONS */
+
+Route::controller(PermissionController::class)->Group(function () {
+    Route::get('/permissions', 'index')->name('permission.index');
+    Route::get('/permission/create', 'create')->name('permission.create');
+    Route::get('/permission/store', 'store')->name('permission.store');
+    Route::get('/permission/edit/{id}', 'edit')->name('permission.edit');
+    Route::get('/permission/update/{id}', 'updated')->name('permission.update');
+    Route::get('/permission/destroy/{id}', 'destroy')->name('permission.remove');
 });
 
 /* #endregion */
@@ -116,28 +145,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
 });
 
-/* #endregion */
-
-/* #region FORGOT PASSWORD */
-
-// Route::get('/forgot-password', function () {
-//     return view('auth.passwords.email');
-// })->middleware('guest')->name('password.request');
-
-// Route::get('/reset-password/{token}', function ($token) {
-//     return view('auth.passwords.reset', ['token' => $token]);
-// })->middleware('guest')->name('password.reset');
-
-// Route::post('/forgot-password', function (Request $request) {
-//     $request->validate(['email' => 'required|email']);
-
-//     $status = Password::sendResetLink(
-//         $request->only('email')
-//     );
-
-//     return $status === Password::RESET_LINK_SENT
-//         ? back()->with(['status' => __($status)])
-//         : back()->withErrors(['email' => __($status)]);
-// })->middleware('guest')->name('password.email');
-        
 /* #endregion */

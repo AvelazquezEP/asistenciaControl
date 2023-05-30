@@ -1,5 +1,6 @@
 <?php
-
+// ESTE CONTROLADOR ES DE PRUEBAS
+// NO USAR ESTE CONTROLADOR
 namespace App\Http\Controllers;
 
 use App\Models\post;
@@ -70,7 +71,7 @@ class PostController extends Controller
         $post->save();
         // Post::create($postData->all());
 
-        return redirect()->route('posts.inex')
+        return redirect()->route('posts.index')
             ->with('success', 'Post created successfully');
     }
 

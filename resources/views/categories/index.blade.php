@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-
 @section('content')
     <style>
+        /* ACTIONS */
         .btn_container {
             display: flex;
             flex-direction: row-reverse;
@@ -46,15 +46,6 @@
             color: rgb(46, 177, 101);
         }
 
-        .fa-file {
-            color: rgb(84, 164, 230);
-        }
-
-        .fa-file:hover {
-            scale: 1.3;
-            color: rgb(46, 150, 177);
-        }
-
         .fa-pen-to-square {
             color: rgb(84, 164, 230);
         }
@@ -64,12 +55,32 @@
             color: rgb(46, 92, 177);
         }
 
-        .td_picture {
-            /* width: 50px; */
+        /* CARD ITEMS*/
+        .containerCategory {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            row-gap: 6rem;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .itemCategory {
+            border-radius: 0.8rem;
+            box-shadow: -2px -2px 1.5rem #575757;
+            height: 250px;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .iconContainer>img {
+            height: 100px;
         }
     </style>
-
-    {{-- <input type="text" name="" value="{{$idCategory}}"> --}}
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -87,50 +98,42 @@
 
     <div class="btn_container">
         <input hidden type="text" value="" id="id">
-        @can('post-delete')
-            <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal" title="Delete">
+        @can('category-delete')
+            <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
 
-        @can('post-create')
-            <a href="{{ route('resource.create') }}" class="btnAction btn_create" title="Create">
+        @can('category-create')
+            <a href="{{ route('category.create') }}" class="btnAction btn_create">
                 <i class="fa-solid fa-plus"></i>
             </a>
         @endcan
-        <a onclick="showResource()" class="btnAction btn_create" title="Show resource">
-            <i class="fa-solid fa-file" style="color: #2e73ea;"></i>
-        </a>
-        @can('post-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editResource()" title="Edit">
-                <i class="fa-solid fa-pen-to-square"></i></a>
+        @can('category-edit')
+            <a class="btnAction btn_edit" id="editButton" onclick="editCategory()">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
         @endcan
     </div>
 
-    {{-- MAIN CONTENT --}}
-    <table class="table table-bordered" id="myTable">
-        <tr>
-            <th>Status</th>
-            <th>Date</th>
-            <th>title</th>
-            <th>Description</th>
-        </tr>
-        @foreach ($resources as $resource)
-            <input hidden type="text" value="{{ $resource->id }}">
-            <tr id="{{ $resource->id }}" onclick="changeBG({{ $resource->id }})">
-                <td style="width: 50px;">
-                    @if ($resource->status == true)
-                        <i class="fa-solid fa-check" style="color: #1bc546; background-color: transparent;"></i>
-                    @else
-                        <i class="fa-sharp fa-solid fa-xmark" style="color: #ce2e1c; background-color: transparent;"></i>
-                    @endif
-                </td>
-                <td style="width: 100px;">{{ $resource->created_at }}</td>
-                <td>{{ $resource->title }}</td>
-                <td>{{ $resource->description }}</td>
-            </tr>
+    <div class="containerCategory" id="itemsContainer">
+        @foreach ($categories as $category)
+            <div class="itemCategory" onclick="getID({{ $category->id }})" id="{{ $category->id }}"
+                title="{{ $category->Description }}">
+                <div class="iconContainer">
+                    <img src="data:image/png;base64,{{ $category->icon }}" alt="Picture" style="max-width: 100%;">
+                </div>
+                <div>
+                    <p>{{ $category->title }}</p>
+                    {{-- <p>{{ $category->Description }}</p> --}}
+                </div>
+                <a href="/resources/{{ $category->id }}">
+                    {{-- <a href="{{ route('category.index', $category->id) }}"> --}}
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
         @endforeach
-    </table>
+    </div>
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
@@ -152,7 +155,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteResource()">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteCategory()">Delete</button>
+                    {{-- <form class="form" action="{{ route('Users.deleted_ok', [$user->id]) }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form> --}}
                 </div>
             </div>
         </div>

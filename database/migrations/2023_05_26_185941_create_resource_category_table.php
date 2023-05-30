@@ -16,13 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('Description');
             $table->text('icon');
+            $table->boolean('status');
             $table->timestamps();
-
-            $table->foreign('id_category')
-                ->references('id') // permission id
-                ->on('resource_categories')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 
