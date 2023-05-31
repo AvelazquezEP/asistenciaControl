@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('schedulers', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('comment');
-            $table->date('start_time');
-            $table->date('finish_time');
-            $table->timestamps();
+            $table->string('description');
+            $table->timestamp('time_start');
+            $table->timestamp('time_finish');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('scheduler');
+        Schema::dropIfExists('schedulers');
     }
 };

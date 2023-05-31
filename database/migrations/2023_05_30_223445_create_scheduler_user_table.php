@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,7 +15,20 @@ return new class extends Migration
         Schema::create('scheduler_user', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->foreignId('id_user')->constrained(
+                table: 'users',
+                indexName: 'id'
+            )
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->unsignedInteger('scheduler_id');
         });
+
+        DB::statement(
+            "ALTER TABLE scheduler_user ADD FOREIGN KEY (scheduler_id) REFERENCES schedulers(id) ON DELETE CASCADE"
+        );
     }
 
     /**

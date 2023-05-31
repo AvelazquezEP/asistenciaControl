@@ -103,7 +103,7 @@
                 {{-- edit --}}
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
-        @endcan        
+        @endcan
         @if (auth()->user()->can('scheduler-list') ||
                 auth()->user()->can('scheduler-edit') ||
                 auth()->user()->can('scheduler-create'))
@@ -116,32 +116,24 @@
 
     <table class="table table-bordered" id="myTable">
         <tr>
-            {{-- <th>No</th> --}}
             <th>Name</th>
-            <th>Start Time</th>
-            <th>finish Time</th>
             <th>b #1</th>
             <th>b #2</th>
             <th>b #3</th>
-            {{-- <th width="280px">Action</th> --}}
         </tr>
-        @foreach ($schedulers as $item)
-            <input hidden type="text" value="{{ $item->id }}">
-            <tr id="{{ $item->id }}" onclick="#">
-                {{-- <td>{{ ++$i }}</td> --}}
-                <td>{{ $item->title }}</td>
-                <td>{{ $item->start_time }}</td>
-                <td>{{ $item->finish_time }}</td>
-                <td> - </td>
-                <td> - </td>
-                <td> - </td>
-                {{-- <td>
-                    @if (!empty($user->getRoleNames()))
-                        @foreach ($user->getRoleNames() as $v)
-                            <label class="badge bg-success">{{ $v }}</label>
-                        @endforeach
+        @foreach ($users as $user)
+            <tr>
+                <td>{{ $user->name }}</td>
+
+                @foreach ($data as $item)
+                    @if ($user->id == $item->id)
+                        <td>
+                            {{ date('G:i', strtotime($item->time_start)) }} -
+                            {{ date('G:i', strtotime($item->time_finish)) }}
+                        </td>
                     @endif
-                </td> --}}
+                @endforeach
+
             </tr>
         @endforeach
     </table>

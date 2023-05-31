@@ -12,14 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resource_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('Description');
-            $table->text('icon');
-            $table->boolean('status');
-            $table->timestamps();
-        });
+        // Schema::create('resource_categories', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('title');
+        //     $table->string('Description');
+        //     $table->text('icon');
+        //     $table->boolean('status');
+        //     $table->timestamps();
+        // });
 
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
@@ -32,13 +32,13 @@ return new class extends Migration
             $table->boolean('status');
             $table->timestamps();
 
-            $table->integer('id_category');
-
-            // $table->foreign('id_category')
-            //     ->references('id') // permission id
-            //     ->on('resource_categories')
-            //     ->onUpdate('cascade')
-            //     ->onDelete('cascade');
+            $table->foreignId('id_resource_category')->constrained(
+                table: 'resource_categories',
+                indexName: 'id'
+            )
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+                ->nullable();
         });
     }
     /**

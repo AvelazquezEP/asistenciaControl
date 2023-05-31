@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class schedulers extends Model
 {
@@ -18,8 +19,13 @@ class schedulers extends Model
         'updated_at',
     ];
 
-    public function users()
+    public function scheduler_user(): HasMany
     {
-        return $this->BelongsTo(users::class, 'id');
+        return $this->hasMany(scheduler_user::class);
     }
+
+    // public function users()
+    // {
+    //     return $this->BelongsTo(users::class, 'id');
+    // }
 }

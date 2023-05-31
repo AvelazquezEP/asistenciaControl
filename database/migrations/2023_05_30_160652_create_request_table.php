@@ -17,6 +17,14 @@ return new class extends Migration
             $table->string('reason');
             $table->string('type_request'); //<---este es un select con valores ya predefinidos (validación de vista)            
             $table->timestamps();
+
+            $table->foreignId('id_user')->constrained(
+                table: 'users',
+                indexName: 'id'
+            )
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+                ->nullable();
         });
     }
 

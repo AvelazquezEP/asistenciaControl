@@ -26,15 +26,15 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function schedulers(): HasMany
+    public function scheduler_user(): HasMany
     {
-        return $this->hasMany(schedulers::class);
+        return $this->hasMany(scheduler_user::class);
     }
 
-    public function requests(): HasMany
-    {
-        return $this->hasMany(requests::class);
-    }
+    // public function requests(): HasMany
+    // {
+    //     return $this->hasMany(requests::class);
+    // }
 
     /**
      * The attributes that should be hidden for serialization.
