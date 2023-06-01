@@ -28,23 +28,25 @@
     </div>
 
     <div class="">
-        {{-- <p></p> --}}
-        {{-- <button onclick="open_all_alerts()">Test Alert</button> --}}
-        <form action="{{ route('scheduler.create', 1) }}" method="POST" class="timeForm">
+        {{-- <button onclick="validate_all()">Test Alert</button> --}}
+        <div class="alert alert-danger" id="mainAlert">
+            <strong id="mainMsg"></strong>
+        </div>
+        <form action="{{ route('scheduler.create', 1) }}" method="POST" class="timeForm" id="formTime">
             @csrf
             {{-- B1 --}}
             <div class="form-group">
                 <label>b1</label>
 
                 <div class="alert alert-danger" id="b1Alert">
-                    {{-- <a class="close" onclick="close_dangerAlert('b1Alert')">&times;</a> --}}
                     <strong id="b1Msg"></strong>
                 </div>
 
                 <div class="timeContainer">
-                    <input type="time" name="time_start" id="b1_time_start" class="form-control" required>
+                    <input type="time" name="time_start" id="b1_time_start" class="form-control" required
+                        onchange="b1_validate('b1_time_start')">
                     <input type="time" name="time_finish" id="b1_time_finish" class="form-control" required
-                        onchange="b1_validate()">
+                        onchange="b1_validate('b1_time_finish')">
                 </div>
             </div>
             {{-- B2 --}}
@@ -58,9 +60,9 @@
 
                 <div class="timeContainer">
                     <input type="time" name="time_start" id="b2_time_start" class="form-control" required
-                        onchange="b2_validate()">
+                        onchange="b2_validate('b2_time_start')">
                     <input type="time" name="time_finish" id="b2_time_finish" class="form-control" required
-                        onchange="b2_validate()">
+                        onchange="b2_validate('b2_time_finish')">
                 </div>
             </div>
             {{-- LNC --}}
@@ -74,9 +76,9 @@
 
                 <div class="timeContainer">
                     <input type="time" name="time_start" id="lnc_time_start" class="form-control" required
-                        onchange="lnc_validate()">
+                        onchange="lnc_validate('lnc_time_start')">
                     <input type="time" name="time_finish" id="lnc_time_finish" class="form-control" required
-                        onchange="lnc_validate()">
+                        onchange="lnc_validate('lnc_time_finish')">
                 </div>
             </div>
         </form>

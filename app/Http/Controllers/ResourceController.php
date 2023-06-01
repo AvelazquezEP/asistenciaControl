@@ -25,7 +25,7 @@ class ResourceController extends Controller
 
     public function index($id): View
     {
-        $resources = resources::where('id_category', $id)->get();
+        $resources = resources::where('id_resource_category', $id)->get();
         // $idCategory = $id;
 
         return view('resources.index', compact('resources'));

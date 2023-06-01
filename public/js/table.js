@@ -169,9 +169,9 @@ const getID = (id) => {
     allItems = document.getElementById('itemsContainer').getElementsByClassName('itemCategory');
     for (var i = 0; i < allItems.length; i++) {
         if (id != allItems[i].id) {
-            document.getElementById(allItems[i].id).style.scale = '1';
+            document.getElementById(allItems[i].id).style.scale = '1'; //<-- escala a 1 es el tamaño original
         } else {
-            document.getElementById(allItems[i].id).style.scale = '1.1';
+            document.getElementById(allItems[i].id).style.scale = '1.1'; //<-- escala a 1.1 es el zoom (se vera mas grande)
         }
     }
 
