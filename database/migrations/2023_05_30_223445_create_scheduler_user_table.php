@@ -14,7 +14,9 @@ return new class extends Migration
     {
         Schema::create('scheduler_user', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('type');
+            $table->timestamp('time_start');
+            $table->timestamp('time_finish');
 
             $table->foreignId('id_user')->constrained(
                 table: 'users',

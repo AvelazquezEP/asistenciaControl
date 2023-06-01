@@ -93,7 +93,7 @@
             </button>
         @endcan
         @can('scheduler-create')
-            <a href="{{ route('scheduler.create') }}" class="btnAction btn_create">
+            <a onclick="createScheduler()" class="btnAction btn_create">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>
@@ -104,31 +104,31 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
         @endcan
-        @if (auth()->user()->can('scheduler-list') ||
-                auth()->user()->can('scheduler-edit') ||
-                auth()->user()->can('scheduler-create'))
+        {{-- @if (auth()->user()->can('scheduler-list') ||
+    auth()->user()->can('scheduler-edit') ||
+    auth()->user()->can('scheduler-create'))
             <a href="{{ route('scheduler.index') }}" class="btnAction btn_scheduler" id="schedulerButton">
-                {{-- scheduler --}}
                 <i class="fa-solid fa-calendar-days"></i>
             </a>
-        @endif
+        @endif --}}
     </div>
 
     <table class="table table-bordered" id="myTable">
         <tr>
             <th>Name</th>
             <th>b #1</th>
+            <th>L</th>
             <th>b #2</th>
-            <th>b #3</th>
         </tr>
         @foreach ($users as $user)
-            <tr>
+            <input hidden type="text" value="{{ $user->id }}">
+            <tr id="{{ $user->id }}" onclick="changeBG({{ $user->id }})">
                 <td>{{ $user->name }}</td>
-
                 @foreach ($data as $item)
                     @if ($user->id == $item->id)
                         <td>
-                            {{ date('G:i', strtotime($item->time_start)) }} -
+                            {{ date('G:i', strtotime($item->time_start)) }}
+                            -
                             {{ date('G:i', strtotime($item->time_finish)) }}
                         </td>
                     @endif

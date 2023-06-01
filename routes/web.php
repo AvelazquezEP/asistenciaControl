@@ -142,7 +142,7 @@ Route::controller(PermissionController::class)->Group(function () {
 
 Route::controller(SchedulerController::class)->Group(function () {
     Route::get('/schedulers', 'index')->name('scheduler.index');
-    Route::get('/scheduler/create', 'create')->name('scheduler.create');
+    Route::get('/scheduler/create/{id}', 'create')->name('scheduler.create');
     Route::post('/scheduler/store', 'store')->name('scheduler.store');
     Route::get('/scheduler/edit/{id}', 'edit')->name('scheduler.edit');
     Route::post('/scheduler/update/{id}', 'updated')->name('scheduler.update');

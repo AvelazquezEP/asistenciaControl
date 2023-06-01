@@ -209,6 +209,17 @@ const deleteCategory = () => {
 /* #endregion */
 
 /* #region SCHEDULER */
+const createScheduler = () => {
+    let baseUrl = '/scheduler/create/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
 
 const editScheduler = () => {
     let baseUrl = '/scheduler/edit/';

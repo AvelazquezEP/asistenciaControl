@@ -18,14 +18,13 @@ class SchedulerController extends Controller
     {
         $schedulers = schedulers::orderBy('title', 'desc')->get()->all();
 
-        // $users = User::where('id', 1)->get()->all();
-        $users = User::get()->all();
-
         $data = scheduler_user::join('users', 'scheduler_user.id_user', '=', 'users.id')
             ->join('schedulers', 'scheduler_user.scheduler_id', '=', 'schedulers.id')
-            ->select('scheduler_user.*', 'scheduler_user.id', 'users.*', 'schedulers.time_start', 'schedulers.time_finish')
+            ->select('scheduler_user.*', 'scheduler_user.id', 'users.*', 'scheduler_user.time_start', 'scheduler_user.time_finish')
             ->orderBy('scheduler_user.scheduler_id')
             ->get()->all();
+
+        $users = User::get()->all();
 
         return view('schedulers.index', compact('schedulers', 'data', 'users'));
     }
@@ -37,7 +36,7 @@ class SchedulerController extends Controller
     {
         $user = User::find($id);
 
-        return view('schedulers.create', compact('$user'));
+        return view('schedulers.create', compact('user'));
     }
 
     /**
