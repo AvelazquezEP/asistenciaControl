@@ -194,6 +194,11 @@
                                             Manage Scheduler
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('scheduler.index') }}">
+                                            Manage Assistance
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             {{-- @endcan --}}

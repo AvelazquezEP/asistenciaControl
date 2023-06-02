@@ -58,7 +58,8 @@
                             <strong>{{ $module }}:</strong>
                             @foreach ($permission as $value)
                                 @if ($value->module == $module)
-                                    <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
+                                    <label>
+                                        {{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
                                         {{ $value->name }}
                                     </label>
                                 @endif

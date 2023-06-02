@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class scheduler_user extends Model
 {
-    use HasFactory;
     protected $table = 'scheduler_user';
+    use HasFactory;
+    protected $fillable = [
+        'type',
+        'time_start',
+        'time_finish',
+        'id_user',
+        'scheduler_id',
+        'created_at',
+        'updated_at'
+    ];
 
     public function users()
     {

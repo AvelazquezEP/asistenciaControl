@@ -6,6 +6,7 @@ use App\Models\schedulers;
 use App\Http\Controllers\Controller;
 use App\Models\scheduler_user;
 use App\Models\User;
+use DateTime;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,13 +46,71 @@ class SchedulerController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
-
-            'start_time',
-            'finish_time',
+            'id_user',
+            'b1_time_start',
+            'b1_time_finish',
+            'b2_time_start',
+            'b2_time_finish',
+            'lnc_time_start',
+            'lnc_time_finish'
         ]);
 
-        return redirect('scheduler.index')
-            ->with('success', 'created successfully');;
+        $id_user = request('id_user');
+        $b1S = request('b1_time_start');
+        $b1F = request('b1_time_finish');
+        $b2S = request('b2_time_start');
+        $b2F = request('b2_time_finish');
+        $lncS = request('lnc_time_start');
+        $lncF = request('lnc_time_finish');
+
+        $b1S_stamp = "2023-06-01 " . $b1S;
+        $b1F_stamp = "2023-06-01 " . $b1F;
+
+        // $b1S_stamp = '2023/'
+        $scheduler_user =  new scheduler_user([
+            'type' => 'b1',
+            'time_start' => $b1S_stamp,
+            'time_finish' => $b1F_stamp,
+            'id_user' => $id_user,
+            'scheduler_id' => 1
+        ]);
+
+        $scheduler_user->save();
+
+        // Save 2
+        $b2S_stamp = "2023-06-01 " . $b2S;
+        $b2F_stamp = "2023-06-01 " . $b2F;
+
+        $scheduler_user_2 =  new scheduler_user([
+            'type' => 'b1',
+            'time_start' => $b2S_stamp,
+            'time_finish' => $b2F_stamp,
+            'id_user' => $id_user,
+            'scheduler_id' => 1
+        ]);
+
+        $scheduler_user_2->save();
+
+        // Save 3
+        $lncS_stamp = "2023-06-01 " . $lncS;
+        $lncF_stamp = "2023-06-01 " . $lncF;
+
+        $scheduler_user_3 =  new scheduler_user([
+            'type' => 'b1',
+            'time_start' => $lncS_stamp,
+            'time_finish' => $lncF_stamp,
+            'id_user' => $id_user,
+            'scheduler_id' => 1
+        ]);
+
+        $scheduler_user_3->save();
+
+        return redirect()->route('scheduler.index')
+            ->with('success', 'Scheduler created successfully');
+
+        // return view('schedulers.test', compact(
+        //     'id_user'
+        // ));
     }
 
     /**

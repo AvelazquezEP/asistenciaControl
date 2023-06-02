@@ -209,6 +209,7 @@ const deleteCategory = () => {
 /* #endregion */
 
 /* #region SCHEDULER */
+
 const createScheduler = () => {
     let baseUrl = '/scheduler/create/';
     let idUser = document.getElementById('id').value;
@@ -244,6 +245,9 @@ const deleteScheduler = () => {
         open_dangerAlert('dangerAlertDelete');
     }
 }
+
+// json_data = JSON.stringify(my_array);
+
 
 /* #endregion */
 

@@ -15,6 +15,10 @@
         }
     </style>
 
+    <div class="alert alert-danger" id="mainAlert">
+        <strong id="mainMsg"></strong>
+    </div>
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -29,12 +33,10 @@
 
     <div class="">
         {{-- <button onclick="validate_all()">Test Alert</button> --}}
-        <div class="alert alert-danger" id="mainAlert">
-            <strong id="mainMsg"></strong>
-        </div>
-        <form action="{{ route('scheduler.create', 1) }}" method="POST" class="timeForm" id="formTime">
+        <form action="{{ route('scheduler.store') }}" method="POST" class="timeForm" id="formTime">
+            {{-- <div class="timeForm" id="formTime"> --}}
             @csrf
-            {{-- B1 --}}
+            <input hidden type="text" value="{{ $user->id }}" id="id" name="id_user">
             <div class="form-group">
                 <label>b1</label>
 
@@ -43,9 +45,9 @@
                 </div>
 
                 <div class="timeContainer">
-                    <input type="time" name="time_start" id="b1_time_start" class="form-control" required
+                    <input type="time" name="b1_time_start" id="b1_time_start" class="form-control"
                         onchange="b1_validate('b1_time_start')">
-                    <input type="time" name="time_finish" id="b1_time_finish" class="form-control" required
+                    <input type="time" name="b1_time_finish" id="b1_time_finish" class="form-control"
                         onchange="b1_validate('b1_time_finish')">
                 </div>
             </div>
@@ -59,9 +61,9 @@
                 </div>
 
                 <div class="timeContainer">
-                    <input type="time" name="time_start" id="b2_time_start" class="form-control" required
+                    <input type="time" name="b2_time_start" id="b2_time_start" class="form-control"
                         onchange="b2_validate('b2_time_start')">
-                    <input type="time" name="time_finish" id="b2_time_finish" class="form-control" required
+                    <input type="time" name="b2_time_finish" id="b2_time_finish" class="form-control"
                         onchange="b2_validate('b2_time_finish')">
                 </div>
             </div>
@@ -75,13 +77,17 @@
                 </div>
 
                 <div class="timeContainer">
-                    <input type="time" name="time_start" id="lnc_time_start" class="form-control" required
+                    <input type="time" name="lnc_time_start" id="lnc_time_start" class="form-control"
                         onchange="lnc_validate('lnc_time_start')">
-                    <input type="time" name="time_finish" id="lnc_time_finish" class="form-control" required
+                    <input type="time" name="lnc_time_finish" id="lnc_time_finish" class="form-control"
                         onchange="lnc_validate('lnc_time_finish')">
                 </div>
             </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
         </form>
+        {{-- <button class="btn btn-primary" onclick="test()">Save</button> --}}
     </div>
 
     <script src="{{ asset('js/scheduler.js') }}"></script>

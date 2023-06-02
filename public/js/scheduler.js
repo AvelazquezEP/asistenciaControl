@@ -189,16 +189,64 @@ const get_all_times = (this_divTime) => {
     return (timeArray);
 }
 
-const getID = () => {
-    allItems = document.getElementById('itemsContainer').getElementsByClassName('formTime');
-    for (var i = 0; i < allItems.length; i++) {
-        if (id != allItems[i].id) {
-            document.getElementById(allItems[i].id).style.scale = '1'; //<-- escala a 1 es el tamaño original
-        } else {
-            document.getElementById(allItems[i].id).style.scale = '1.1'; //<-- escala a 1.1 es el zoom (se vera mas grande)
-        }
-    }
+const get_clean_times = () => {
+    var times = [];
 
-    let id_category = id;
-    document.getElementById('id').value = id_category;
+    let b1Start = document.getElementById('b1_time_start').value;
+    let b1Finish = document.getElementById('b1_time_finish').value;
+
+    let b2Start = document.getElementById('b2_time_start').value;
+    let b2Finish = document.getElementById('b2_time_finish').value;
+
+    let lncStart = document.getElementById('lnc_time_start').value;
+    let lncFinish = document.getElementById('lnc_time_finish').value;
+
+    times.push(b1Start);
+    times.push(b1Finish);
+    times.push(b2Start);
+    times.push(b2Finish);
+    times.push(lncStart);
+    times.push(lncFinish);
+
+    return times;
+}
+
+
+const test = () => {
+
+    var times = [];
+
+    let b1Start = document.getElementById('b1_time_start').value;
+    let b1Finish = document.getElementById('b1_time_finish').value;
+
+    let b2Start = document.getElementById('b2_time_start').value;
+    let b2Finish = document.getElementById('b2_time_finish').value;
+
+    let lncStart = document.getElementById('lnc_time_start').value;
+    let lncFinish = document.getElementById('lnc_time_finish').value;
+
+    times.push(b1Start);
+    times.push(b1Finish);
+    times.push(b2Start);
+    times.push(b2Finish);
+    times.push(lncStart);
+    times.push(lncFinish);
+
+    // log(times);    
+
+    let baseUrl = '/scheduler/store/';
+    let id = document.getElementById('id').value;
+    times.push(id);
+
+    var timeArray_encode = encodeURIComponent(JSON.stringify(times));
+    var timeArray_encode = JSON.stringify(times);
+    // window.location.href = "{{URL::to('/modulos/contas_ti/gerar_protocolo')}}" + "?array=" + myArray;
+
+    if (id != 0) {
+        // window.location.href = `${baseUrl}${id}`;
+        window.location.href = `/scheduler/store/${timeArray_encode}`;
+        // window.location.href = "{{/scheduler/store'}}" + "?array=" + timeArray_encode;
+    } else {
+        open_dangerAlert('mainAlert');
+    }
 }
