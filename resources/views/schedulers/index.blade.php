@@ -80,7 +80,7 @@
     <div class="alert alert-danger" id="dangerAlertEdit">
         <a class="close" onclick="close_dangerAlert('dangerAlertEdit')">&times;</a>
         <strong>
-            You need to select a record to edit !!
+            You need to select a record!!
         </strong>
     </div>
 
@@ -99,7 +99,7 @@
             </a>
         @endcan
         @can('scheduler-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editUser()">
+            <a class="btnAction btn_edit" id="editButton" onclick="editScheduler()">
                 {{-- edit --}}
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
@@ -133,7 +133,6 @@
                         </td>
                     @endif
                 @endforeach
-
             </tr>
         @endforeach
     </table>
@@ -165,5 +164,6 @@
         </div>
     </div>
 
+    {{-- <script src="{{ asset('js/scheduler.js') }}"></script> --}}
     <script src="{{ asset('js/table.js') }}"></script>
 @endsection

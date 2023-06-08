@@ -34,7 +34,6 @@
     <div class="">
         {{-- <button onclick="validate_all()">Test Alert</button> --}}
         <form action="{{ route('scheduler.store') }}" method="POST" class="timeForm" id="formTime">
-            {{-- <div class="timeForm" id="formTime"> --}}
             @csrf
             <input hidden type="text" value="{{ $user->id }}" id="id" name="id_user">
             <div class="form-group">

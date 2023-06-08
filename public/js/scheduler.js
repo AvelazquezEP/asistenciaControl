@@ -211,7 +211,6 @@ const get_clean_times = () => {
     return times;
 }
 
-
 const test = () => {
 
     var times = [];
