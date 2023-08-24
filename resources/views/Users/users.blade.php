@@ -75,7 +75,6 @@
             <strong>{{ $message }}</strong>.
         </div>
     @endif
-
     <div class="alert alert-danger" id="dangerAlertEdit">
         <a class="close" onclick="close_dangerAlert('dangerAlertEdit')">&times;</a>
         <strong>
@@ -106,13 +105,14 @@
         @if (auth()->user()->can('scheduler-list') ||
                 auth()->user()->can('scheduler-edit') ||
                 auth()->user()->can('scheduler-create'))
-            <a href="{{ route('scheduler.index') }}" class="btnAction btn_scheduler" id="schedulerButton">
+            {{-- <a href="{{ route('scheduler.index --}}
+            <a class="btnAction btn_scheduler" id="schedulerButton" onclick="schedulerUser()">
                 {{-- scheduler --}}
                 <i class="fa-solid fa-calendar-days"></i>
             </a>
         @endif
     </div>
-
+    
     <table class="table table-bordered" id="myTable">
         <tr>
             {{-- <th>No</th> --}}

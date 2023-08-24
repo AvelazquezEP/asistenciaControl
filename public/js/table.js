@@ -68,6 +68,18 @@ const deleteUser = () => {
     }
 }
 
+const schedulerUser = () => {
+    let baseUrl = '/scheduler/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
 // #endregion
 
 // #region Post
@@ -215,19 +227,10 @@ const createScheduler = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    var table = document.getElementById('myTable');
-    for (var i = 1; i < table.rows.length; i++) {
-        var firstCol = table.rows[i].cells[0].cells; //first column        
-        log(firstCol)
-        // firstCol.style.color = 'red'; // or anything you want to do with first col
-    }
-
-    
-
     if (id != 0) {
-        // window.location.href = `${baseUrl}${id}`;
+        window.location.href = `${baseUrl}${id}`;
     } else {
-        // open_dangerAlert('dangerAlertEdit');
+        open_dangerAlert('dangerAlertEdit');
     }
 }
 

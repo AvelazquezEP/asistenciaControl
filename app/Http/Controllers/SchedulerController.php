@@ -25,19 +25,28 @@ class SchedulerController extends Controller
             ->orderBy('scheduler_user.scheduler_id')
             ->get()->all();
 
-        $users = User::get()->all();
+        $users = User::get()->all();    
+        // Auth::user()->name;
+        // Auth::user()->id;        
 
-        return view('schedulers.index', compact('schedulers', 'data', 'users'));
+        $userID = auth()->user()->id;
+        return view('schedulers.index', compact('schedulers', 'data', 'users', 'userID'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id): View
+    public function create($id)
     {
         $user = User::find($id);
 
-        return view('schedulers.create', compact('user'));
+        $scheduler_user = scheduler_user::where('id_user', $id)->get()->all();
+
+        if (count($scheduler_user) > 0) {
+            return redirect()->route('scheduler.edit', $id);
+        } else {
+            return view('schedulers.create', compact('user'));
+        }
     }
 
     /**

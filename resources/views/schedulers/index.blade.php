@@ -67,7 +67,6 @@
             /* width: 50px; */
         }
     </style>
-
     {{-- <input type="text" name="" value="{{$idCategory}}"> --}}
 
     @if ($message = Session::get('success'))

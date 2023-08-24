@@ -60,7 +60,7 @@
         @else
             <div>
                 <strong>
-                    no existe scheduler data for this user
+                    There is no registered schedule for this user.
                 </strong>
             </div>
         @endif
