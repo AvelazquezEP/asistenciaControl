@@ -103,13 +103,6 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
         @endcan
-        {{-- @if (auth()->user()->can('scheduler-list') ||
-    auth()->user()->can('scheduler-edit') ||
-    auth()->user()->can('scheduler-create'))
-            <a href="{{ route('scheduler.index') }}" class="btnAction btn_scheduler" id="schedulerButton">
-                <i class="fa-solid fa-calendar-days"></i>
-            </a>
-        @endif --}}
     </div>
 
     <table class="table table-bordered" id="myTable">
