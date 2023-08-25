@@ -25,7 +25,7 @@ class SchedulerController extends Controller
             ->orderBy('scheduler_user.scheduler_id')
             ->get()->all();
 
-        $users = User::get()->all();    
+        $users = User::get()->all();
         // Auth::user()->name;
         // Auth::user()->id;        
 
