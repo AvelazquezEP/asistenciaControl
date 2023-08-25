@@ -16,6 +16,12 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 4rem;
         }
+
+        .divider {
+            width: 95%;
+            height: .5rem;
+            background-color: black
+        }
     </style>
 
     <div class="row">
@@ -69,7 +75,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <div class=""></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-left">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
