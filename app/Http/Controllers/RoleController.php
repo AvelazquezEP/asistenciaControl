@@ -29,6 +29,7 @@ class RoleController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+    /* #region Create/Store function */
     public function create(): View
     {
         $permission = Permission::get();
@@ -49,6 +50,7 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
             ->with('success', 'Role created successfully');
     }
+    /* #endregion */
 
     public function show($id): View
     {
@@ -60,15 +62,19 @@ class RoleController extends Controller
         return view('roles.show', compact('role', 'rolePermissions'));
     }
 
+    /* #region EDIT/UPDATE */
     public function edit($id): View
     {
+
         $role = Role::find($id);
         $permission = Permission::get();
+        $modules = Permission::pluck('module', 'module')->all();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('roles.edit', compact('role', 'permission', 'modules', 'rolePermissions'));
+        // return view('roles.create', compact('permission', 'modules'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -87,6 +93,7 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
             ->with('success', 'Role updated successfully');
     }
+    /* #endregion */
 
     public function destroy($id): RedirectResponse
     {
