@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="divisor"></div>
+        {{-- <div class="divisor"></div> --}}
         <div class="col-xs-12 col-sm-12 col-md-12 text-left">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

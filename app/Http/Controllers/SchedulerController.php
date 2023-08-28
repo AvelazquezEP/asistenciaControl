@@ -26,8 +26,6 @@ class SchedulerController extends Controller
             ->get()->all();
 
         $users = User::get()->all();
-        // Auth::user()->name;
-        // Auth::user()->id;        
 
         $userID = auth()->user()->id;
         return view('schedulers.index', compact('schedulers', 'data', 'users', 'userID'));
@@ -83,7 +81,7 @@ class SchedulerController extends Controller
             'time_start' => $b1S_stamp,
             'time_finish' => $b1F_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 1
+            'scheduler_id' => 7
         ]);
 
         $scheduler_user->save();
@@ -100,7 +98,7 @@ class SchedulerController extends Controller
             'time_start' => $b2S_stamp,
             'time_finish' => $b2F_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 1
+            'scheduler_id' => 8
         ]);
 
         $scheduler_user_2->save();
@@ -117,7 +115,7 @@ class SchedulerController extends Controller
             'time_start' => $lncS_stamp,
             'time_finish' => $lncF_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 1
+            'scheduler_id' => 9
         ]);
 
         $scheduler_user_3->save();
@@ -134,14 +132,9 @@ class SchedulerController extends Controller
     /* #endregion */
 
 
-    public function show($id)
-    {
-    }
-
-
     /* #region EDIT/UPDATE */
 
-    /* #region  */
+    /* #region  EDIT*/
     public function edit($id): View
     {
 
@@ -165,10 +158,9 @@ class SchedulerController extends Controller
 
         return view('schedulers.edit', compact('data', 'userId',));
     }
+    /* #endregion */
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /* #region UPDATE */
     public function update(Request $request): RedirectResponse
     {
 
@@ -180,8 +172,6 @@ class SchedulerController extends Controller
             'lnc_time_start',
             'lnc_time_finish'
         ]);
-
-        // $id_user = request('id_user');
 
         $b1S = request('b1_time_start');
         $b1F = request('b1_time_finish');
@@ -237,10 +227,10 @@ class SchedulerController extends Controller
         return redirect()->route('scheduler.index')
             ->with('success', "Scheduler updated successfully");
     }
+    /* #endregion */
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /* #endregion */
+
     public function destroy()
     {
         //

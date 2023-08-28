@@ -37,7 +37,7 @@
             @csrf
             <input hidden type="text" value="{{ $user->id }}" id="id" name="id_user">
             <div class="form-group">
-                <label>b1</label>
+                <label>B1</label>
 
                 <div class="alert alert-danger" id="b1Alert">
                     <strong id="b1Msg"></strong>
@@ -50,25 +50,9 @@
                         onchange="b1_validate('b1_time_finish')">
                 </div>
             </div>
-            {{-- B2 --}}
-            <div class="form-group">
-                <label>b2</label>
-
-                <div class="alert alert-danger" id="b2Alert">
-                    {{-- <a class="close" onclick="close_dangerAlert('b2Alert')">&times;</a> --}}
-                    <strong id="b2Msg"></strong>
-                </div>
-
-                <div class="timeContainer">
-                    <input type="time" name="b2_time_start" id="b2_time_start" class="form-control"
-                        onchange="b2_validate('b2_time_start')">
-                    <input type="time" name="b2_time_finish" id="b2_time_finish" class="form-control"
-                        onchange="b2_validate('b2_time_finish')">
-                </div>
-            </div>
             {{-- LNC --}}
             <div class="form-group">
-                <label>lnc</label>
+                <label>LNC</label>
 
                 <div class="alert alert-danger" id="lncAlert">
                     {{-- <a class="close" onclick="close_dangerAlert('lncAlert')">&times;</a> --}}
@@ -80,6 +64,22 @@
                         onchange="lnc_validate('lnc_time_start')">
                     <input type="time" name="lnc_time_finish" id="lnc_time_finish" class="form-control"
                         onchange="lnc_validate('lnc_time_finish')">
+                </div>
+            </div>
+            {{-- B2 --}}
+            <div class="form-group">
+                <label>B2</label>
+
+                <div class="alert alert-danger" id="b2Alert">
+                    {{-- <a class="close" onclick="close_dangerAlert('b2Alert')">&times;</a> --}}
+                    <strong id="b2Msg"></strong>
+                </div>
+
+                <div class="timeContainer">
+                    <input type="time" name="b2_time_start" id="b2_time_start" class="form-control"
+                        onchange="b2_validate('b2_time_start')">
+                    <input type="time" name="b2_time_finish" id="b2_time_finish" class="form-control"
+                        onchange="b2_validate('b2_time_finish')">
                 </div>
             </div>
             <div class="form-group">

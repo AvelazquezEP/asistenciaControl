@@ -65,5 +65,5 @@
     {!! Form::close() !!}
 
 
-    <p class="text-center text-primary"><small>Alberto</small></p>
+    {{-- <p class="text-center text-primary"><small>Alberto</small></p> --}}
 @endsection

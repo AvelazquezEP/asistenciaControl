@@ -79,7 +79,7 @@
     <div class="alert alert-danger" id="dangerAlertEdit">
         <a class="close" onclick="close_dangerAlert('dangerAlertEdit')">&times;</a>
         <strong>
-            You need to select a record!!
+            You need to select the user !
         </strong>
     </div>
 
@@ -137,7 +137,7 @@
             <div class="alert alert-danger" id="dangerAlertDelete">
                 <a class="close" onclick="close_dangerAlert('dangerAlertDelete')">&times;</a>
                 <strong>
-                    You need to select a record to Delete !!
+                    You need to select the user to Delete !!
                 </strong>
             </div>
             <div class="modal-content">
