@@ -33,9 +33,9 @@ class SchedulerController extends Controller
         return view('schedulers.index', compact('schedulers', 'data', 'users', 'userID'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /* #region  CREATE/STORE */
+
+    /* #region CREATE */
     public function create($id)
     {
         $user = User::find($id);
@@ -48,10 +48,9 @@ class SchedulerController extends Controller
             return view('schedulers.create', compact('user'));
         }
     }
+    /* #endregion */
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    /* #region STORE */
     public function store(Request $request): RedirectResponse
     {
         $this->validate($request, [
@@ -130,23 +129,21 @@ class SchedulerController extends Controller
         return redirect()->route('scheduler.index')
             ->with('success', 'Scheduler created successfully');
     }
+    /* #endregion */
 
-    /**
-     * Display the specified resource.
-     */
+    /* #endregion */
+
+
     public function show($id)
     {
-        // $scheduler = schedulers::find($id);
-
-        // return view('scheduler.show', compact('scheduler'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+    /* #region EDIT/UPDATE */
+
+    /* #region  */
     public function edit($id): View
     {
-        // $schedulers = schedulers::orderBy('title', 'desc')->get()->all();
 
         $userId = $id;
 

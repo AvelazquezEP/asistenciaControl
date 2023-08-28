@@ -23,9 +23,4 @@ class schedulers extends Model
     {
         return $this->hasMany(scheduler_user::class);
     }
-
-    // public function users()
-    // {
-    //     return $this->BelongsTo(users::class, 'id');
-    // }
 }
