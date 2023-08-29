@@ -81,7 +81,7 @@ class SchedulerController extends Controller
             'time_start' => $b1S_stamp,
             'time_finish' => $b1F_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 7
+            'scheduler_id' => 1
         ]);
 
         $scheduler_user->save();
@@ -98,7 +98,7 @@ class SchedulerController extends Controller
             'time_start' => $b2S_stamp,
             'time_finish' => $b2F_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 8
+            'scheduler_id' => 2
         ]);
 
         $scheduler_user_2->save();
@@ -115,7 +115,7 @@ class SchedulerController extends Controller
             'time_start' => $lncS_stamp,
             'time_finish' => $lncF_stamp,
             'id_user' => $id_user,
-            'scheduler_id' => 9
+            'scheduler_id' => 3
         ]);
 
         $scheduler_user_3->save();
