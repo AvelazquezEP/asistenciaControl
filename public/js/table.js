@@ -223,7 +223,7 @@ const deleteCategory = () => {
 /* #region Examen Category */
 
 const editExam = () => {
-    let baseUrl = '/exams/edit/';
+    let baseUrl = '/exam/edit/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
@@ -235,7 +235,7 @@ const editExam = () => {
 }
 
 const deleteExam = () => {
-    let baseUrl = '/exams/destroy/';
+    let baseUrl = '/exam/destroy/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 

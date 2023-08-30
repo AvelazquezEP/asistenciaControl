@@ -48,7 +48,7 @@ class ResourceExamsController extends Controller
             'type' => $request->get('type_category'),
             'department' => $request->get('department'),
             'description' => $request->get('description'),
-            'status' => true,
+            'status' => $request->get('status'),
         ]);
 
         $category->save();
@@ -65,14 +65,14 @@ class ResourceExamsController extends Controller
 
     public function edit($id): View
     {
-        $category = resource_exam::find($id);
-        return view('categories.edit', compact('category'));
+        $category = exam::find($id);
+        return view('exams.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
         /* #region UPDATE FUNCTION */
-        $category = resource_exam::find($id);
+        $category = exam::find($id);
 
         $category->type = $request->input('type_category');
         $category->department = $request->input('department');
@@ -81,7 +81,7 @@ class ResourceExamsController extends Controller
 
         $category->save();
 
-        return redirect()->route('category.index')->with('success', 'Exam category updated successfully');
+        return redirect()->route('exams.index')->with('success', 'Exam category updated successfully');
         /* #endregion */
     }
 
