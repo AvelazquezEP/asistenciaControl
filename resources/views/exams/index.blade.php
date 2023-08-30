@@ -159,9 +159,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger" onclick="deleteExam()">Delete</button>
-                    {{-- <form class="form" action="{{ route('Users.deleted_ok', [$user->id]) }}">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form> --}}
                 </div>
             </div>
         </div>
