@@ -209,12 +209,40 @@ const deleteCategory = () => {
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
-    log(idUser);
+    // log(idUser);
 
     if (id != 0) {
         window.location.href = `${baseUrl}${id}`;
     } else {
         open_dangerAlert('dangerAlertDelete');
+    }
+}
+
+/* #endregion */
+
+/* #region Examen Category */
+
+const editExam = () => {
+    let baseUrl = '/exams/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteExam = () => {
+    let baseUrl = '/exams/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
     }
 }
 

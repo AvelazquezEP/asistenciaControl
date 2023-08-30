@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\resource_exam;
+use App\Models\exam;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +22,7 @@ class ResourceExamsController extends Controller
 
     public function index(): View
     {
-        $categories = resource_exam::where('status', true)->get()->all();
+        $categories = exam::where('status', true)->get()->all();
 
         return view('exams.index', compact('categories'));
     }
@@ -44,7 +44,7 @@ class ResourceExamsController extends Controller
             'status' => 'required',
         ]));
 
-        $category = new resource_exam([
+        $category = new exam([
             'type' => $request->get('type_category'),
             'department' => $request->get('department'),
             'description' => $request->get('description'),
@@ -89,7 +89,7 @@ class ResourceExamsController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $category = resource_exam::find($id);
+        $category = exam::find($id);
         $category->delete();
 
         return redirect()->route('exam.index')
