@@ -104,7 +104,6 @@
                 <i class="fa-solid fa-trash" id="deleteBtn"></i>
             </button>
         @endcan
-
         @can('category-create')
             <a href="{{ route('exams.create') }}" class="btnAction btn_create">
                 {{-- create --}}
@@ -128,10 +127,8 @@
                 </div> --}}
                 <div>
                     <p>{{ $category->type }}</p>
-                    {{-- <p>{{ $category->Description }}</p> --}}
                 </div>
                 <a href="/resources/{{ $category->id }}">
-                    {{-- <a href="{{ route('category.index', $category->id) }}"> --}}
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>

@@ -34,13 +34,11 @@
                 <label for="Description">Department</label>
                 <input type="text" name="department" id="department" class="form-control" required>
             </div>
-
             <button type="submit" class="btn btn-primary">Save and publish</button>
         </form>
         <hr>
 
-        {{-- @csrf
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="title">Do you want to show this category to another users?</label>
             </br>
             @if ($category->status == true)
