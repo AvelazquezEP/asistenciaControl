@@ -67,7 +67,7 @@
         .itemCategory {
             border-radius: 0.8rem;
             box-shadow: -2px -2px 1.5rem #575757;
-            height: 250px;
+            height: 100px;
             width: 200px;
             display: flex;
             flex-direction: column;
@@ -123,11 +123,11 @@
         @foreach ($categories as $category)
             <div class="itemCategory" onclick="getID({{ $category->id }})" id="{{ $category->id }}"
                 title="{{ $category->Description }}">
-                <div class="iconContainer">
+                {{-- <div class="iconContainer">
                     <img src="data:image/png;base64,{{ $category->icon }}" alt="Picture" style="max-width: 100%;">
-                </div>
+                </div> --}}
                 <div>
-                    <p>{{ $category->title }}</p>
+                    <p>{{ $category->type }}</p>
                     {{-- <p>{{ $category->Description }}</p> --}}
                 </div>
                 <a href="/resources/{{ $category->id }}">

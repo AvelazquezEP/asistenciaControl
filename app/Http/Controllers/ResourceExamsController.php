@@ -38,11 +38,18 @@ class ResourceExamsController extends Controller
     {
         /* #region  STORE */
         $request->validate(([
-            'type:' => 'required',
+            'type' => 'required',
             'department' => 'required',
             'description' => 'required',
             'status' => 'required',
         ]));
+
+        // 'type:',
+        // 'department',
+        // 'description',
+        // 'status',
+        // 'created_at',
+        // 'updated_at',
 
         $category = new exam([
             'type' => $request->get('type_category'),

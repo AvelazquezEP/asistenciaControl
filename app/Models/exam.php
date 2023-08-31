@@ -10,9 +10,11 @@ class exam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type:',
+        'type',
         'department',
         'description',
         'status',
+        'created_at',
+        'updated_at',
     ];
 }

@@ -17,7 +17,6 @@
                 <h2>Edit Resource</h2>
             </div>
             <div class="pull-right">
-                {{-- <a class="btn btn-primary" href="{{ route('resources.index') }}"> Back</a> --}}
                 <a class="btn btn-primary" href="javascript:window.history.back();"> Back</a>
             </div>
         </div>
