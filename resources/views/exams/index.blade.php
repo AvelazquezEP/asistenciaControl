@@ -95,7 +95,6 @@
             You need to select a record to edit !!
         </strong>
     </div>
-
     <div class="btn_container">
         <input hidden type="text" value="" id="id">
         @can('category-delete')

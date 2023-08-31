@@ -44,13 +44,6 @@ class ResourceExamsController extends Controller
             'status' => 'required',
         ]));
 
-        // 'type:',
-        // 'department',
-        // 'description',
-        // 'status',
-        // 'created_at',
-        // 'updated_at',
-
         $category = new exam([
             'type' => $request->get('type_category'),
             'department' => $request->get('department'),

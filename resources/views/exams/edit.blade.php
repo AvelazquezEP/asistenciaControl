@@ -16,7 +16,7 @@
         <form action="{{ route('exams.update', $category->id) }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="title">Do you want to show this category to another users?</label>
+                <label for="title">Do you want to show this category?</label>
                 </br>
                 @if ($category->status == true)
                     <input type="radio" name="status" id="status" value="true" checked>
