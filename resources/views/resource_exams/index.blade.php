@@ -104,7 +104,7 @@
             </button>
         @endcan
         @can('category-create')
-            <a href="{{ route('exams.create') }}" class="btnAction btn_create">
+            <a href="{{ route('resource_exams.create') }}" class="btnAction btn_create">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>
@@ -147,10 +147,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Delet Post</h4>
+                    <h4 class="modal-title">Delet Category</h4>
                 </div>
                 <div class="modal-body">
-                    <p>are you secure to delete this Post?</p>
+                    <p>are you secure to delete this Category?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

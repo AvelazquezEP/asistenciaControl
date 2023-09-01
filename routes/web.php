@@ -113,16 +113,24 @@ Route::controller(ResourceCategoryController::class)->Group(function () {
 });
 /* #endregion */
 
-/* #region EXAMS */
+/* #region RESOURCE EXAMS */
 Route::controller(ResourceExamsController::class)->Group(function () {
-    Route::get('/exam', 'index')->name('exams.index');
-    Route::get('/exam/show/{id}', 'show')->name('exams.show');
-    Route::get('/exam/create', 'create')->name('exams.create');
-    Route::post('/exam/store', 'store')->name('exams.store');
-    Route::get('/exam/edit/{id}', 'edit')->name('exams.edit');
-    Route::post('/exam/update/{id}', 'update')->name('exams.update');
-    Route::get('/exam/destroy/{id}', 'destroy')->name('exams.remove');
+    Route::get('/resource/exam', 'index')->name('resource_exams.index');
+    Route::get('/resource/exam/show/{id}', 'show')->name('resource_exams.show');
+    Route::get('/resource/exam/create', 'create')->name('resource_exams.create');
+    Route::post('/resource/exam/store', 'store')->name('resource_exams.store');
+    Route::get('/resource/exam/edit/{id}', 'edit')->name('resource_exams.edit');
+    Route::post('/resource/exam/update/{id}', 'update')->name('resource_exams.update');
+    Route::get('/resource/exam/destroy/{id}', 'destroy')->name('resource_exams.remove');
 });
+/* #endregion */
+
+/* #region EXAM */
+
+// Route::controller(ExamController::class)->Group(function () {
+//     Route::get('', '')->name('');
+// });
+
 /* #endregion */
 
 /* #region PERMISSIONS */

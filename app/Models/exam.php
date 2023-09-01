@@ -15,6 +15,6 @@ class exam extends Model
         'description',
         'status',
         'created_at',
-        'updated_at',
+        // 'updated_at',
     ];
 }

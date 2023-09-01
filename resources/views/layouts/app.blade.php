@@ -148,7 +148,7 @@
                                         @can('exams-list')
                                             <li>
                                                 {{-- href="{{ route('tests.index') }}" --}}
-                                                <a class="dropdown-item" href="{{ route('exams.index') }}">
+                                                <a class="dropdown-item" href="{{ route('resource_exams.index') }}">
                                                     Manage Exams
                                                 </a>
                                             </li>

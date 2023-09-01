@@ -7,13 +7,13 @@
                 <h2>Edit Category</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('exams.index') }}">Back</a>
+                <a class="btn btn-primary" href="{{ route('resource_exams.index') }}">Back</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <form action="{{ route('exams.update', $category->id) }}" method="POST">
+        <form action="{{ route('resource_exams.update', $category->id) }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Do you want to show this category?</label>
@@ -33,8 +33,8 @@
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" name="type_category" id="type_category" class="form-control"
-                    value="{{ $category->type }}" required>
+                <input type="text" name="type" id="type" class="form-control" value="{{ $category->type }}"
+                    required>
             </div>
 
             <div class="form-group">

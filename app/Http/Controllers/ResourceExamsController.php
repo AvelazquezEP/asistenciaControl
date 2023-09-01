@@ -24,36 +24,39 @@ class ResourceExamsController extends Controller
     {
         $categories = exam::where('status', true)->get()->all();
 
-        return view('exams.index', compact('categories'));
+        return view('resource_exams.index', compact('categories'));
     }
 
     /* #region CREATE/STORE */
 
     public function create(): View
     {
-        return view('exams.create');
+        return view('resource_exams.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
         /* #region  STORE */
+
         $request->validate(([
             'type' => 'required',
             'department' => 'required',
             'description' => 'required',
             'status' => 'required',
+            // 'created_at' => 'required',
         ]));
 
         $category = new exam([
-            'type' => $request->get('type_category'),
+            'type' => $request->get('type'),
             'department' => $request->get('department'),
             'description' => $request->get('description'),
             'status' => $request->get('status'),
+            // 'created_at' => '2023-08-31 18:03:49.000',
         ]);
 
         $category->save();
 
-        return redirect()->route('exams.index')
+        return redirect()->route('resource_exams.index')
             ->with('success', 'Resource created successfully');
 
         /* #endregion */
@@ -66,7 +69,7 @@ class ResourceExamsController extends Controller
     public function edit($id): View
     {
         $category = exam::find($id);
-        return view('exams.edit', compact('category'));
+        return view('resource_exams.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
@@ -74,14 +77,14 @@ class ResourceExamsController extends Controller
         /* #region UPDATE FUNCTION */
         $category = exam::find($id);
 
-        $category->type = $request->input('type_category');
+        $category->type = $request->input('type');
         $category->department = $request->input('department');
         $category->description = $request->input('description');
         $category->status = $request->input('status');
 
         $category->save();
 
-        return redirect()->route('exams.index')->with('success', 'Exam category updated successfully');
+        return redirect()->route('resource_exams.index')->with('success', 'Exam category updated successfully');
         /* #endregion */
     }
 
@@ -92,7 +95,7 @@ class ResourceExamsController extends Controller
         $category = exam::find($id);
         $category->delete();
 
-        return redirect()->route('exam.index')
+        return redirect()->route('resource_exams.index')
             ->with('success', 'Category delete');
     }
 }

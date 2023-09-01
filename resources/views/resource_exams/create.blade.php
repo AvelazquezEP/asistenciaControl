@@ -7,13 +7,13 @@
                 <h2>Create a new Category</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('exams.index') }}">Back</a>
+                <a class="btn btn-primary" href="{{ route('resource_exams.index') }}">Back</a>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <form action="{{ route('exams.store') }}" method="POST">
+        <form action="{{ route('resource_exams.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="">Status</label>
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" name="type_category" id="type_category" class="form-control" required>
+                <input type="text" name="type" id="type" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="Description">Description</label>
