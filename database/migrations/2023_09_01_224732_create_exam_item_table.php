@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_item', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('number_of_questions');
+            $table->string("user_name");
+            $table->integer("age");
+            $table->string("user_department");
             $table->timestamps();
 
             $table->foreignId('id_resource_exam')->constrained(
-                table: 'exams',
+                table: 'resource_exams',
                 indexName: 'id'
             )
                 ->onUpdate('cascade')

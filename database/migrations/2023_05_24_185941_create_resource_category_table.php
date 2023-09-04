@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('Description');
             $table->text('icon');
             $table->boolean('status');
-            $table->timestamps();            
+            $table->timestamps();
         });
     }
 
