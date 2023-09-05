@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions_exam', function (Blueprint $table) {
+        Schema::create('exam_users', function (Blueprint $table) {
             $table->id();
-            $table->integer('number_of_question');
-            $table->string('question');
-            $table->string('option_1');
-            $table->string('option_2');
-            $table->string('option_3');
-            $table->string('open_answer');
+            $table->string('user_name');
+            $table->string('department');
             $table->string('correct_answer');
-            $table->string('answer_details'); //<-- administrator
+            $table->string('incorrect_answer');
+            $table->string('empty_answer');
+            $table->string('exam_name');
             $table->timestamps();
 
-            $table->foreignId('exam_id')->constrained(
+            $table->foreignId('id_exam')->constrained(
                 table: 'exams',
                 indexName: 'id'
             )
@@ -38,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('question_exam');
+        Schema::dropIfExists('exam_user');
     }
 };

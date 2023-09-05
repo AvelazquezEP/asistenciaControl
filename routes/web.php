@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExamItemsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostHomeController;
@@ -19,6 +20,7 @@ use Spatie\Permission\Models\Permission;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\QuestionExamController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResourceCategoryController;
 use App\Http\Controllers\SchedulerController;
@@ -125,13 +127,25 @@ Route::controller(ResourceExamsController::class)->Group(function () {
 });
 /* #endregion */
 
-/* #region EXAM */
-
-// Route::controller(ExamController::class)->Group(function () {
-//     Route::get('', '')->name('');
-// });
-
+/* #region  */
+Route::controller(ExamItemsController::class)->Group(function () {
+    Route::get('/exam/{id}', 'index')->name('exam.index');
+    Route::get('/exam/create', 'create')->name('exam.create');
+    Route::post('/exam/store', 'store')->name('exam.store');
+    Route::get('/exam/edit/{id}', 'edit')->name('exam.edit');
+    Route::post('/exam/update/{id}', 'update')->name('exam.update');
+    Route::get('/exam/destroy/{id}', 'destroy')->name('exam.destroy');
+});
 /* #endregion */
+
+Route::controller(QuestionExamController::class)->Group(function () {
+    Route::get('/question/{id}', 'index')->name('questionExam.index');
+    Route::get('/question/create', 'create')->name('questionExam.create');
+    Route::get('/question/store', 'store')->name('questionExam.store');
+    Route::get('/question/edit', 'edit')->name('questionExam.edit');
+    Route::get('/question/update', 'update')->name('questionExam.update');
+    Route::get('/question/destroy', 'destroy')->name('questionExam.destroy');
+});
 
 /* #region PERMISSIONS */
 Route::controller(PermissionController::class)->Group(function () {

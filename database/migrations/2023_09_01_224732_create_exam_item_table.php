@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('number_of_questions');
-            $table->string("user_name");
-            $table->integer("age");
-            $table->string("user_department");
+            $table->string("exam_name");
+            $table->string('description');
             $table->timestamps();
 
             $table->foreignId('id_resource_exam')->constrained(
-                table: 'resource_exams',
+                table: 'resources_exams',
                 indexName: 'id'
             )
                 ->onUpdate('cascade')

@@ -117,22 +117,21 @@
         @endcan
     </div>
 
-    <div class="containerCategory" id="itemsContainer">
-        @foreach ($categories as $category)
-            <div class="itemCategory" onclick="getID({{ $category->id }})" id="{{ $category->id }}"
-                title="{{ $category->Description }}">
-                {{-- <div class="iconContainer">
-                    <img src="data:image/png;base64,{{ $category->icon }}" alt="Picture" style="max-width: 100%;">
-                </div> --}}
-                <div>
-                    <p>{{ $category->type }}</p>
-                </div>
-                <a href="/exam/{{ $category->id }}">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
+    {{-- TABLE --}}
+    <table class="table table-bordered" id="myTable">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            {{-- <th width="280px">Action</th> --}}
+        </tr>
+        @foreach ($roles as $key => $role)
+            <input hidden type="text" value="{{ $role->id }}">
+            <tr id="{{ $role->id }}" onclick="changeBG({{ $role->id }})">
+                <td>{{ ++$i }}</td>
+                <td>{{ $role->name }}</td>
+            </tr>
         @endforeach
-    </div>
+    </table>
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
