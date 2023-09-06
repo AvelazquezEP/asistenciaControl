@@ -21,9 +21,9 @@ class ExamItemsController extends Controller
 
     public function index($id): View
     {
-        $exam = exams::where('id_resource_exam', $id)->get();
+        $exams = exams::where('id_resource_exam', $id)->get();
 
-        return view('exam.index', compact('exam', 'id'));
+        return view('exam.index', compact('exams', 'id'));
     }
 
     public function create($id): View
@@ -33,9 +33,6 @@ class ExamItemsController extends Controller
         return view('exam.create', compact('exam_id'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -57,7 +54,7 @@ class ExamItemsController extends Controller
         $exam->save();
 
         return redirect()->route('exam.index', $id_resource_exam)
-            ->width('success', 'Exam created successfully');
+            ->with('success', 'Exam created successfully');
     }
 
     public function show($id): View
@@ -98,9 +95,6 @@ class ExamItemsController extends Controller
             ->with('success', 'Exam updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id): RedirectResponse
     {
         $exam = exams::find($id);

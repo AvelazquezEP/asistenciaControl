@@ -7,7 +7,7 @@
                 <h2>Create a new Exam</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="/exam/index/{{ $exam_id }}">Back</a>
+                <a class="btn btn-primary" href="/exam/{{ $exam_id }}">Back</a>
                 {{-- <a class="btn btn-primary" href="{{ route('exam.index') }}">Back</a> --}}
             </div>
         </div>
@@ -15,7 +15,7 @@
 
     <div class="form-group">
         {{-- <form action="{{ route('exam.store') }}" method="POST"> --}}
-        <form action="/exam/create/{{ $exam_id }}" method="POST">
+        <form action="/exam/store" method="POST">
             @csrf
             <input hidden type="text" name="id_resource_exam" id="id_resource_exam" value="{{ $exam_id }}">
             <div class="form-group">

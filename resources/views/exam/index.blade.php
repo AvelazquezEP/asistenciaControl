@@ -116,26 +116,27 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
         @endcan
+        <div class="pull-right">
+            <a class="btn btn-primary" href="/resource/exam">Back</a>
+            {{-- <a class="btn btn-primary" href="{{ route('exam.index') }}">Back</a> --}}
+        </div>
     </div>
 
     {{-- TABLE --}}
     <table class="table table-bordered" id="myTable">
         <tr>
-            <th>No</th>
-            <th>Name</th>
-            {{-- <th width="280px">Action</th> --}}
+            <th>Title</th>
+            <th>Description</th>
+            <th>No. Questions</th>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        {{-- @foreach ($roles as $key => $role)
-            <input hidden type="text" value="{{ $role->id }}">
-            <tr id="{{ $role->id }}" onclick="changeBG({{ $role->id }})">
-                <td>{{ ++$i }}</td>
-                <td>{{ $role->name }}</td>
+        @foreach ($exams as $key => $exam)
+            <tr id="{{ $exam->id }}" onclick="changeBG({{ $exam->id }})">
+                <input hidden type="text" value="{{ $exam->id }}">
+                <td>{{ $exam->exam_name }}</td>
+                <td>{{ $exam->description }}</td>
+                <td>{{ $exam->number_of_questions }}</td>
             </tr>
-        @endforeach --}}
+        @endforeach
     </table>
 
     <!-- Modal -->
