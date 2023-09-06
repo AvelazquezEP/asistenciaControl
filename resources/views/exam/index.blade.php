@@ -110,6 +110,10 @@
                 <i class="fa-solid fa-plus"></i>
             </a>
         @endcan
+        {{-- show --}}
+        <a onclick="showExamItem()" class="btnAction btn_create" title="Show resource">
+            <i class="fa-solid fa-file" style="color: #2e73ea;"></i>
+        </a>
         @can('category-edit')
             <a class="btnAction btn_edit" id="editButton" onclick="editExam()">
                 {{-- edit --}}

@@ -130,6 +130,7 @@ Route::controller(ResourceExamsController::class)->Group(function () {
 /* #region ExamItem Controller */
 Route::controller(ExamItemsController::class)->Group(function () {
     Route::get('/exam/{id}', 'index')->name('exam.index');
+    Route::get('/exam/show/{id}', 'show')->name('exam.show');
     Route::get('/exam/create/{id}', 'create')->name('exam.create');
     Route::post('/exam/store', 'store')->name('exam.store');
     Route::get('/exam/edit/{id}', 'edit')->name('exam.edit');
