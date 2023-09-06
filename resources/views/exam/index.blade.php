@@ -96,7 +96,7 @@
         </strong>
     </div>
     <div class="btn_container">
-        <input hidden type="text" value="" id="id">
+        <input hidden type="text" value="{{ $id }}" id="id">
         @can('category-delete')
             <button class="btnAction btn_delete" data-toggle="modal" data-target="#myModal">
                 {{-- delete --}}
@@ -104,7 +104,8 @@
             </button>
         @endcan
         @can('category-create')
-            <a href="{{ route('exam.create') }}" class="btnAction btn_create">
+            {{-- <a href="{{ route('exam.create') }}" class="btnAction btn_create"> --}}
+            <a class="btnAction btn_create" id="createButton" onclick="createExam()">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>

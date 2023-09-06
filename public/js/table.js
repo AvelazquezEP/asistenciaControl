@@ -220,7 +220,7 @@ const deleteCategory = () => {
 
 /* #endregion */
 
-/* #region Examen Category */
+/* #region Resource Examen Category */
 
 const editExam = () => {
     let baseUrl = '/resource/exam/edit/';
@@ -246,6 +246,44 @@ const deleteExam = () => {
     }
 }
 
+/* #endregion */
+
+/* #region EXAM ITEM */
+const createExam = () => {
+    let baseUrl = '/exam/create/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const editExamItem = () => {
+    let baseUrl = '/resource/exam/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const deleteExamItem = () => {
+    let baseUrl = '/resource/exam/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
 /* #endregion */
 
 /* #region SCHEDULER */

@@ -127,10 +127,10 @@ Route::controller(ResourceExamsController::class)->Group(function () {
 });
 /* #endregion */
 
-/* #region  */
+/* #region ExamItem Controller */
 Route::controller(ExamItemsController::class)->Group(function () {
     Route::get('/exam/{id}', 'index')->name('exam.index');
-    Route::get('/exam/create', 'create')->name('exam.create');
+    Route::get('/exam/create/{id}', 'create')->name('exam.create');
     Route::post('/exam/store', 'store')->name('exam.store');
     Route::get('/exam/edit/{id}', 'edit')->name('exam.edit');
     Route::post('/exam/update/{id}', 'update')->name('exam.update');
@@ -138,6 +138,7 @@ Route::controller(ExamItemsController::class)->Group(function () {
 });
 /* #endregion */
 
+/* #region QuestionExamController */
 Route::controller(QuestionExamController::class)->Group(function () {
     Route::get('/question/{id}', 'index')->name('questionExam.index');
     Route::get('/question/create', 'create')->name('questionExam.create');
@@ -146,6 +147,7 @@ Route::controller(QuestionExamController::class)->Group(function () {
     Route::get('/question/update', 'update')->name('questionExam.update');
     Route::get('/question/destroy', 'destroy')->name('questionExam.destroy');
 });
+/* #endregion */
 
 /* #region PERMISSIONS */
 Route::controller(PermissionController::class)->Group(function () {
