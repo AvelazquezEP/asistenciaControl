@@ -104,7 +104,7 @@
             </button>
         @endcan
         @can('category-create')
-            <a href="{{ route('resource_exams.create') }}" class="btnAction btn_create">
+            <a href="{{ route('exam.create') }}" class="btnAction btn_create">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>
@@ -124,13 +124,17 @@
             <th>Name</th>
             {{-- <th width="280px">Action</th> --}}
         </tr>
-        @foreach ($roles as $key => $role)
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        {{-- @foreach ($roles as $key => $role)
             <input hidden type="text" value="{{ $role->id }}">
             <tr id="{{ $role->id }}" onclick="changeBG({{ $role->id }})">
                 <td>{{ ++$i }}</td>
                 <td>{{ $role->name }}</td>
             </tr>
-        @endforeach
+        @endforeach --}}
     </table>
 
     <!-- Modal -->
