@@ -105,7 +105,7 @@
         @endcan
         @can('category-create')
             {{-- <a href="{{ route('exam.create') }}" class="btnAction btn_create"> --}}
-            <a class="btnAction btn_create" id="createButton" onclick="createExam()">
+            <a class="btnAction btn_create" id="createButton" onclick="createExamItem()">
                 {{-- create --}}
                 <i class="fa-solid fa-plus"></i>
             </a>
@@ -115,7 +115,7 @@
             <i class="fa-solid fa-file" style="color: #2e73ea;"></i>
         </a>
         @can('category-edit')
-            <a class="btnAction btn_edit" id="editButton" onclick="editExam()">
+            <a class="btnAction btn_edit" id="editButton" onclick="editExamItem()">
                 {{-- edit --}}
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>

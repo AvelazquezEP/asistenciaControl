@@ -142,7 +142,7 @@ Route::controller(ExamItemsController::class)->Group(function () {
 /* #region QuestionExamController */
 Route::controller(QuestionExamController::class)->Group(function () {
     Route::get('/question/{id}', 'index')->name('questionExam.index');
-    Route::get('/question/create', 'create')->name('questionExam.create');
+    Route::get('/question/create/{id}', 'create')->name('questionExam.create');
     Route::get('/question/store', 'store')->name('questionExam.store');
     Route::get('/question/edit', 'edit')->name('questionExam.edit');
     Route::get('/question/update', 'update')->name('questionExam.update');

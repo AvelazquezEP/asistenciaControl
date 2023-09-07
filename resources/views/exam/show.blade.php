@@ -38,15 +38,17 @@
                     <a class="btn btn-primary" href="javascript:window.history.back();">Back</a>
                 </div>
             </div>
+            <input hidden type="text" name="id" value="{{ $exam->id }}">
             <p><b>Title: </b>{{ $exam->exam_name }}</p>
             <p><b>Description: </b>{{ $exam->description }}</p>
             <p><b>No. Questions: </b>{{ $exam->number_of_questions }}</p>
+            <a class="btn btn-primary" onclick="createExamQuestion()">Add question</a>
         </div>
     </div>
     <hr>
     <div class="header">
         <div class="details">
-            
+
         </div>
     </div>
 @endsection

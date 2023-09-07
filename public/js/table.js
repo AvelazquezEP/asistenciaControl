@@ -249,7 +249,7 @@ const deleteExam = () => {
 /* #endregion */
 
 /* #region EXAM ITEM */
-const createExam = () => {
+const createExamItem = () => {
     let baseUrl = '/exam/create/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
@@ -262,7 +262,7 @@ const createExam = () => {
 }
 
 const editExamItem = () => {
-    let baseUrl = '/resource/exam/edit/';
+    let baseUrl = '/exam/edit/';
     let idUser = document.getElementById('id').value;
     var id = idUser;
 
@@ -296,6 +296,22 @@ const deleteExamItem = () => {
         open_dangerAlert('dangerAlertEdit');
     }
 }
+/* #endregion */
+
+/* #region Exam Questions */
+
+const createExamQuestion = () => {
+    let baseUrl = '/question/create/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
 /* #endregion */
 
 /* #region SCHEDULER */

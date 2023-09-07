@@ -70,7 +70,9 @@ class ExamItemsController extends Controller
     {
         $exam = exams::find($id);
 
-        return view('exam.edit', compact('exam'));
+        $exam_id = $id;
+
+        return view('exam.edit', compact('exam', 'exam_id'));
     }
 
     public function update(Request $request, $id): RedirectResponse
