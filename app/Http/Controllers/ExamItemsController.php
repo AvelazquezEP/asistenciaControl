@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\exams;
+use App\Models\questionsExam;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,8 +61,9 @@ class ExamItemsController extends Controller
     public function show($id): View
     {
         $exam = exams::find($id);
+        $questions = questionsExam::where('exam_id', $id)->get();
 
-        return view('exam.show', compact('exam'));
+        return view('exam.show', compact('exam', 'questions'));
     }
 
     public function edit($id): View
