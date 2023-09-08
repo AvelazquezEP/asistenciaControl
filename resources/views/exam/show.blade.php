@@ -38,7 +38,7 @@
                     <a class="btn btn-primary" href="javascript:window.history.back();">Back</a>
                 </div>
             </div>
-            <input hidden type="text" name="id" value="{{ $exam->id }}">
+            <input hidden type="text" name="id" id="id" value="{{ $exam->id }}">
             <p><b>Title: </b>{{ $exam->exam_name }}</p>
             <p><b>Description: </b>{{ $exam->description }}</p>
             <p><b>No. Questions: </b>{{ $exam->number_of_questions }}</p>
@@ -51,4 +51,6 @@
 
         </div>
     </div>
+
+    <script src="{{ asset('js/table.js') }}"></script>
 @endsection
