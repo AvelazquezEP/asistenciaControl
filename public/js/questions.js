@@ -1,22 +1,36 @@
 const log = console.log;
 
-const change_answer_type = () => {
+const change_answer_type = (id_radio) => {
+
+    let id_question = id_radio.split('_');
 
     let number_of_question = document.getElementById('number_of_questions').value;
+    let type_category_radio = document.getElementById(id_radio).value;
 
-    for (i = 0; i < number_of_question; i++) {
-        let answer_type = document.getElementsByName(`type_answer_${i}`);
+    let multiple_questions_container = document.getElementById('multiple-questions-container');
+    let open_answer_container = document.getElementById('open_answer_container');
 
-        for (j = 0; j < answer_type.length; j++) {
-            // if (answer_type, checked == true) {
-            //     log('FALSE');
-            // } else {
-            //     log('TRUE');
-            // }
-            if (answer_type[j].checked) {
-                log(answer_type[j].value);
-            }
-        }
-    }
+    multiple_questions_container.style.display = "none";
+    open_answer_container.style.display = "none";
+
+    // if (type_category_radio == false) {
+    //     log(type_category_radio);
+    //     open_answer_container.style.display = "none";
+    // } else {
+    //     multiple_questions_container.style.display = "none";
+    // }
+
+    // log(type_category_radio);
+    // log(id_question[3]);
+}
+
+const show_element = (id_radio) => {
+    let type_category_radio = document.getElementById(id_radio).value;
+
+    let multiple_questions_container = document.getElementById('multiple-questions-container');
+    let open_answer_container = document.getElementById('open_answer_container');
+
+    multiple_questions_container.style.display = "block";
+    open_answer_container.style.display = "block";
 
 }
