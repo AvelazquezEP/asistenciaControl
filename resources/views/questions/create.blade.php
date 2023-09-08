@@ -52,10 +52,11 @@
                         <label for="question" style="margin-right: 2rem;">Question #{{ $i + 1 }}</label>
                     </div>
                     <div class="pull-right">
-                        <input type="radio" name="type_answer" id="type_answear_{{ $i }}" value="true"
-                            checked>
+                        <input onclick="change_answer_type()" type="radio" name="type_answer_{{ $i }}"
+                            id="type_answer_{{ $i }}" value="true" checked>
                         <label for="">Multiple option</label>
-                        <input type="radio" name="type_answer" id="type_answear_{{ $i }}" value="false">
+                        <input onclick="change_answer_type()" type="radio" name="type_answer_{{ $i }}"
+                            id="type_answer_{{ $i }}" value="false">
                         <label for="">open answer</label>
                     </div>
                 </div>
@@ -88,4 +89,6 @@
             </div>
         @endfor
     </div>
+
+    <script src="{{ asset('js/questions.js') }}"></script>
 @endsection
