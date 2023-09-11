@@ -302,7 +302,7 @@ const deleteExamItem = () => {
 
 const createExamQuestion = () => {
     let baseUrl = '/question/create/';
-    let idUser = document.getElementById('id').value;
+    let idUser = document.getElementById('id_exam').value;
     var id = idUser;
 
     if (id != 0) {

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('number_of_question');
             $table->string('question');
-            $table->string('option_1');
-            $table->string('option_2');
-            $table->string('option_3');
+            $table->string('option_a');
+            $table->string('option_b');
+            $table->string('option_c');
             $table->string('open_answer');
             $table->string('correct_answer');
             $table->string('answer_details'); //<-- administrator

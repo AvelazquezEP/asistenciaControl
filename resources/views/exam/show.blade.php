@@ -10,7 +10,7 @@
         }
 
         .header {
-            background-color: antiquewhite;
+            /* background-color: antiquewhite; */
             padding: 0.5rem;
             margin-bottom: 1rem;
         }
@@ -38,7 +38,7 @@
                     <a class="btn btn-primary" href="javascript:window.history.back();">Back</a>
                 </div>
             </div>
-            <input hidden type="text" name="id" id="id" value="{{ $exam->id }}">
+            <input hidden type="text" name="id" id="id_exam" value="{{ $exam->id }}">
             <p><b>Title: </b>{{ $exam->exam_name }}</p>
             <p><b>Description: </b>{{ $exam->description }}</p>
             <p><b>No. Questions: </b>{{ $exam->number_of_questions }}</p>
@@ -47,8 +47,19 @@
     </div>
     <hr>
     <div class="header">
+        <table class="table table-bordered" id="myTable">
+            <tr>
+                <th>Question</th>
+                <th>Correct Answer</th>
+            </tr>
+            @foreach ($questions as $question)
+                <tr id="{{ $question->id }}" onclick="changeBG({{ $question->id }})">
+                    <td>{{ $question->question }}</td>
+                    <td>{{ $question->correct_answer }}</td>
+                </tr>
+            @endforeach
+        </table>
         <div class="details">
-
         </div>
     </div>
 

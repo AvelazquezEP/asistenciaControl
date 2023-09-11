@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\questionExam;
+use App\Models\questionsExam;
 use App\Models\exams;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
@@ -19,9 +19,9 @@ class QuestionExamController extends Controller
         $this->middleware('permission:exams-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(): View
     {
-        // 
+        return view('exam.index');
     }
 
     public function create($id): View
@@ -36,8 +36,55 @@ class QuestionExamController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        return redirect()->route('questionExam.index')
-            ->with('success', 'Exam created successfully');
+        $request->validate([
+            // 'number_of_question' => 'required',
+            // 'question' => 'required',
+            // 'option_a' => 'required',
+            // 'option_b' => 'required',
+            // 'option_c' => 'required',
+            // 'open_answer' => 'required',
+            // 'correct_answer' => 'required',
+            // 'answer_details' => 'required',
+            // 'exam_id' => 'required',
+        ]);
+
+        $exam_id = $request->get('exam_id');
+        $question_type = $request->get('question_type');
+
+        $questions = new questionsExam([]);
+
+        if ($question_type == 'true') { //<-- multiple option
+
+            $questions = new questionsExam([
+                'number_of_question' => 1,
+                'question' => $request->get('question'),
+                'option_a' => $request->get('option_a'),
+                'option_b' => $request->get('option_b'),
+                'option_c' => $request->get('option_c'),
+                'open_answer' => "no open answer",
+                'correct_answer' => $request->get('correct_answer'),
+                'answer_details' => "answer detail",
+                'exam_id' => $request->get('exam_id'),
+            ]);
+        } else {
+
+            $questions = new questionsExam([
+                'number_of_question' => 1,
+                'question' => $request->get('question'),
+                'option_a' => "a",
+                'option_b' => "b",
+                'option_c' => "c",
+                'open_answer' => $request->get('open_answer'),
+                'correct_answer' => "** without multiple option",
+                'answer_details' => "answer detail",
+                'exam_id' => $request->get('exam_id'),
+            ]);
+        }
+
+        $questions->save();
+
+        return redirect()->route('exam.show', $exam_id)
+            ->with('success', 'Question created successfully');
     }
 
     // public function show(questionExam $questionExam)
