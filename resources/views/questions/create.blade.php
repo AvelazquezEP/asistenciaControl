@@ -71,7 +71,7 @@
                             name="type_answer_{{ $i }}" id="type_answer_yes_{{ $i }}" value="true"
                             checked>
                         <label for="">Multiple option</label>
-                        <input onclick="show_element('type_answer_no_{{ $i }}')" type="radio"
+                        <input onclick="change_answer_type('type_answer_no_{{ $i }}')" type="radio"
                             name="type_answer_{{ $i }}" id="type_answer_no_{{ $i }}" value="false">
                         <label for="">open answer</label>
                     </div>
@@ -82,7 +82,7 @@
                         class="form-control input-question">
                 </div>
 
-                <div class="multiple-questions-container" id="multiple-questions-container">
+                <div class="multiple-questions-container_{{ $i }}" id="multiple-questions-container">
                     <div class="question">
                         <label for="option_a">a)</label>
                         <input type="text" name="option_a" id="option_a_{{ $i }}"
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="open_answer_container" id="open_answer_container">
+                <div class="open_answer_container_{{ $i }}" id="open_answer_container">
                     <label for="option_c">Write your answer:</label>
                     <textarea name="open_answer" id="open_answer_{{ $i }}" rows="6" class="form-control input-answer"></textarea>
                 </div>
