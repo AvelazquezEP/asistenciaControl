@@ -312,6 +312,30 @@ const createExamQuestion = () => {
     }
 }
 
+const editExamQuestion = () => {
+    let baseUrl = '/question/edit/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const removeExamQuestion = () => {
+    let baseUrl = '/question/destroy/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
 /* #endregion */
 
 /* #region SCHEDULER */

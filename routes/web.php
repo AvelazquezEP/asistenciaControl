@@ -144,9 +144,9 @@ Route::controller(QuestionExamController::class)->Group(function () {
     Route::get('/question/index', 'index')->name('questionExam.index');
     Route::get('/question/create/{id}', 'create')->name('questionExam.create');
     Route::post('/question/store', 'store')->name('questionExam.store');
-    Route::get('/question/edit', 'edit')->name('questionExam.edit');
-    Route::get('/question/update', 'update')->name('questionExam.update');
-    Route::get('/question/destroy', 'destroy')->name('questionExam.destroy');
+    Route::get('/question/edit/{id}', 'edit')->name('questionExam.edit');
+    Route::post('/question/update/{id}', 'update')->name('questionExam.update');
+    Route::get('/question/destroy/{id}', 'destroy')->name('questionExam.destroy');
 });
 /* #endregion */
 

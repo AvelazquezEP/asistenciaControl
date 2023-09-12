@@ -33,7 +33,7 @@ class QuestionExamController extends Controller
 
         return view('questions.create', compact('exam_id', 'no_questions'));
     }
-    
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -83,30 +83,45 @@ class QuestionExamController extends Controller
 
         $questions->save();
 
-        // $questions = questionsExam::where('exam_id', $exam_id);
-        // $total_questions = count($questions);
-
         return redirect()->route('exam.show', $exam_id)
-            ->with('success', 'Question created successfully' . $total_questions);
+            ->with('success', 'Question created successfully');
     }
 
-    // public function show(questionExam $questionExam)
-    // {
-    //     //
-    // }
+    public function edit($id): View
+    {
+        $question = questionsExam::find($id);
+        $question_id = $id;
 
-    // public function edit(questionExam $questionExam)
-    // {
-    //     //
-    // }
+        return view('questions.edit', compact('question', 'question_id'));
+    }
 
-    // public function update(Request $request, questionExam $questionExam)
-    // {
-    //     //
-    // }
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $question = questionsExam::find($id);
 
-    // public function destroy(questionExam $questionExam)
-    // {
-    //     //
-    // }
+        $id_exam = $question->exam_id;
+
+        $question->number_of_question = 1;
+        $question->question = $request->input('question');
+        $question->option_a = $request->input('option_a');
+        $question->option_b = $request->input('option_b');
+        $question->option_c = $request->input('option_c');
+        $question->open_answer = $request->input('open_answer');
+        $question->correct_answer = $request->input('correct_answer');
+        $question->exam_id = $request->input('exam_id');
+
+        $question->save();
+
+        return redirect()->route('exam.show', $id_exam)
+            ->with('success', 'Question updated successfully');
+    }
+
+    public function destroy($id): RedirectResponse
+    {
+        $question = questionsExam::find($id);
+
+        $question->delete();
+
+        return redirect()->route('exam.show', $id);
+    }
 }
