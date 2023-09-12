@@ -61,7 +61,7 @@ class QuestionExamController extends Controller
                 'option_a' => $request->get('option_a'),
                 'option_b' => $request->get('option_b'),
                 'option_c' => $request->get('option_c'),
-                'open_answer' => "no open answer",
+                'open_answer' => "-",
                 'correct_answer' => $request->get('correct_answer'),
                 'answer_details' => "answer detail",
                 'exam_id' => $request->get('exam_id'),
@@ -71,20 +71,23 @@ class QuestionExamController extends Controller
             $questions = new questionsExam([
                 'number_of_question' => 1,
                 'question' => $request->get('question'),
-                'option_a' => "a",
-                'option_b' => "b",
-                'option_c' => "c",
+                'option_a' => "-",
+                'option_b' => "-",
+                'option_c' => "-",
                 'open_answer' => $request->get('open_answer'),
                 'correct_answer' => "** without multiple option",
-                'answer_details' => "answer detail",
+                'answer_details' => "-",
                 'exam_id' => $request->get('exam_id'),
             ]);
         }
 
         $questions->save();
 
+        // $questions = questionsExam::where('exam_id', $exam_id);
+        // $total_questions = count($questions);
+
         return redirect()->route('exam.show', $exam_id)
-            ->with('success', 'Question created successfully');
+            ->with('success', 'Question created successfully' . $total_questions);
     }
 
     // public function show(questionExam $questionExam)

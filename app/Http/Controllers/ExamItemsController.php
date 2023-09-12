@@ -23,6 +23,7 @@ class ExamItemsController extends Controller
     public function index($id): View
     {
         $exams = exams::where('id_resource_exam', $id)->get();
+        // $questions = questionsExam::where();
 
         return view('exam.index', compact('exams', 'id'));
     }
@@ -53,6 +54,7 @@ class ExamItemsController extends Controller
         ]);
 
         $exam->save();
+
 
         return redirect()->route('exam.index', $id_resource_exam)
             ->with('success', 'Exam created successfully');
