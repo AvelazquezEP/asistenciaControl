@@ -122,6 +122,6 @@ class QuestionExamController extends Controller
 
         $question->delete();
 
-        return redirect()->route('exam.show', $id);
+        return redirect()->route('exam.show', $question->exam_id);
     }
 }
