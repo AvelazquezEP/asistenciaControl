@@ -33,7 +33,7 @@ class QuestionExamController extends Controller
 
         return view('questions.create', compact('exam_id', 'no_questions'));
     }
-
+    
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
