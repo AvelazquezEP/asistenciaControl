@@ -139,7 +139,7 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>No. Questions</th>
+            <th>Questions</th>
             <th>Action</th>
         </tr>
         @foreach ($exams as $key => $exam)
@@ -149,7 +149,7 @@
                 <td>{{ $exam->description }}</td>
                 <td>{{ $exam->number_of_questions }}</td>
                 <td>
-                    <a href="" class="start-container">
+                    <a href="/examuser/{{ $exam->id }}" class="start-container">
                         <i class="fa-solid fa-play start-icon" style="color: #57c44f;"></i>
                     </a>
                 </td>

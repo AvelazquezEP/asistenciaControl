@@ -338,6 +338,32 @@ const removeExamQuestion = () => {
 
 /* #endregion */
 
+/* #region Exam user */
+const examUser_index = () => {
+    let baseUrl = '/exam/user/';
+    let idUser = document.getElementById('id_exam').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+const examUser_create = () => {
+    let baseUrl = '/exam/user/create';
+    let idUser = document.getElementById('id_exam').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+/* #endregion */
+
 /* #region SCHEDULER */
 
 const createScheduler = () => {

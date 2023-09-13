@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExamItemsController;
+use App\Http\Controllers\examUserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostHomeController;
@@ -115,6 +116,8 @@ Route::controller(ResourceCategoryController::class)->Group(function () {
 });
 /* #endregion */
 
+/* #region EXAM MODULE */
+
 /* #region RESOURCE EXAMS */
 Route::controller(ResourceExamsController::class)->Group(function () {
     Route::get('/resource/exam', 'index')->name('resource_exams.index');
@@ -148,6 +151,17 @@ Route::controller(QuestionExamController::class)->Group(function () {
     Route::post('/question/update/{id}', 'update')->name('questionExam.update');
     Route::get('/question/destroy/{id}', 'destroy')->name('questionExam.destroy');
 });
+/* #endregion */
+
+/* #region EXAM USER */
+Route::controller(examUserController::class)->Group(function () {
+    Route::get('/examuser/{id}', 'index')->name('examuser.index');
+    Route::get('/examuser/show/{id}', 'show')->name('examuser.show');
+    Route::get('/examuser/create', 'create')->name('examuser.create');
+    Route::post('/examuser/store/{id}', 'store')->name('examuser.store');
+});
+/* #endregion */
+
 /* #endregion */
 
 /* #region PERMISSIONS */
