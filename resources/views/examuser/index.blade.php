@@ -25,7 +25,7 @@
             accusamus nobis ipsam dicta repellendus magnam alias velit exercitationem maxime veniam nulla ex repellat unde!
         </p>
 
-        <form action="/examuser/store" method="POST">
+        <form action="/examuser/store/{{ $exam->id }}" method="POST">
             @csrf
             <input hidden type="text" name="exam_id" id="exam_id" value="{{ $exam->id }}">
             <input hidden type="text" name="exam_name" id="exam_name" value="{{ $exam->id }}">

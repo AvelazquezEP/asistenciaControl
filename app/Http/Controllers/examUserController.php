@@ -28,9 +28,6 @@ class examUserController extends Controller
         return view('examuser.index', compact('questions', 'exam'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create($id)
     {
         $questions = questionsExam::where('exam_id', $id)->get();
@@ -39,9 +36,6 @@ class examUserController extends Controller
         return view('examuser.index', compact('questions', 'exam'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $id_temp = 1;
@@ -62,39 +56,30 @@ class examUserController extends Controller
 
         $exam_user->save();
 
-        return redirect()->route('examuser.show', $id_temp)
+        return redirect()->route('examuser.show', $id_exam)
             ->with('success', 'Exam finished successfully');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id): View
     {
-        $test = 'text test';
+        // $test = 'text test';
 
-        return view('examuser.show', compact('test'));
+        $questions = questionsExam::where('exam_id', $id)->get();
+        $exam = exams::find($id);
+
+        return view('examuser.show', compact('questions', 'exam'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(exam_users $exam_users)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, exam_users $exam_users)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(exam_users $exam_users)
     {
         //
