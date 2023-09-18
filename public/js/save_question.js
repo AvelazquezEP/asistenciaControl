@@ -28,7 +28,16 @@ const save_question = (chosen_option, open_element) => {
     // });
 }
 
-const test = (option) => {
-    let question_option = document.getElementById(option).value;
-    console.log(question_option);
+// const test = (chosen_option) => {
+//     let question_option = document.getElementById(option).value;
+//     let chosen_option = document.getElementById('');
+
+//     console.log(question_option);
+// }
+
+const change_option = (option, element_option_to_save) => {
+    let option_input = document.getElementById(option).value
+    let chosen_element = document.getElementById(element_option_to_save);
+
+    chosen_element.value = option;
 }

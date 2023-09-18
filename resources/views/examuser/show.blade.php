@@ -54,12 +54,13 @@
                         </div>
                     @else
                         <div class="option-multiple">
-                            <input hidden type="text" id="chosen_option_{{ $question->id }}" value="a">
+                            <input type="text" id="chosen_option_{{ $question->id }}" value="a">
 
                             <div class="item-option">
                                 <div>
-                                    <input type="radio" name="option_answer" id="option_a"
-                                        value="{{ $question->option_a }}">
+                                    <input type="radio" name="option_answer" id="option_a_{{ $question->option_a }}"
+                                        value="{{ $question->option_a }}"
+                                        onclick="change_option({{ $question->option_a }})">
                                 </div>
                                 <div>
                                     <p>{{ $question->option_a }}</p>
@@ -68,8 +69,9 @@
 
                             <div class="item-option">
                                 <div>
-                                    <input type="radio" name="option_answer" id="option_b"
-                                        value="{{ $question->option_b }}">
+                                    <input type="radio" name="option_answer" id="option_b_{{ $question->option_b }}"
+                                        value="{{ $question->option_b }}"
+                                        onclick="change_option({{ $question->option_b }})">>
                                 </div>
                                 <div>
                                     <p>{{ $question->option_b }}</p>
@@ -78,8 +80,9 @@
 
                             <div class="item-option">
                                 <div>
-                                    <input type="radio" name="option_answer" id="option_c"
-                                        value="{{ $question->option_c }}">
+                                    <input type="radio" name="option_answer" id="option_c_{{ $question->option_c }}"
+                                        value="{{ $question->option_c }}"
+                                        onclick="change_option({{ $question->option_c }})">>
                                 </div>
                                 <div>
                                     <p>{{ $question->option_c }}</p>
