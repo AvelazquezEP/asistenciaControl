@@ -46,7 +46,10 @@
 
                 <form action="/examuser/question" method="POST">
                     @csrf
+
                     <input hidden type="text" name="id_question" value="{{ $question->id }}">
+                    <input hidden type="text" name="exam_id" value="{{ $exam->id }}">
+
                     <div class="answer">
                         @if ($question->option_a == '-' || $question->option_b == '-' || $question->option_c == '-')
                             <div class="open-answer">

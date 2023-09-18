@@ -78,12 +78,13 @@ class examUserController extends Controller
         // 'exam_name',
         // 'id_exam_user',
 
-        $id_exam = 1;
+        // $id_exam = 1;
 
-        $exam_questions = questionsExam::where('id_exam', $id_exam)->get();
-        $exam_user = questions_users::find($id_exam);
+        $exam_id = $request->get('exam_id');
+        $exam_questions = questionsExam::where('exam_id', $exam_id)->get();
+        // $exam_user = questions_users::find($id_exam);
 
-        $user_questions = questions_users::where('id_exam_user', $exam_user->id);
+        // $user_questions = questions_users::where('id_exam_user', $exam_user->id);
 
 
         $request->validate([]);
@@ -93,7 +94,8 @@ class examUserController extends Controller
         $option = $request->get('chosen_option_' . $question_id);
 
         return redirect()->route('exam.index', 1)
-            ->with('success', 'saved' . $exam_user->id . $option);
+            ->with('success', 'saved' . $exam_questions[0]->exam_id);
+        // ->with('success', 'saved' . $exam_user->id . $option);
 
         // if ($id_ajax != 3) {
         //     return redirect()->route('exam.index', 1)
