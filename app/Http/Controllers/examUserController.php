@@ -78,12 +78,13 @@ class examUserController extends Controller
         // 'exam_name',
         // 'id_exam_user',
 
-        $id = 1;
-        $id_exam_user = 5;
+        $id_exam = 1;
 
-        $exam_questions = questionsExam::where('id_exam', $id);
-        $user_questions = questions_users::where('id_exam_user', $id_exam_user);
-        $id_ajax = 3;
+        $exam_questions = questionsExam::where('id_exam', $id_exam)->get();
+        $exam_user = questions_users::find($id_exam);
+
+        $user_questions = questions_users::where('id_exam_user', $exam_user->id);
+
 
         $request->validate([]);
 
@@ -91,15 +92,15 @@ class examUserController extends Controller
         // chosen_option_{{ $question->id }}
         $option = $request->get('chosen_option_' . $question_id);
 
-        // // return $id_ajax;
-        // return response()->json(array('id_ajax' => $id_ajax), 200);
+        return redirect()->route('exam.index', 1)
+            ->with('success', 'saved' . $exam_user->id . $option);
 
-        if ($id_ajax != 3) {
-            return redirect()->route('exam.index', 1)
-                ->with('success', 'saved' . $question_id . $option);
-        } else {
-            return view('examuser.index', 1);
-        }
+        // if ($id_ajax != 3) {
+        //     return redirect()->route('exam.index', 1)
+        //         ->with('success', 'saved' . $question_id . $option);
+        // } else {
+        //     return view('examuser.index', 1);
+        // }
     }
 
     public function edit(exam_users $exam_users)
