@@ -88,6 +88,10 @@
         .start-icon {
             background-color: none;
         }
+
+        .action-container {
+            background-color: none;
+        }
     </style>
 
     @if ($message = Session::get('success'))
@@ -148,7 +152,7 @@
                 <td>{{ $exam->exam_name }}</td>
                 <td>{{ $exam->description }}</td>
                 <td>{{ $exam->number_of_questions }}</td>
-                <td>
+                <td class="action-container">
                     <a href="/examuser/{{ $exam->id }}" class="start-container">
                         <i class="fa-solid fa-play start-icon" style="color: #57c44f;"></i>
                     </a>
