@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\exam_users;
 use App\Http\Controllers\Controller;
 use App\Models\exams;
+use App\Models\questions_users;
 use App\Models\questionsExam;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -38,7 +39,7 @@ class examUserController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $id_temp = 1;
+        // $id_temp = 1;
 
         $request->validate([]);
 
@@ -68,6 +69,37 @@ class examUserController extends Controller
         $exam = exams::find($id);
 
         return view('examuser.show', compact('questions', 'exam'));
+    }
+
+    public function save_question(Request $request)
+    {
+        // 'answer',
+        // 'id_question',
+        // 'exam_name',
+        // 'id_exam_user',
+
+        $id = 1;
+        $id_exam_user = 5;
+
+        $exam_questions = questionsExam::where('id_exam', $id);
+        $user_questions = questions_users::where('id_exam_user', $id_exam_user);
+        $id_ajax = 3;
+
+        $request->validate([]);
+
+        $question_id = $request->get('id_question');
+        // chosen_option_{{ $question->id }}
+        $option = $request->get('chosen_option_' . $question_id);
+
+        // // return $id_ajax;
+        // return response()->json(array('id_ajax' => $id_ajax), 200);
+
+        if ($id_ajax != 3) {
+            return redirect()->route('exam.index', 1)
+                ->with('success', 'saved' . $question_id . $option);
+        } else {
+            return view('examuser.index', 1);
+        }
     }
 
     public function edit(exam_users $exam_users)

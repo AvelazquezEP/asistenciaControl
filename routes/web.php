@@ -159,6 +159,7 @@ Route::controller(examUserController::class)->Group(function () {
     Route::get('/examuser/show/{id}', 'show')->name('examuser.show');
     Route::get('/examuser/create', 'create')->name('examuser.create');
     Route::post('/examuser/store/{id}', 'store')->name('examuser.store');
+    Route::post('/examuser/question', 'save_question')->name('examuser.save_question');
 });
 /* #endregion */
 

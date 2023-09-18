@@ -9,15 +9,17 @@ const save_question = (question_id) => {
 
     // $.ajax({
     //     type: 'POST',
-    //     url: 'test.php',
+    //     // url: 'test.php',
+    //     url: "/examuser/ajax",
+    //     // url: "http://127.0.0.1:8000/examuser/ajax/",
     //     data: {
-    //         "FirstName": first_name,
+    //         "id_ajax": question_id,
     //     },
     //     dataType: 'json',
     //     success: function (data) {
-
+    //         log(`${data} - sent`);
     //     }, error: function (data) {
-
+    //         log(`${data} - error`);
     //     }
     // });
 }
