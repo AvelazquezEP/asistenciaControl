@@ -86,7 +86,6 @@ class examUserController extends Controller
 
         // $user_questions = questions_users::where('id_exam_user', $exam_user->id);
 
-
         $request->validate([]);
 
         $question_id = $request->get('id_question');
