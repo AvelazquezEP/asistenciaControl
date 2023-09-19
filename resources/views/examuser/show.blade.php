@@ -32,20 +32,25 @@
             display: flex;
         }
 
-        .btn-save {}
+        .btn-save {
+            margin-bottom: 1rem;
+            padding: 1rem 2rem;
+        }
     </style>
     <div class="exam-header">
         <h2>{{ $exam->exam_name }}</h2>
     </div>
-    @foreach ($questions as $key => $question)
-        <div class="main-container">
-            <div class="question-container">
-                <div class="question">
-                    <p>{{ $question->question }}</p>
-                </div>
+    <form action="/examuser/question" method="POST">
+        @csrf
 
-                <form action="/examuser/question" method="POST">
-                    @csrf
+        @foreach ($questions as $key => $question)
+            <div class="main-container">
+                <div class="question-container" id="question_container_{{ $question->id }}">
+                    <div class="question">
+                        <p>{{ $question->question }}</p>
+                    </div>
+
+                    {{-- <form action="/examuser/question" method="POST"> --}}
 
                     <input hidden type="text" name="id_question" value="{{ $question->id }}">
                     <input hidden type="text" name="exam_id" value="{{ $exam->id }}">
@@ -53,8 +58,8 @@
                     <div class="answer">
                         @if ($question->option_a == '-' || $question->option_b == '-' || $question->option_c == '-')
                             <div class="open-answer">
-                                <textarea name="" id="open_element_{{ $question->id }}" rows="6" class="form-control input-answer"
-                                    placeholder="anwser:"></textarea>
+                                <textarea name="open_element_{{ $question->id }}" id="open_element_{{ $question->id }}" rows="6"
+                                    class="form-control input-answer" placeholder="anwser:"></textarea>
                             </div>
                         @else
                             <div class="option-multiple">
@@ -63,8 +68,9 @@
 
                                 <div class="item-option">
                                     <div>
-                                        <input type="radio" name="option_answer" id="option_a_{{ $question->id }}"
-                                            value="option_a" onclick="change_option({{ $question->id }})">
+                                        <input type="radio" name="option_answer_{{ $question->id }}"
+                                            id="option_a_{{ $question->id }}" value="option_a"
+                                            onclick="change_option({{ $question->id }})">
                                     </div>
                                     <div>
                                         <p>{{ $question->option_a }}</p>
@@ -73,8 +79,9 @@
 
                                 <div class="item-option">
                                     <div>
-                                        <input type="radio" name="option_answer" id="option_b_{{ $question->id }}"
-                                            value="option_b" onclick="change_option({{ $question->id }})">
+                                        <input type="radio" name="option_answer_{{ $question->id }}"
+                                            id="option_b_{{ $question->id }}" value="option_b"
+                                            onclick="change_option({{ $question->id }})">
                                     </div>
                                     <div>
                                         <p>{{ $question->option_b }}</p>
@@ -83,8 +90,9 @@
 
                                 <div class="item-option">
                                     <div>
-                                        <input type="radio" name="option_answer" id="option_c_{{ $question->id }}"
-                                            value="option_c" onclick="change_option({{ $question->id }})">
+                                        <input type="radio" name="option_answer_{{ $question->id }}"
+                                            id="option_c_{{ $question->id }}" value="option_c"
+                                            onclick="change_option({{ $question->id }})">
                                     </div>
                                     <div>
                                         <p>{{ $question->option_c }}</p>
@@ -95,13 +103,16 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-primary btn-save">send</button>
-                        {{-- <button class="btn btn-primary btn-save" onclick="save_question({{ $question->id }})">send</button> --}}
+                        <a class="btn btn-primary btn-save" onclick="save_question({{ $question->id }})">save</a>
+                        {{-- <button type="submit" class="btn btn-primary btn-save">save</button> --}}
                     </div>
-                </form>
+
+                </div>
+
             </div>
-        </div>
-    @endforeach
+        @endforeach
+        <button type="submit" class="btn btn-primary btn-save" onclick="">Finish</button>
+    </form>
 
     <script script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script script src="{{ asset('js/save_question.js') }}"></script>

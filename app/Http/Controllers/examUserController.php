@@ -66,6 +66,8 @@ class examUserController extends Controller
         // $test = 'text test';
 
         $questions = questionsExam::where('exam_id', $id)->get();
+        // $questions = questionsExam::where('exam_id', $id)->take(1)->get();
+
         $exam = exams::find($id);
 
         return view('examuser.show', compact('questions', 'exam'));
@@ -73,35 +75,63 @@ class examUserController extends Controller
 
     public function save_question(Request $request)
     {
-        // 'answer',
-        // 'id_question',
-        // 'exam_name',
-        // 'id_exam_user',
-
-        // $id_exam = 1;
 
         $exam_id = $request->get('exam_id');
-        $exam_questions = questionsExam::where('exam_id', $exam_id)->get();
-        // $exam_user = questions_users::find($id_exam);
 
-        // $user_questions = questions_users::where('id_exam_user', $exam_user->id);
+        $exam = exams::find($exam_id);
+        $total_questions = $exam->number_of_questions;
+        // $question_id = 1;
 
-        $request->validate([]);
+        // $question = $request->get('chosen_option_1');
+        $question = $request->input('chosen_option_1');
 
-        $question_id = $request->get('id_question');
-        // chosen_option_{{ $question->id }}
-        $option = $request->get('chosen_option_' . $question_id);
+        $question_user = new questions_users([
+            // 'answer' => $question,
+            'answer' => $question,
+            'id_question' => $exam_id,
+            'exam_name' => 'INTRODUCTION EXAM',
+            'id_exam_user' => 1,
+        ]);
+        $question_user->save();
+
+        for ($i = 0; $i < $total_questions; $i++) {
+            // $question = $request->get('chosen_option_' . $i);
+            // $open_question = $request->get('open_element_' . $i);
+            // $question_tmp = "Answer" . $i;
+
+            // $question_user = new questions_users([
+            //     // 'answer' => $question,
+            //     'answer' => $question,
+            //     'id_question' => $exam_id,
+            //     'exam_name' => 'INTRODUCTION EXAM',
+            //     'id_exam_user' => 1,
+            // ]);
+            // $question_user->save();
+
+
+            // if ($question != "-") {
+            //     $question_user = new questions_users([
+            //         // 'answer' => $question,
+            //         'answer' => $question,
+            //         'id_question' => $exam_id,
+            //         'exam_name' => 'INTRODUCTION EXAM',
+            //         'id_exam_user' => 1,
+            //     ]);
+            //     $question_user->save();
+            // } else {
+            //     $question_user = new questions_users([
+            //         // 'answer' => $open_question,
+            //         'answer' => $question_tmp,
+            //         'id_question' => $exam_id,
+            //         'exam_name' => 'INTRODUCTION EXAM',
+            //         'id_exam_user' => 1,
+            //     ]);
+            //     $question_user->save();
+            // }
+        }
 
         return redirect()->route('exam.index', 1)
-            ->with('success', 'saved' . $exam_questions[0]->exam_id);
-        // ->with('success', 'saved' . $exam_user->id . $option);
-
-        // if ($id_ajax != 3) {
-        //     return redirect()->route('exam.index', 1)
-        //         ->with('success', 'saved' . $question_id . $option);
-        // } else {
-        //     return view('examuser.index', 1);
-        // }
+            ->with('success', 'Questions saved');
     }
 
     public function edit(exam_users $exam_users)
