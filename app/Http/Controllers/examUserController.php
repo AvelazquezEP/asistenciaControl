@@ -76,10 +76,7 @@ class examUserController extends Controller
     public function save_question(Request $request)
     {
 
-        $exam_id = $request->get('exam_id');
-
-        $exam = exams::find($exam_id);
-        $total_questions = $exam->number_of_questions;
+        /* #region some Module test */
         // $question_id = 1;
 
         // $question = $request->get('chosen_option_1');
@@ -92,35 +89,67 @@ class examUserController extends Controller
         //     'exam_name' => 'INTRODUCTION EXAM',
         //     'id_exam_user' => 1,
         // ]);
-        // $question_user->save();
+        // $question_user->save();        
 
-        for ($i = 0; $i < $total_questions; $i++) {
-            $question = $request->get('chosen_option_' . $i);
-            $open_question = $request->get('open_element_' . $i);
+        // for ($i = 1; $i < $total_questions; $i++) {
 
-            if ($question != "-") {
-                $question_user = new questions_users([
-                    // 'answer' => $question,
-                    'answer' => $question,
-                    'id_question' => $exam_id,
-                    'exam_name' => 'INTRODUCTION EXAM',
-                    'id_exam_user' => 1,
-                ]);
-                $question_user->save();
-            } else {
-                $question_user = new questions_users([
-                    // 'answer' => $open_question,
-                    'answer' => $open_question,
-                    'id_question' => $exam_id,
-                    'exam_name' => 'INTRODUCTION EXAM',
-                    'id_exam_user' => 1,
-                ]);
-                $question_user->save();
-            }
+        //     $question = $request->input('chosen_option_' . $i);
+        //     // $open_question = $request->get('open_element_' . $i);
+
+        //     $question_user = new questions_users([
+        //         // 'answer' => $question,
+        //         'answer' => $question,
+        //         'id_question' => $exam_id,
+        //         'exam_name' => 'INTRODUCTION EXAM',
+        //         'id_exam_user' => 1,
+        //     ]);
+        //     $question_user->save();
+
+        //     if ($question != "-") {
+        //         $question_user = new questions_users([
+        //             // 'answer' => $question,
+        //             'answer' => $question,
+        //             'id_question' => $exam_id,
+        //             'exam_name' => 'INTRODUCTION EXAM',
+        //             'id_exam_user' => 1,
+        //         ]);
+        //         $question_user->save();
+        //     } else {
+        //         $question_user = new questions_users([
+        //             // 'answer' => $open_question,
+        //             'answer' => $open_question,
+        //             'id_question' => $exam_id,
+        //             'exam_name' => 'INTRODUCTION EXAM',
+        //             'id_exam_user' => 1,
+        //         ]);
+        //         $question_user->save();
+        //     }
+        // }
+
+        // return redirect()->route('exam.index', 1)
+        //     ->with('success', 'Questions saved');
+        /* #endregion */
+
+        $exam_id = $request->input('exam_id');
+        $exam = exams::find($exam_id);
+
+        $questions = questionsExam::where('exam_id', $exam_id)->get();
+
+        $question_tmp = '';
+
+        foreach ($questions as $key => $question) {
+            $question_tmp = $request->input('chosen_option_' . $question->id);
         }
 
+        // $question_1 = $request->input('chosen_option_1');
+        // $question_2 = $request->input('chosen_option_2');
+        // $question_3 = $request->input('chosen_option_4');
+
         return redirect()->route('exam.index', 1)
-            ->with('success', 'Questions saved');
+            ->with('success', 'Exam ID: ' . $question_tmp);
+
+        // return redirect()->route('exam.index', 1)
+        //     ->with('success', 'Exam ID: ' . $question_1 . $question_2 . $question_3);
     }
 
     public function edit(exam_users $exam_users)
