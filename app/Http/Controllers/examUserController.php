@@ -139,11 +139,16 @@ class examUserController extends Controller
 
         foreach ($questions as $key => $question) {
             $question_tmp = $request->input('chosen_option_' . $question->id);
-        }
 
-        // $question_1 = $request->input('chosen_option_1');
-        // $question_2 = $request->input('chosen_option_2');
-        // $question_3 = $request->input('chosen_option_4');
+            $save_question = new questions_users([
+                'answer' => $question_tmp,
+                'id_question' => $question->id,
+                'exam_name' => 'INTRODUCTION EXAM',
+                'id_exam_user' => 1,
+            ]);
+
+            $save_question->save();
+        }
 
         return redirect()->route('exam.index', 1)
             ->with('success', 'Exam ID: ' . $question_tmp);
