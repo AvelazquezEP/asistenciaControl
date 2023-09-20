@@ -83,51 +83,40 @@ class examUserController extends Controller
         // $question_id = 1;
 
         // $question = $request->get('chosen_option_1');
-        $question = $request->input('chosen_option_1');
+        // $question = $request->input('chosen_option_2');
 
-        $question_user = new questions_users([
-            // 'answer' => $question,
-            'answer' => $question,
-            'id_question' => $exam_id,
-            'exam_name' => 'INTRODUCTION EXAM',
-            'id_exam_user' => 1,
-        ]);
-        $question_user->save();
+        // $question_user = new questions_users([
+        //     // 'answer' => "option_a",
+        //     'answer' => $question,
+        //     'id_question' => $exam_id,
+        //     'exam_name' => 'INTRODUCTION EXAM',
+        //     'id_exam_user' => 1,
+        // ]);
+        // $question_user->save();
 
         for ($i = 0; $i < $total_questions; $i++) {
-            // $question = $request->get('chosen_option_' . $i);
-            // $open_question = $request->get('open_element_' . $i);
-            // $question_tmp = "Answer" . $i;
+            $question = $request->get('chosen_option_' . $i);
+            $open_question = $request->get('open_element_' . $i);
 
-            // $question_user = new questions_users([
-            //     // 'answer' => $question,
-            //     'answer' => $question,
-            //     'id_question' => $exam_id,
-            //     'exam_name' => 'INTRODUCTION EXAM',
-            //     'id_exam_user' => 1,
-            // ]);
-            // $question_user->save();
-
-
-            // if ($question != "-") {
-            //     $question_user = new questions_users([
-            //         // 'answer' => $question,
-            //         'answer' => $question,
-            //         'id_question' => $exam_id,
-            //         'exam_name' => 'INTRODUCTION EXAM',
-            //         'id_exam_user' => 1,
-            //     ]);
-            //     $question_user->save();
-            // } else {
-            //     $question_user = new questions_users([
-            //         // 'answer' => $open_question,
-            //         'answer' => $question_tmp,
-            //         'id_question' => $exam_id,
-            //         'exam_name' => 'INTRODUCTION EXAM',
-            //         'id_exam_user' => 1,
-            //     ]);
-            //     $question_user->save();
-            // }
+            if ($question != "-") {
+                $question_user = new questions_users([
+                    // 'answer' => $question,
+                    'answer' => $question,
+                    'id_question' => $exam_id,
+                    'exam_name' => 'INTRODUCTION EXAM',
+                    'id_exam_user' => 1,
+                ]);
+                $question_user->save();
+            } else {
+                $question_user = new questions_users([
+                    // 'answer' => $open_question,
+                    'answer' => $open_question,
+                    'id_question' => $exam_id,
+                    'exam_name' => 'INTRODUCTION EXAM',
+                    'id_exam_user' => 1,
+                ]);
+                $question_user->save();
+            }
         }
 
         return redirect()->route('exam.index', 1)
