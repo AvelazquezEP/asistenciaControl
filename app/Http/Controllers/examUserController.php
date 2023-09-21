@@ -163,19 +163,26 @@ class examUserController extends Controller
             }
         }
 
-        return redirect()->route('examuser.details')
+        return redirect()->route('examuser.result', 1)
             ->with('success', 'Congratulations, you finished the exam');
-
-        // return redirect()->route('exam.index', 1)
-        //     ->with('success', 'Exam ID: ' . $question_tmp);
     }
 
-    public function details(): View
+    public function details($id): View
     {
+        // $correct_id = $id;
         $correct_count = '5';
         $incorrect_count = '8';
 
-        return view('examuser.detail', compact('correct_count', 'incorrect_count'));
+        return view('examuser.details', compact('correct_count', 'incorrect_count'));
+    }
+
+    public function results($id)
+    {
+
+        $correct_count = '5';
+        $incorrect_count = '8';
+
+        return view('examuser.result', compact('correct_count', 'incorrect_count'));
     }
 
     public function edit(exam_users $exam_users)
