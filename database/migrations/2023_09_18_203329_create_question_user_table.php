@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('answer');
             $table->string('id_question');
+            $table->string('correct_answer');
             $table->string('exam_name');
             $table->timestamps();
 

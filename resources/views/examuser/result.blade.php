@@ -11,7 +11,8 @@
         }
 
         .correct-container,
-        .incorrect-container {
+        .incorrect-container,
+        .blank-container {
             width: 400px;
             height: 100px;
             padding: 1rem;
@@ -29,6 +30,10 @@
 
         .incorrect-container {
             background-color: rgb(221, 128, 125);
+        }
+
+        .blank-container {
+            background-color: rgb(219, 219, 219);
         }
 
         .title-answer {
@@ -56,6 +61,13 @@
                 <div>
                     <p class="title-answer">Incorrect answers:</p>
                     <p class="total-answer">2</p>
+                </div>
+            </div>
+
+            <div class="blank-container">
+                <div>
+                    <p class="title-answer">Blank answers:</p>
+                    <p class="total-answer">0</p>
                 </div>
             </div>
         </div>

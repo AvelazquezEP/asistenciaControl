@@ -148,6 +148,7 @@ class examUserController extends Controller
                     'id_question' => $question->id,
                     'exam_name' => 'INTRODUCTION EXAM',
                     'id_exam_user' => 1,
+                    'correct_answer' => $question->correct_answer,
                 ]);
 
                 $save_question->save();
@@ -157,6 +158,7 @@ class examUserController extends Controller
                     'id_question' => $question->id,
                     'exam_name' => 'INTRODUCTION EXAM',
                     'id_exam_user' => 1,
+                    'correct_answer' => $question->correct_answer,
                 ]);
 
                 $save_question->save();
@@ -181,6 +183,23 @@ class examUserController extends Controller
 
         $correct_count = '5';
         $incorrect_count = '8';
+
+        $array_correct = array();
+        $array_incorrect = array();
+        $array_blank = array();
+
+        $exam_question = questionsExam::where('id_exam', $id)->get();
+        $question_user = questions_users::where('id_exam', $id)->get();
+
+        foreach ($question_user as $key => $question) {
+
+            $correct_answer_question = $question->correct_answer;
+
+            if ($question->answer == $correct_answer_question) {
+                // $array_correct . push($question_answer);
+                array_push($array_correct, $question);
+            }
+        }
 
         return view('examuser.result', compact('correct_count', 'incorrect_count'));
     }
