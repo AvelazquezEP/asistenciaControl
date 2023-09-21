@@ -138,16 +138,29 @@ class examUserController extends Controller
         $question_tmp = '';
 
         foreach ($questions as $key => $question) {
-            $question_tmp = $request->input('chosen_option_' . $question->id);
+            $question_multiple = $request->input('chosen_option_' . $question->id);
+            $question_open = $request->input('open_element_' . $question->id);
 
-            $save_question = new questions_users([
-                'answer' => $question_tmp,
-                'id_question' => $question->id,
-                'exam_name' => 'INTRODUCTION EXAM',
-                'id_exam_user' => 1,
-            ]);
+            if (empty($question_open)) {
 
-            $save_question->save();
+                $save_question = new questions_users([
+                    'answer' => $question_multiple,
+                    'id_question' => $question->id,
+                    'exam_name' => 'INTRODUCTION EXAM',
+                    'id_exam_user' => 1,
+                ]);
+
+                $save_question->save();
+            } else {
+                $save_question = new questions_users([
+                    'answer' => $question_open,
+                    'id_question' => $question->id,
+                    'exam_name' => 'INTRODUCTION EXAM',
+                    'id_exam_user' => 1,
+                ]);
+
+                $save_question->save();
+            }
         }
 
         return redirect()->route('exam.index', 1)
