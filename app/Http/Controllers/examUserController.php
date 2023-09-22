@@ -111,7 +111,7 @@ class examUserController extends Controller
                         'id_question' => $question->id,
                         'exam_name' => 'INTRODUCTION EXAM',
                         'id_exam_user' => 1,
-                        'correct_answer' => $question->correct_answer,
+                        'correct_answer' => "-",
                         'control_number' => $control_number,
                     ]);
 
@@ -122,12 +122,11 @@ class examUserController extends Controller
                         'id_question' => $question->id,
                         'exam_name' => 'INTRODUCTION EXAM',
                         'id_exam_user' => 1,
-                        'correct_answer' => $question->correct_answer,
+                        'correct_answer' => "-",
                         'control_number' => $control_number,
                     ]);
+                    $save_question->save();
                 }
-
-                $save_question->save();
             }
         }
 
