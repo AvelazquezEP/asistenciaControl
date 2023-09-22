@@ -42,6 +42,7 @@ class ResourceExamsController extends Controller
         $request->validate(([
             'type' => 'required',
             'department' => 'required',
+            'department' => 'required',
             'description' => 'required',
             'status' => 'required',
             // 'created_at' => 'required',

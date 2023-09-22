@@ -42,6 +42,8 @@
     </div>
     <form action="/examuser/question" method="POST">
         @csrf
+        {{-- <?php $exam_id = Session::get('id_exam'); ?> --}}
+        <?php $control_number = Session::get('control_number'); ?>
 
         @foreach ($questions as $key => $question)
             <div class="main-container">
@@ -50,10 +52,9 @@
                         <p>{{ $question->question }}</p>
                     </div>
 
-                    {{-- <form action="/examuser/question" method="POST"> --}}
-
                     <input hidden type="text" name="id_question" value="{{ $question->id }}">
                     <input hidden type="text" name="exam_id" value="{{ $exam->id }}">
+                    <input hidden type="text" name="control_number" value="{{ $control_number }}">
 
                     <div class="answer">
                         @if ($question->option_a == '-' || $question->option_b == '-' || $question->option_c == '-')

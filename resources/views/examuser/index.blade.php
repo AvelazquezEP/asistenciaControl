@@ -36,6 +36,11 @@
             </div>
 
             <div class="form-group">
+                <label for="control_number">Control number</label>
+                <input type="text" name="control_number" id="control_number" class="form-control">
+            </div>
+
+            <div class="form-group">
                 <label for="department">Deparment</label>
                 <input type="text" name="department" id="department" class="form-control">
             </div>

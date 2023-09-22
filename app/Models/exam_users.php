@@ -12,6 +12,7 @@ class exam_users extends Model
     protected $fillable = [
         'user_name',
         'department',
+        'control_number',
         'correct_answer',
         'incorrect_answer',
         'empty_answer',
