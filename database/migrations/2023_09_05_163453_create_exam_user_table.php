@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_name');
             $table->string('department');
+            $table->string('control_number');
             $table->string('correct_answer');
             $table->string('incorrect_answer');
             $table->string('empty_answer');

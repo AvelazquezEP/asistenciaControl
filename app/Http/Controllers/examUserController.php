@@ -188,8 +188,8 @@ class examUserController extends Controller
         $array_incorrect = array();
         $array_blank = array();
 
-        $exam_question = questionsExam::where('id_exam', $id)->get();
-        $question_user = questions_users::where('id_exam', $id)->get();
+        $exam_question = questionsExam::where('exam_id', $id)->get();
+        $question_user = questions_users::where('id_question', $exam_question->id)->get();
 
         foreach ($question_user as $key => $question) {
 
