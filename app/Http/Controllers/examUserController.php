@@ -84,7 +84,9 @@ class examUserController extends Controller
 
         $questions = questionsExam::where('exam_id', $exam_id)->get();
 
+
         $question_tmp = '';
+        $control_number = $request->input('control_number');
 
         foreach ($questions as $key => $question) {
             $question_multiple = $request->input('chosen_option_' . $question->id);
@@ -98,17 +100,32 @@ class examUserController extends Controller
                     'exam_name' => 'INTRODUCTION EXAM',
                     'id_exam_user' => $question->exam_id,
                     'correct_answer' => $question->correct_answer,
+                    'control_number' => $control_number,
                 ]);
 
                 $save_question->save();
             } else {
-                $save_question = new questions_users([
-                    'answer' => $question_open,
-                    'id_question' => $question->id,
-                    'exam_name' => 'INTRODUCTION EXAM',
-                    'id_exam_user' => 1,
-                    'correct_answer' => $question->correct_answer,
-                ]);
+                if (empty($question_open)) {
+                    $save_question = new questions_users([
+                        'answer' => "-",
+                        'id_question' => $question->id,
+                        'exam_name' => 'INTRODUCTION EXAM',
+                        'id_exam_user' => 1,
+                        'correct_answer' => $question->correct_answer,
+                        'control_number' => $control_number,
+                    ]);
+
+                    $save_question->save();
+                } else {
+                    $save_question = new questions_users([
+                        'answer' => $question_open,
+                        'id_question' => $question->id,
+                        'exam_name' => 'INTRODUCTION EXAM',
+                        'id_exam_user' => 1,
+                        'correct_answer' => $question->correct_answer,
+                        'control_number' => $control_number,
+                    ]);
+                }
 
                 $save_question->save();
             }
