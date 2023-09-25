@@ -28,57 +28,66 @@ class examUserController extends Controller
 
         return view('examuser.index', compact('questions', 'exam'));
     }
+    /* #region CREATE/STORE */
 
     public function create($id)
     {
+        /* #region create */
         $questions = questionsExam::where('exam_id', $id)->get();
         $exam = exams::find($id);
 
         return view('examuser.index', compact('questions', 'exam'));
+        /* #endregion */
     }
 
     public function store(Request $request): RedirectResponse
     {
-        // $id_temp = 1;
-
+        /* #region STORE*/
         $request->validate([]);
 
         $id_exam = $request->get('exam_id');
-        $control_number = $request->get('control_number');
+        $control_number = $request->input('control_number');
+        $find_control_number = exam_users::where('control_number', $control_number);
 
-        $exam_user = new exam_users([
-            'user_name' => $request->get('user_name'),
-            'department' => $request->get('department'),
-            'control_number' => $request->get('control_number'),
-            'correct_answer' => '0',
-            'incorrect_answer' => '0',
-            'empty_answer' => '0',
-            'exam_name' => $request->get('exam_name'),
-            'id_exam' => $id_exam,
-        ]);
+        if ($find_control_number) {
+            return redirect()->route('examuser.show', $id_exam)
+                ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
+        } else {
+            $exam_user = new exam_users([
+                'user_name' => $request->get('user_name'),
+                'department' => $request->get('department'),
+                'control_number' => $request->input('control_number'),
+                'correct_answer' => '0',
+                'incorrect_answer' => '0',
+                'empty_answer' => '0',
+                'exam_name' => $request->get('exam_name'),
+                'id_exam' => $id_exam,
+            ]);
+            $exam_user->save();
+            return redirect()->route('examuser.show', $id_exam)
+                ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
+        }
 
-        $exam_user->save();
-
-        return redirect()->route('examuser.show', $id_exam)
-            ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
-
-        // return view('examuser.show', $id_exam, compact(''));
+        // return redirect()->route('examuser.show', $id_exam)
+        //     ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
+        /* #endregion */
     }
+
+    /* #endregion */
 
     public function show($id): View
     {
-        // $test = 'text test';
-
+        /* #region PENDIENTE DE UTILIZAR*/
         $questions = questionsExam::where('exam_id', $id)->get();
-        // $questions = questionsExam::where('exam_id', $id)->take(1)->get();
-
         $exam = exams::find($id);
 
         return view('examuser.show', compact('questions', 'exam'));
+        /* #endregion */
     }
 
     public function save_question(Request $request)
     {
+        /* #region SAVE QUESTIONS*/
         $exam_id = $request->input('exam_id');
         $exam = exams::find($exam_id);
 
@@ -86,18 +95,21 @@ class examUserController extends Controller
 
 
         $question_tmp = '';
-        $control_number = $request->input('control_number');
+        // $control_number = $request->input('control_number');
 
         foreach ($questions as $key => $question) {
+            $control_number = $request->input('control_number');
             $question_multiple = $request->input('chosen_option_' . $question->id);
             $question_open = $request->input('open_element_' . $question->id);
+            $exam_name_test = 'INTRODUCTION EXAM';
 
             if (empty($question_open)) {
 
                 $save_question = new questions_users([
                     'answer' => $question_multiple,
-                    'id_question' => $question->id,
-                    'exam_name' => 'INTRODUCTION EXAM',
+                    'id_question' => strval($question->id),
+                    // 'exam_name' => 'INTRODUCTION EXAM',
+                    'exam_name' => $exam_name_test,
                     'id_exam_user' => $question->exam_id,
                     'correct_answer' => $question->correct_answer,
                     'control_number' => $control_number,
@@ -108,20 +120,21 @@ class examUserController extends Controller
                 if (empty($question_open)) {
                     $save_question = new questions_users([
                         'answer' => "-",
-                        'id_question' => $question->id,
-                        'exam_name' => 'INTRODUCTION EXAM',
-                        'id_exam_user' => 1,
+                        'id_question' => strval($question->id),
+                        // 'exam_name' => 'INTRODUCTION EXAM',
+                        'exam_name' => $exam_name_test,
+                        'id_exam_user' => $question->exam_id,
                         'correct_answer' => "-",
                         'control_number' => $control_number,
                     ]);
-
                     $save_question->save();
                 } else {
                     $save_question = new questions_users([
                         'answer' => $question_open,
-                        'id_question' => $question->id,
-                        'exam_name' => 'INTRODUCTION EXAM',
-                        'id_exam_user' => 1,
+                        'id_question' => strval($question->id),
+                        // 'exam_name' => 'INTRODUCTION EXAM',
+                        'exam_name' => $exam_name_test,
+                        'id_exam_user' => $question->exam_id,
                         'correct_answer' => "-",
                         'control_number' => $control_number,
                     ]);
@@ -132,6 +145,7 @@ class examUserController extends Controller
 
         return redirect()->route('examuser.result', 1)
             ->with('success', 'Congratulations, you finished the exam');
+        /* #endregion */
     }
 
     public function details($id): View
@@ -167,20 +181,5 @@ class examUserController extends Controller
         }
 
         return view('examuser.result', compact('correct_count', 'incorrect_count'));
-    }
-
-    public function edit(exam_users $exam_users)
-    {
-        //
-    }
-
-    public function update(Request $request, exam_users $exam_users)
-    {
-        //
-    }
-
-    public function destroy(exam_users $exam_users)
-    {
-        //
     }
 }

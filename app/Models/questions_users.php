@@ -14,5 +14,7 @@ class questions_users extends Model
         'id_question',
         'exam_name',
         'id_exam_user',
+        'correct_answer',
+        'control_number',
     ];
 }
