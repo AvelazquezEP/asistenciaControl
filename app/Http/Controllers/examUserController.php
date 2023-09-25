@@ -42,12 +42,13 @@ class examUserController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        /* #region STORE*/
+        /* #region STORE/START THE EXAM */
         $request->validate([]);
 
         $id_exam = $request->get('exam_id');
         $control_number = $request->input('control_number');
         $find_control_number = exam_users::where('control_number', $control_number);
+        // $find_control_number = exam_users::where('control_number', $this->control_number);
 
         if ($find_control_number) {
             return redirect()->route('examuser.show', $id_exam)
@@ -66,10 +67,8 @@ class examUserController extends Controller
             $exam_user->save();
             return redirect()->route('examuser.show', $id_exam)
                 ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
+            // ->with(['id_exam' => $id_exam, 'control_number' => $this->control_number]);
         }
-
-        // return redirect()->route('examuser.show', $id_exam)
-        //     ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
         /* #endregion */
     }
 
@@ -143,8 +142,8 @@ class examUserController extends Controller
             }
         }
 
-        return redirect()->route('examuser.result', 1)
-            ->with('success', 'Congratulations, you finished the exam');
+        return redirect()->route('examuser.results', 1)
+            ->with('success', 'Congratulations, you finished the exam', ['control_number' => $control_number]);
         /* #endregion */
     }
 
@@ -167,8 +166,9 @@ class examUserController extends Controller
         $array_incorrect = array();
         $array_blank = array();
 
-        $exam_question = questionsExam::where('exam_id', $id)->get();
-        $question_user = questions_users::where('id_question', $exam_question->id)->get();
+        $exam_question = questionsExam::where('exam_id', $id)->take(1)->get();
+
+        $question_user = questions_users::where('id_question', $exam_question[0]->id)->get();
 
         foreach ($question_user as $key => $question) {
 

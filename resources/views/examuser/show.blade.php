@@ -44,6 +44,7 @@
         @csrf
         <?php $control_number = Session::get('control_number'); ?>
         <input hidden type="text" name="control_number" value="{{ $control_number }}">
+        {{-- <input hidden type="text" name="control_number" value="{{ $actual_control_number }}"> --}}
 
         @foreach ($questions as $key => $question)
             <div class="main-container">

@@ -49,6 +49,9 @@
 
     <div class="container">
         <h2>Results</h2>
+
+        <?php $control_number = Session::get('control_number'); ?>
+
         <div class="answer-container">
             <div class="correct-container">
                 <div>
