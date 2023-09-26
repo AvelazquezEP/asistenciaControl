@@ -96,9 +96,9 @@
                 <div class="div-left">
                     <h2>Exam</h2>
                 </div>
-                <div class="div-right">
+                {{-- <div class="div-right">
                     <a class="btn btn-primary" href="javascript:window.history.back();">Back</a>
-                </div>
+                </div> --}}
             </div>
             <input hidden type="text" name="id_exam" id="id_exam" value="{{ $exam->id }}">
             <p><b>Title: </b>{{ $exam->exam_name }}</p>

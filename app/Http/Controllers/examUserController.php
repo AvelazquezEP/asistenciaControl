@@ -47,16 +47,18 @@ class examUserController extends Controller
 
         $id_exam = $request->get('exam_id');
         $control_number = $request->input('control_number');
-        $find_control_number = exam_users::where('control_number', $control_number);
+        $find_control_number = exam_users::where('control_number', $control_number)->take(1)->get();
 
-        if ($find_control_number) {
+        // if ($control_number == $find_control_number[0]->control_number) {
+        if (count($find_control_number) > 0) {
             return redirect()->route('examuser.show', $id_exam)
                 ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
         } else {
             $exam_user = new exam_users([
                 'user_name' => $request->get('user_name'),
                 'department' => $request->get('department'),
-                'control_number' => $request->input('control_number'),
+                // 'control_number' => $request->input('control_number'),
+                'control_number' => $control_number,
                 'correct_answer' => '0',
                 'incorrect_answer' => '0',
                 'empty_answer' => '0',
@@ -99,6 +101,7 @@ class examUserController extends Controller
             if (empty($question_open)) {
 
                 $save_question = new questions_users([
+                    'question' => $question->question,
                     'answer' => $question_multiple,
                     'id_question' => strval($question->id),
                     // 'exam_name' => 'INTRODUCTION EXAM',
@@ -112,6 +115,7 @@ class examUserController extends Controller
             } else {
                 if (empty($question_open)) {
                     $save_question = new questions_users([
+                        'question' => $question->question,
                         'answer' => "-",
                         'id_question' => strval($question->id),
                         // 'exam_name' => 'INTRODUCTION EXAM',
@@ -123,6 +127,7 @@ class examUserController extends Controller
                     $save_question->save();
                 } else {
                     $save_question = new questions_users([
+                        'question' => $question->question,
                         'answer' => $question_open,
                         'id_question' => strval($question->id),
                         'exam_name' => $exam_name_test,
@@ -137,16 +142,6 @@ class examUserController extends Controller
 
         return redirect()->route('examuser.results', $exam_id)
             ->with('success', 'Congratulations, you finished the exam', ['control_number' => $control_number]);
-        /* #endregion */
-    }
-
-    public function details($id): View
-    {
-        /* #region METODO SIN USAR */
-        $correct_count = '5';
-        $incorrect_count = '8';
-
-        return view('examuser.details', compact('correct_count', 'incorrect_count'));
         /* #endregion */
     }
 
@@ -198,5 +193,28 @@ class examUserController extends Controller
         $user_exams = exam_users::get()->all();
 
         return view('examuser.exam_users', compact('user_exams'));
+    }
+
+    public function details($id): View
+    {
+        $user_exam = exam_users::find($id);
+
+        $control_number = $user_exam->control_number;
+        $exam_id = $user_exam->exam_id;
+
+        $real_questions = questionsExam::where('id', $exam_id);
+        $questions = questions_users::where('control_number', $control_number)->get();
+
+        foreach ($questions as $key => $question) {
+            $question_id = $question->id_question;
+
+            foreach ($real_questions as $key => $real_question) {
+                $real_question_id = $real_question->id;
+                if ($question_id === $real_question_id) {
+                }
+            }
+        }
+
+        return view('examuser.details', compact('questions'));
     }
 }

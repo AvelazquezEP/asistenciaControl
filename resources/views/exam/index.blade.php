@@ -132,10 +132,9 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
         @endcan
-        <div class="pull-right">
+        {{-- <div class="pull-right">
             <a class="btn btn-primary" href="/resource/exam">Back</a>
-            {{-- <a class="btn btn-primary" href="{{ route('exam.index') }}">Back</a> --}}
-        </div>
+        </div> --}}
     </div>
 
     {{-- TABLE --}}

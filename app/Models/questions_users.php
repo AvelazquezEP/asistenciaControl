@@ -10,6 +10,7 @@ class questions_users extends Model
     use HasFactory;
 
     protected $fillable = [
+        'question',
         'answer',
         'id_question',
         'exam_name',
