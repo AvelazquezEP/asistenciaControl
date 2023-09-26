@@ -152,6 +152,7 @@ class examUserController extends Controller
 
     public function results($id)
     {
+        /* #region RESULTS */
         $correct_answer_count = 0;
         $incorrect_answer_count = 0;
         $blank_answer = 0;
@@ -189,5 +190,13 @@ class examUserController extends Controller
             'open_answer_count',
             'blank_answer_count',
         ));
+        /* #endregion */
+    }
+
+    public function exam_details()
+    {
+        $user_exams = exam_users::get()->all();
+
+        return view('', compact($user_exams));
     }
 }
