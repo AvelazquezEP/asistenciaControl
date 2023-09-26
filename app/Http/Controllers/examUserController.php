@@ -57,7 +57,6 @@ class examUserController extends Controller
             $exam_user = new exam_users([
                 'user_name' => $request->get('user_name'),
                 'department' => $request->get('department'),
-                // 'control_number' => $request->input('control_number'),
                 'control_number' => $control_number,
                 'correct_answer' => '0',
                 'incorrect_answer' => '0',
@@ -202,19 +201,12 @@ class examUserController extends Controller
         $control_number = $user_exam->control_number;
         $exam_id = $user_exam->exam_id;
 
-        $real_questions = questionsExam::where('id', $exam_id);
-        $questions = questions_users::where('control_number', $control_number)->get();
+        $questions = questions_users::where([
+            'control_number' => $control_number,
+            'correct_answer' => '-',
+        ])->get();
+        // $questions = questions_users::where('control_number', $control_number)->get();
 
-        foreach ($questions as $key => $question) {
-            $question_id = $question->id_question;
-
-            foreach ($real_questions as $key => $real_question) {
-                $real_question_id = $real_question->id;
-                if ($question_id === $real_question_id) {
-                }
-            }
-        }
-
-        return view('examuser.details', compact('questions'));
+        return view('examuser.details', compact('control_number', 'questions'));
     }
 }

@@ -2,7 +2,7 @@ const log = console.log;
 
 // SAVA THE QUESTION IN ANOTHER TABLE (TEMPORAL)
 const save_question = (question_id) => {
-    log(`saved - ${question_id}`);
+    // log(`saved - ${question_id}`);
 
     let question_container = document.getElementById(`question_container_${question_id}`);
 
