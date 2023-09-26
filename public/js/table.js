@@ -364,6 +364,22 @@ const examUser_create = () => {
 }
 /* #endregion */
 
+/* #region EXAM USER DETAILS */
+
+const exam_details = () => {
+    let baseUrl = '/examuser/details/';
+    let idUser = document.getElementById('id').value;
+    var id = idUser;
+
+    if (id != 0) {
+        window.location.href = `${baseUrl}${id}`;
+    } else {
+        open_dangerAlert('dangerAlertEdit');
+    }
+}
+
+/* #endregion */
+
 /* #region SCHEDULER */
 
 const createScheduler = () => {

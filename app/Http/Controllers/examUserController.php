@@ -193,10 +193,10 @@ class examUserController extends Controller
         /* #endregion */
     }
 
-    public function exam_details()
+    public function exam_users()
     {
         $user_exams = exam_users::get()->all();
 
-        return view('', compact($user_exams));
+        return view('examuser.exam_users', compact('user_exams'));
     }
 }

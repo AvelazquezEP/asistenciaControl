@@ -158,7 +158,7 @@ Route::controller(examUserController::class)->Group(function () {
     Route::get('/examuser/{id}', 'index')->name('examuser.index');
     Route::get('/examuser/show/{id}', 'show')->name('examuser.show');
     Route::get('/examuser/details/', 'details')->name('examuser.details');
-    Route::get('/examuser/examdetails/{id}', 'exam_details')->name('examuser.exam_details');
+    Route::get('/examuser', 'exam_users')->name('examuser.exam_users');
     Route::get('/examuser/results/{id}', 'results')->name('examuser.results');
     Route::get('/examuser/create', 'create')->name('examuser.create');
     Route::post('/examuser/store/{id}', 'store')->name('examuser.store');
