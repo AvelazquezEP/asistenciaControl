@@ -25,15 +25,15 @@
 
         .correct-container {
 
-            background-color: rgb(144, 221, 125);
+            /* background-color: rgb(144, 221, 125); */
         }
 
         .incorrect-container {
-            background-color: rgb(221, 128, 125);
+            /* background-color: rgb(221, 128, 125); */
         }
 
         .blank-container {
-            background-color: rgb(219, 219, 219);
+            /* background-color: rgb(219, 219, 219); */
         }
 
         .title-answer {
@@ -49,28 +49,36 @@
 
     <div class="container">
         <h2>Results</h2>
-
         <?php $control_number = Session::get('control_number'); ?>
 
         <div class="answer-container">
             <div class="correct-container">
                 <div>
                     <p class="title-answer">Correct answers:</p>
-                    <p class="total-answer">8</p>
+                    <p class="total-answer">{{ $correct_answer_count }}</p>
+                    {{-- <p class="total-answer">{{ $correct_answer_onffor }}</p> --}}
                 </div>
             </div>
 
             <div class="incorrect-container">
                 <div>
                     <p class="title-answer">Incorrect answers:</p>
-                    <p class="total-answer">2</p>
+                    <p class="total-answer">{{ $incorrect_answer_count }}</p>
+                    {{-- <p class="total-answer">{{ $incorrect_answer_onffor }}</p> --}}
+                </div>
+            </div>
+
+            <div class="blank-container">
+                <div>
+                    <p class="title-answer">Open answers:</p>
+                    <p class="total-answer">{{ $open_answer_count }}</p>
                 </div>
             </div>
 
             <div class="blank-container">
                 <div>
                     <p class="title-answer">Blank answers:</p>
-                    <p class="total-answer">0</p>
+                    <p class="total-answer">{{ $blank_answer_count }}</p>
                 </div>
             </div>
         </div>

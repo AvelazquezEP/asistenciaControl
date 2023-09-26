@@ -48,7 +48,6 @@ class examUserController extends Controller
         $id_exam = $request->get('exam_id');
         $control_number = $request->input('control_number');
         $find_control_number = exam_users::where('control_number', $control_number);
-        // $find_control_number = exam_users::where('control_number', $this->control_number);
 
         if ($find_control_number) {
             return redirect()->route('examuser.show', $id_exam)
@@ -67,7 +66,6 @@ class examUserController extends Controller
             $exam_user->save();
             return redirect()->route('examuser.show', $id_exam)
                 ->with(['id_exam' => $id_exam, 'control_number' => $control_number]);
-            // ->with(['id_exam' => $id_exam, 'control_number' => $this->control_number]);
         }
         /* #endregion */
     }
@@ -91,10 +89,6 @@ class examUserController extends Controller
         $exam = exams::find($exam_id);
 
         $questions = questionsExam::where('exam_id', $exam_id)->get();
-
-
-        $question_tmp = '';
-        // $control_number = $request->input('control_number');
 
         foreach ($questions as $key => $question) {
             $control_number = $request->input('control_number');
@@ -131,7 +125,6 @@ class examUserController extends Controller
                     $save_question = new questions_users([
                         'answer' => $question_open,
                         'id_question' => strval($question->id),
-                        // 'exam_name' => 'INTRODUCTION EXAM',
                         'exam_name' => $exam_name_test,
                         'id_exam_user' => $question->exam_id,
                         'correct_answer' => "-",
@@ -142,44 +135,59 @@ class examUserController extends Controller
             }
         }
 
-        return redirect()->route('examuser.results', 1)
+        return redirect()->route('examuser.results', $exam_id)
             ->with('success', 'Congratulations, you finished the exam', ['control_number' => $control_number]);
         /* #endregion */
     }
 
     public function details($id): View
     {
-        // $correct_id = $id;
+        /* #region METODO SIN USAR */
         $correct_count = '5';
         $incorrect_count = '8';
 
         return view('examuser.details', compact('correct_count', 'incorrect_count'));
+        /* #endregion */
     }
 
     public function results($id)
     {
-
-        $correct_count = '5';
-        $incorrect_count = '8';
+        $correct_answer_count = 0;
+        $incorrect_answer_count = 0;
+        $blank_answer = 0;
 
         $array_correct = array();
         $array_incorrect = array();
         $array_blank = array();
+        $array_open_questions = array();
 
-        $exam_question = questionsExam::where('exam_id', $id)->take(1)->get();
+        $exam_questions = questionsExam::where('exam_id', $id)->get();
 
-        $question_user = questions_users::where('id_question', $exam_question[0]->id)->get();
+        foreach ($exam_questions as $key => $exam_question) {
+            $question_id = $exam_question->id;
+            $question_user = questions_users::where('id_question', $question_id)->get();
 
-        foreach ($question_user as $key => $question) {
-
-            $correct_answer_question = $question->correct_answer;
-
-            if ($question->answer == $correct_answer_question) {
-                // $array_correct . push($question_answer);
-                array_push($array_correct, $question);
+            if ($question_user[0]->correct_answer == "-") {
+                array_push($array_open_questions, $question_id);
+            } else {
+                if ($question_user[0]->answer == $exam_question->correct_answer) {
+                    array_push($array_correct, $question_id);
+                } else {
+                    array_push($array_incorrect, $question_id);
+                }
             }
         }
 
-        return view('examuser.result', compact('correct_count', 'incorrect_count'));
+        $correct_answer_count = count($array_correct);
+        $incorrect_answer_count = count($array_incorrect);
+        $open_answer_count = count($array_open_questions);
+        $blank_answer_count = count($array_blank);
+
+        return view('examuser.result', compact(
+            'correct_answer_count',
+            'incorrect_answer_count',
+            'open_answer_count',
+            'blank_answer_count',
+        ));
     }
 }
