@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('question');
             $table->string('answer');
             $table->string('id_question');
+            $table->string('exam_id');
             $table->string('correct_answer');
             $table->string('exam_name');
             $table->string('control_number');

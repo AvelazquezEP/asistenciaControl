@@ -13,6 +13,7 @@ class questions_users extends Model
         'question',
         'answer',
         'id_question',
+        'exam_id',
         'exam_name',
         'id_exam_user',
         'correct_answer',
