@@ -215,11 +215,13 @@ class examUserController extends Controller
     public function save_open_question(Requests $request)
     {
         // $id_user = $request->get('exam_id');
-        $id_user = $request->get('id_user');
+        $id_tmp = 2;
+        $id_question = $request->get('id_question_2');
 
         // ('examuser.final_result', compact('id_user'));
-        return redirect()->route('examuser.final_result', 1)
-            ->with(['id_user' => $id_user]);
+        return view('examuser.final_result', 1, compact('id_question_'));
+        // return redirect()->route('examuser.final_result', 1)
+        //     ->with(['id_user' => $id_user]);
 
         // return redirect()->route('examuser.final_result', $id_user)
         //     ->with(['id_user' => $id_user]);
