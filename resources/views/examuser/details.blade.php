@@ -42,11 +42,11 @@
 
     <form action="/examuser/save_open_question" method="POST" class="question-container">
         @csrf
-        {{-- <div > --}}
-        <input hidden type="text" id="exam_id" value="{{ $exam_id }}">
         <input hidden type="text" id="id_user" value="{{ $id_user }}">
 
         @foreach ($questions as $question)
+            <input hidden type="text" id="exam_id_{{ $question->id }}" value="{{ $exam_id }}">
+
             <div class="question" id="question_container_{{ $question->id }}">
                 <input hidden type="text" id="question_id" value="{{ $question->id }}">
                 <input hidden type="text" id="question_answer_{{ $question->id }}" value="-">
