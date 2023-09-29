@@ -158,13 +158,13 @@ Route::controller(examUserController::class)->Group(function () {
     Route::get('/examuser/{id}', 'index')->name('examuser.index');
     Route::get('/examuser/show/{id}', 'show')->name('examuser.show');
     Route::get('/examuser/details/{id}', 'details')->name('examuser.details');
-    Route::get('/examuser', 'exam_users')->name('examuser.exam_users');
-    Route::get('/examuser/results/{id}', 'results')->name('examuser.results');
+    Route::get('/examuser', 'exam_users')->name('examuser.exam_users'); //<--its like a index for this controller
+    Route::get('/examuser/results/{id}', 'results')->name('examuser.results'); //<-- this results its like a subtotal
     Route::get('/examuser/create', 'create')->name('examuser.create');
     Route::post('/examuser/store/{id}', 'store')->name('examuser.store');
     Route::post('/examuser/question', 'save_question')->name('examuser.save_question');
     Route::post('/examuser/save_open_question', 'save_open_question')->name('examuser.save_open_question');
-    Route::get('/examuser/final_result/{id}', 'final_result')->name('examuser.final_result');
+    Route::get('/examuser/final_result/{id}', 'final_result')->name('examuser.final_result'); //<-- this its the final result when the admin review all the open questions for this user
 });
 /* #endregion */
 
