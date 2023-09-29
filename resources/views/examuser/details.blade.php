@@ -42,15 +42,18 @@
 
     <form action="/examuser/save_open_question" method="POST" class="question-container">
         @csrf
-        <input hidden type="text" id="id_user" value="{{ $id_user }}">
+        <input hidden type="text" name="id_user" id="id_user" value="{{ $id_user }}">
 
         @foreach ($questions as $question)
-            <input hidden type="text" id="exam_id_{{ $question->id }}" value="{{ $exam_id }}">
+            <input hidden type="text" name="exam_id_{{ $question->id }}" id="exam_id_{{ $question->id }}"
+                value="{{ $exam_id }}">
 
             <div class="question" id="question_container_{{ $question->id }}">
-                <input hidden type="text" id="question_id" value="{{ $question->id }}">
-                <input hidden type="text" id="question_answer_{{ $question->id }}" value="-">
-                <input hidden type="text" id="id_question_{{ $question->id }}" value="{{ $question->id_question }}">
+                <input hidden type="text" name="question_id" id="question_id" value="{{ $question->id }}">
+                <input hidden type="text" name="question_answer_{{ $question->id }}"
+                    id="question_answer_{{ $question->id }}" value="-">
+                <input hidden type="text" name="id_question_{{ $question->id }}" id="id_question_{{ $question->id }}"
+                    value="{{ $question->id_question }}">
 
                 <div class="question-detail">
                     <p><b>{{ $question->question }}</b></p>

@@ -8,6 +8,7 @@ use App\Models\exams;
 use App\Models\questions_users;
 use App\Models\questionsExam;
 use App\Models\requests;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -189,6 +190,7 @@ class examUserController extends Controller
         /* #endregion */
     }
 
+    // This functions its like a index method
     public function exam_users()
     {
         $user_exams = exam_users::get()->all();
@@ -214,21 +216,13 @@ class examUserController extends Controller
 
     public function save_open_question(Requests $request)
     {
-        // $id_user = $request->get('exam_id');
-        $id_tmp = 2;
-        $id_question = $request->get('id_question_2');
-
-        return view('examuser.final_result', 1, compact('id_question_'));
-        // return redirect()->route('examuser.final_result', 1)
-        //     ->with(['id_user' => $id_user]);        
 
         /* #region SAVE_OPEN_QUESTION*/
-        // $array_open_correct = array();
-        // $array_open_incorrect = array();
-        // $request->get('exam_id');
-        // get('id_user');
+        $array_open_correct = array();
+        $array_open_incorrect = array();
 
-        /* #region TMP */
+        $id_user = $request->get('id_user');
+
         // $user_id = $request->get('id_user');
         // // $exam_user_id = $request->get('exam_id');
 
@@ -248,22 +242,23 @@ class examUserController extends Controller
         //     }
         // }
 
-        // $total = count($array_open_correct);
-        /* #endregion */
+        // $total = count($array_open_correct);        
 
-
-        // return view('examuser.final_result', 1, compact('test'));
+        return view('examuser.final_result', $id_user, compact('id_user'));
         // return redirect()->route('examuser.final_result', $id_user)
         //     ->with(['id_user' => $id_user]);
         /* #endregion */
     }
 
-    public function final_result($id)
+    public function final_result(Request $request, $id)
     {
         /* #region RESULTS */
-        $test_final = 's';
+        // $id_user = $request->session()->get('id_user', 'default');
+        // $test_final = 's';
 
-        return view('examuser.final_result', compact('test_final'));
+
+        $test = 'test';
+        return view('examuser.final_result', compact('test'));
         /* #endregion */
     }
 }
