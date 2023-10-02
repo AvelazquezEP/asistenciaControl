@@ -223,6 +223,7 @@ class examUserController extends Controller
 
         $id_user = $request->get('id_user');
 
+        /* #region don't use */
         // $user_id = $request->get('id_user');
         // // $exam_user_id = $request->get('exam_id');
 
@@ -243,10 +244,9 @@ class examUserController extends Controller
         // }
 
         // $total = count($array_open_correct);        
+        /* #endregion */
 
         return view('examuser.final_result', $id_user, compact('id_user'));
-        // return redirect()->route('examuser.final_result', $id_user)
-        //     ->with(['id_user' => $id_user]);
         /* #endregion */
     }
 
