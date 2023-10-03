@@ -218,14 +218,11 @@ class examUserController extends Controller
     {
 
         /* #region SAVE_OPEN_QUESTION*/
-        $array_open_correct = array();
-        $array_open_incorrect = array();
-
         $id_user = $request->get('id_user');
 
-        return redirect()->route('examuser.final_result', 1)
-            ->with(['id_user_test' => $id_user]);
-        // return view('examuser.final_result', $id_user, compact('id_user'));
+        // return redirect()->route('examuser.final_result', 1)
+        //     ->with(['id_user_test' => $id_user]);
+        return view('examuser.final_result', $id_user, compact('id_user'));
 
         /* #region don't use */
         // $user_id = $request->get('id_user');

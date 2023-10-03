@@ -157,7 +157,7 @@ Route::controller(QuestionExamController::class)->Group(function () {
 Route::controller(examUserController::class)->Group(function () {
     Route::get('/examuser/{id}', 'index')->name('examuser.index');
     Route::get('/examuser/show/{id}', 'show')->name('examuser.show');
-    Route::get('/examuser/details/{id}', 'details')->name('examuser.details');
+    Route::get('/examuser/details/{id}', 'details')->name('examuser.details'); // <-- This its to can show the details for each open question
     Route::get('/examuser', 'exam_users')->name('examuser.exam_users'); //<--its like a index for this controller
     Route::get('/examuser/results/{id}', 'results')->name('examuser.results'); //<-- this results its like a subtotal
     Route::get('/examuser/create', 'create')->name('examuser.create');
