@@ -111,8 +111,11 @@
     <div class="btn_container">
         <input hidden type="text" value="" id="id">
         {{-- show --}}
-        <a onclick="exam_details()" class="btnAction btn_create" title="Show resource">
+        <a onclick="exam_details()" class="btnAction btn_create" title="review question">
             <i class="fa-solid fa-file" style="color: #2e73ea;"></i>
+        </a>
+        <a onclick="final_result()" class="btnAction btn_create" title="Review all question">
+            <i class="fa-solid fa-square-poll-vertical" style="color: #2e73ea;"></i>
         </a>
     </div>
 

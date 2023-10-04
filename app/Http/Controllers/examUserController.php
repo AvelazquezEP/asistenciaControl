@@ -57,7 +57,8 @@ class examUserController extends Controller
         } else {
             $exam_user = new exam_users([
                 'user_name' => $request->get('user_name'),
-                'department' => $request->get('department'),
+                // 'department' => $request->get('department'),
+                'department' => 'Call Center',
                 'control_number' => $control_number,
                 'correct_answer' => '0',
                 'incorrect_answer' => '0',
@@ -296,11 +297,7 @@ class examUserController extends Controller
 
         $exam_user[0]->save();
 
-        return view('examuser.final_result', compact(
-            // 'total_correct',
-            // 'total_incorrect',
-            // 'last_correct_answer',
-            // 'last_incorrect_answer',
+        return view('examuser.final_result', compact(            
             'final_correct_answer',
             'final_incorrect_answer',
         ));
@@ -318,5 +315,12 @@ class examUserController extends Controller
         $test = 'test';
         // return view('examuser.final_result', compact('test'));
         /* #endregion */
+    }
+
+    public function review_exam()
+    {
+        $test_tmp = "Temporal PDF View";
+
+        return view('examuser.review_exam', compact('test_tmp'));
     }
 }

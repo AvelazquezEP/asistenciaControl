@@ -47,10 +47,10 @@
                 <input type="text" name="control_number" id="control_number" class="form-control">
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="department">Deparment</label>
                 <input type="text" name="department" id="department" class="form-control">
-            </div>
+            </div> --}}
 
             <button type="submit" class="btn btn-primary">Start</button>
         </form>
