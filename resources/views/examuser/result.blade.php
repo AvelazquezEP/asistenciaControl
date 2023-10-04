@@ -69,9 +69,13 @@
 
             <?php $control_number = Session::get('control_number'); ?>
             <?php $exam_id = Session::get('exam_id'); ?>
-            
+
             <input hidden name="user_control_number" type="text" value="{{ $control_number }}">
             <input hidden name="exam_id" type="text" value="{{ $exam_id }}">
+
+            <input hidden name="correct_answer_count" type="text" value="{{ $correct_answer_count }}">
+            <input hidden name="incorrect_answer_count" type="text" value="{{ $incorrect_answer_count }}">
+            <input hidden name="blank_answer_count" type="text" value="{{ $blank_answer_count }}">
 
             <div class="answer-container">
                 <div class="correct-container">

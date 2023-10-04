@@ -194,13 +194,30 @@ class examUserController extends Controller
 
     public function save_result(Request $request)
     {
+        /* #region SAVE RESULTS */
         $request->validate([]);
 
         $control_number = $request->get('user_control_number');
         $exam_id = $request->get('exam_id');
 
-        return redirect()->route('examuser.index', $exam_id)
-            ->with('success', 'Control Number: ' . $control_number . ' Exam ID: ' . $exam_id);
+        $total_correct_answer = $request->get('correct_answer_count');
+        $total_incorrect_answer = $request->get('incorrect_answer_count');
+        $total_blank_answer = $request->get('blank_answer_count');
+
+        $user_exam = exam_users::where('control_number', $control_number)->get();
+
+        $user_exam[0]->correct_answer = $total_correct_answer;
+        $user_exam[0]->incorrect_answer = $total_incorrect_answer;
+        $user_exam[0]->empty_answer = $total_blank_answer;
+
+        $user_exam[0]->save();
+
+        return redirect()->route('examuser.exam_users', $exam_id)
+            ->with('success', 'Finished exam: ' . $control_number);
+
+        // return redirect()->route('examuser.index', $exam_id)
+        //     ->with('success', 'Finished exam: ' . $control_number);
+        /* #endregion */
     }
 
     // This functions its like a index method
@@ -213,6 +230,7 @@ class examUserController extends Controller
 
     public function details($id): View
     {
+        /* #region DETAILS */
         $user_exam = exam_users::find($id);
         $id_user = $user_exam->id;
 
@@ -225,27 +243,29 @@ class examUserController extends Controller
         ])->get();
 
         return view('examuser.details', compact('control_number', 'questions', 'exam_id', 'id_user'));
+
+        /* #endregion */
     }
 
     public function save_open_question(Request $request)
     {
+        /* #REGION SAVE OPEN QUESTION */
         $array_questions = array();
+        $array_questions_id = array();
         $array_correct = array();
         $array_incorrect = array();
 
         $request->validate([]);
 
+        $control_number = $request->get('control_number');
         $id_user = $request->get('exam_user_id');
         $exam_id = $request->get('exam_id');
 
-        $questions = questions_users::where('id_exam_user', $id_user)->get();
+        $questions = questions_users::where('control_number', $control_number)->get();
 
-        /* #region Open Questions */
-        for ($i = 1; $i < count($questions); $i++) {
-            $question_id_input = $request->get('question_id_' . $i);
-
-            if ($questions[$i]->correct_answer == "-") {
-                $question_id = $questions[$i]->id;
+        foreach ($questions as $question) {
+            $question_id = $question->id;
+            if ($question->correct_answer == "-") {
                 array_push($array_questions, $question_id);
 
                 $input_answer = $request->get('question_answer_' . $question_id);
@@ -261,44 +281,24 @@ class examUserController extends Controller
         $total_incorrect = count($array_incorrect);
         /* #endregion */
 
-        /* #region  */
-        $correct_answer_count = 0;
-        $incorrect_answer_count = 0;
-        $blank_answer = 0;
+        $last_result = exam_users::where('control_number', $control_number)->get();
 
-        $array_correct = array();
-        $array_incorrect = array();
-        $array_blank = array();
-        $array_open_questions = array();
+        $last_correct_answer = (int)$last_result[0]->correct_answer;
+        $last_incorrect_answer = (int)$last_result[0]->incorrect_answer;
 
-        $exam_questions = questionsExam::where('exam_id', $exam_id)->get();
-
-        foreach ($exam_questions as $key => $exam_question) {
-            $question_id = $exam_question->id;
-            $question_user = questions_users::where('id_question', $question_id)->get();
-
-            if ($question_user[0]->correct_answer == "-") {
-                array_push($array_open_questions, $question_id);
-            } else {
-                if ($question_user[0]->answer == $exam_question->correct_answer) {
-                    array_push($array_correct, $question_id);
-                } else {
-                    array_push($array_incorrect, $question_id);
-                }
-            }
-        }
-
-        $correct_answer_count = count($array_correct);
-        $incorrect_answer_count = count($array_incorrect);
-        $open_answer_count = count($array_open_questions);
-        $blank_answer_count = count($array_blank);
-        /* #endregion */
+        $final_correct_answer = $total_correct + $last_correct_answer;
+        $final_incorrect_answer = $total_incorrect + $last_incorrect_answer;
 
         return view('examuser.final_result', compact(
-            'total_correct',
-            'total_incorrect',
-
+            // 'total_correct',
+            // 'total_incorrect',
+            // 'last_correct_answer',
+            // 'last_incorrect_answer',
+            'final_correct_answer',
+            'final_incorrect_answer',
         ));
+
+        /* #endregion */
     }
 
     public function final_result(Request $request, $id)

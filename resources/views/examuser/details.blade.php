@@ -43,6 +43,8 @@
     <form action="/examuser/save_open_question" method="POST" class="question-container">
         @csrf
 
+        <input hidden type="text" name="control_number" id="control_number" value="{{ $control_number }}">
+
         <input hidden type="text" name="exam_user_id" id="exam_user_id" value="{{ $id_user }}">
         <input hidden type="text" name="exam_id" id="exam_id" value="{{ $exam_id }}">
 
