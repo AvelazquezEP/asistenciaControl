@@ -16,6 +16,13 @@
         }
     </style>
 
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{ $message }}</strong>.
+        </div>
+    @endif
+
     <div class="container">
         <h2 class="title">{{ $exam->exam_name }}</h2>
         <p class="questions_number"><b>Total questions:</b> {{ $exam->number_of_questions }}</p>

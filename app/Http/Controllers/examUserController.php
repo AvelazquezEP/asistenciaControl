@@ -30,7 +30,6 @@ class examUserController extends Controller
 
         return view('examuser.index', compact('questions', 'exam'));
     }
-    /* #region CREATE/STORE */
 
     public function create($id)
     {
@@ -107,7 +106,7 @@ class examUserController extends Controller
                     'id_question' => strval($question->id),
                     'exam_id' => $exam_id,
                     'exam_name' => $exam_name_test,
-                    'id_exam_user' => $question->exam_id,
+                    'id_exam_user' => $question->exam_id, //<-- posiblemente no se necesita
                     'correct_answer' => $question->correct_answer,
                     'control_number' => $control_number,
                 ]);
@@ -142,8 +141,9 @@ class examUserController extends Controller
             }
         }
 
+        // return view('examuser.result', $exam_id, compact(['control_number', 'exam_id']));
         return redirect()->route('examuser.results', $exam_id)
-            ->with('success', 'Congratulations, you finished the exam', ['control_number' => $control_number]);
+            ->with(['exam_id' => $exam_id, 'control_number' => $control_number]);
         /* #endregion */
     }
 
@@ -157,7 +157,7 @@ class examUserController extends Controller
         $array_correct = array();
         $array_incorrect = array();
         $array_blank = array();
-        $array_open_questions = array();        
+        $array_open_questions = array();
 
         $exam_questions = questionsExam::where('exam_id', $id)->get();
 
@@ -181,7 +181,7 @@ class examUserController extends Controller
         $open_answer_count = count($array_open_questions);
         $blank_answer_count = count($array_blank);
 
-        $exam_user_save = exam_users::where()->get();
+        // $exam_user_save = exam_users::where()->get();
 
         return view('examuser.result', compact(
             'correct_answer_count',
@@ -190,6 +190,17 @@ class examUserController extends Controller
             'blank_answer_count',
         ));
         /* #endregion */
+    }
+
+    public function save_result(Request $request)
+    {
+        $request->validate([]);
+
+        $control_number = $request->get('user_control_number');
+        $exam_id = $request->get('exam_id');
+
+        return redirect()->route('examuser.index', $exam_id)
+            ->with('success', 'Control Number: ' . $control_number . ' Exam ID: ' . $exam_id);
     }
 
     // This functions its like a index method

@@ -10,7 +10,7 @@
         }
 
         .question-container {
-            background-color: rgb(248, 248, 248);            
+            background-color: rgb(248, 248, 248);
             display: flex;
             flex-direction: column;
             gap: 1rem;
