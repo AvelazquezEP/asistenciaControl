@@ -152,6 +152,12 @@
                                                     Manage Exams
                                                 </a>
                                             </li>
+                                            <li>
+                                                {{-- href="{{ route('tests.index') }}" --}}
+                                                <a class="dropdown-item" href="{{ route('examuser.exam_users') }}">
+                                                    Review Exams
+                                                </a>
+                                            </li>
                                         @endcan
                                         @can('post-list')
                                             <li class="dropdown">

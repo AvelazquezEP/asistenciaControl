@@ -289,6 +289,13 @@ class examUserController extends Controller
         $final_correct_answer = $total_correct + $last_correct_answer;
         $final_incorrect_answer = $total_incorrect + $last_incorrect_answer;
 
+        $exam_user = exam_users::where('control_number', $control_number)->get();
+
+        $exam_user[0]->correct_answer = $final_correct_answer;
+        $exam_user[0]->incorrect_answer = $final_incorrect_answer;
+
+        $exam_user[0]->save();
+
         return view('examuser.final_result', compact(
             // 'total_correct',
             // 'total_incorrect',

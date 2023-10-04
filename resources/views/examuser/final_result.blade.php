@@ -67,7 +67,6 @@
     {{-- <p>FINAL COUNT: {{ $final_correct_answer }}</p>
     <p>FINAL COUNT: {{ $final_incorrect_answer }}</p> --}}
 
-
     <div class="answer-container">
         <div class="correct-container">
             <div>
