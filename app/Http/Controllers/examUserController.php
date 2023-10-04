@@ -157,7 +157,7 @@ class examUserController extends Controller
         $array_correct = array();
         $array_incorrect = array();
         $array_blank = array();
-        $array_open_questions = array();
+        $array_open_questions = array();        
 
         $exam_questions = questionsExam::where('exam_id', $id)->get();
 
@@ -180,6 +180,8 @@ class examUserController extends Controller
         $incorrect_answer_count = count($array_incorrect);
         $open_answer_count = count($array_open_questions);
         $blank_answer_count = count($array_blank);
+
+        $exam_user_save = exam_users::where()->get();
 
         return view('examuser.result', compact(
             'correct_answer_count',
