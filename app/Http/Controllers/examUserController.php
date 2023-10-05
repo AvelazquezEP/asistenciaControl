@@ -297,7 +297,7 @@ class examUserController extends Controller
 
         $exam_user[0]->save();
 
-        return view('examuser.final_result', compact(            
+        return view('examuser.final_result', compact(
             'final_correct_answer',
             'final_incorrect_answer',
         ));
