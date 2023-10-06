@@ -110,6 +110,7 @@ class examUserController extends Controller
                     'id_exam_user' => $question->exam_id, //<-- posiblemente no se necesita
                     'correct_answer' => $question->correct_answer,
                     'control_number' => $control_number,
+                    'answer_result' => '-',
                 ]);
 
                 $save_question->save();
@@ -124,6 +125,7 @@ class examUserController extends Controller
                         'id_exam_user' => $question->exam_id,
                         'correct_answer' => "-",
                         'control_number' => $control_number,
+                        'answer_result' => '-'
                     ]);
                     $save_question->save();
                 } else {
@@ -136,13 +138,13 @@ class examUserController extends Controller
                         'id_exam_user' => $question->exam_id,
                         'correct_answer' => "-",
                         'control_number' => $control_number,
+                        'answer_result' => '-'
                     ]);
                     $save_question->save();
                 }
             }
         }
 
-        // return view('examuser.result', $exam_id, compact(['control_number', 'exam_id']));
         return redirect()->route('examuser.results', $exam_id)
             ->with(['exam_id' => $exam_id, 'control_number' => $control_number]);
         /* #endregion */
@@ -170,8 +172,12 @@ class examUserController extends Controller
                 array_push($array_open_questions, $question_id);
             } else {
                 if ($question_user[0]->answer == $exam_question->correct_answer) {
+                    $question_user[0]->answer_result = "true";
+                    $question_user[0]->save();
                     array_push($array_correct, $question_id);
                 } else {
+                    $question_user[0]->answer_result = "false";
+                    $question_user[0]->save();
                     array_push($array_incorrect, $question_id);
                 }
             }
@@ -265,14 +271,19 @@ class examUserController extends Controller
         $questions = questions_users::where('control_number', $control_number)->get();
 
         foreach ($questions as $question) {
+
             $question_id = $question->id;
             if ($question->correct_answer == "-") {
                 array_push($array_questions, $question_id);
 
                 $input_answer = $request->get('question_answer_' . $question_id);
                 if ($input_answer == 'true') {
+                    $question->answer_result = 'true';
+                    $question->save();
                     array_push($array_correct, $question_id);
                 } else {
+                    $question->answer_result = 'false';
+                    $question->save();
                     array_push($array_incorrect, $question_id);
                 }
             }
@@ -282,6 +293,7 @@ class examUserController extends Controller
         $total_incorrect = count($array_incorrect);
         /* #endregion */
 
+        /* #region calculate total answer */
         $last_result = exam_users::where('control_number', $control_number)->get();
 
         $last_correct_answer = (int)$last_result[0]->correct_answer;
@@ -317,10 +329,20 @@ class examUserController extends Controller
         /* #endregion */
     }
 
-    public function review_exam()
+    public function review_exam($id)
     {
-        $test_tmp = "Temporal PDF View";
 
-        return view('examuser.review_exam', compact('test_tmp'));
+        $exam_user = exam_users::where('id', $id)->get();
+
+        $control_number = $exam_user[0]->control_number;
+        $exam_id = $exam_user[0]->id_exam;
+
+        $questions_saved = questionsExam::where('exam_id', $exam_id)->get();
+        $user_questions = questions_users::where('control_number', $control_number)->get();
+
+        // foreach ($user_questions as $user_question) {
+        // }
+
+        return view('examuser.review_exam', compact('question_saved', 'user_questions'));
     }
 }

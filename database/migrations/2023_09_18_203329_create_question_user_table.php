@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('correct_answer');
             $table->string('exam_name');
             $table->string('control_number');
+            $table->string('answer_result');
             $table->timestamps();
 
             $table->foreignId('id_exam_user')->constrained(
