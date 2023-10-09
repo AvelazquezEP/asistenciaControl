@@ -36,7 +36,16 @@
         }
 
         .correct_answer {
-            background-color: rgb(181, 226, 163);
+            /* background-color: rgb(255, 255, 255); */
+            /* color: azure; */
+        }
+
+        .true-question {
+            background-color: rgb(191, 240, 178);
+        }
+
+        .false-question {
+            background-color: rgb(240, 180, 178);
         }
     </style>
 
@@ -52,39 +61,74 @@
             </div>
         </div>
         @foreach ($user_questions as $key => $question)
-            <div class="question-container">
-                <div class="question">
-                    {{ $question->question }}
-                </div>
-                <div class="answer">
-                    @if ($question->correct_answer != '-')
-                        @foreach ($questions_saved as $key => $question_saved)
-                            @if ($question_saved->id == $question->id_question)
-                                @if ($question_saved->correct_answer == 'option_a')
+            @if ($question->answer_result != 'false')
+                {{-- TRUE --}}
+                <div class="question-container true-question">
+                    <div class="question">
+                        {{ $question->question }}
+                    </div>
+                    <div class="answer">
+                        @if ($question->correct_answer != '-')
+                            @foreach ($questions_saved as $key => $question_saved)
+                                @if ($question_saved->id == $question->id_question)
                                     @if ($question_saved->correct_answer == 'option_a')
-                                    @else
+                                        <p class="correct_answer">a) {{ $question_saved->option_a }}</p>
+                                        <p class="">b) {{ $question_saved->option_b }}</p>
+                                        <p class="">c) {{ $question_saved->option_c }}</p>
+                                    @elseif ($question_saved->correct_answer == 'option_b')
+                                        <p class="">a) {{ $question_saved->option_a }}</p>
+                                        <p class="correct_answer">b) {{ $question_saved->option_b }}</p>
+                                        <p class="">c) {{ $question_saved->option_c }}</p>
+                                    @elseif ($question_saved->correct_answer == 'option_c')
+                                        <p class="">a) {{ $question_saved->option_a }}</p>
+                                        <p class="">b) {{ $question_saved->option_b }}</p>
+                                        <p class="correct_answer">c) {{ $question_saved->option_c }}</p>
                                     @endif
-                                    <p class="correct_answer">a) {{ $question_saved->option_a }}</p>
-                                    <p>b) {{ $question_saved->option_b }}</p>
-                                    <p>c) {{ $question_saved->option_c }}</p>
-                                @elseif ($question_saved->correct_answer == 'option_b')
-                                    <p>a) {{ $question_saved->option_a }}</p>
-                                    <p class="correct_answer">b) {{ $question_saved->option_b }}</p>
-                                    <p>c) {{ $question_saved->option_c }}</p>
-                                @elseif ($question_saved->correct_answer == 'option_c')
-                                    <p>a) {{ $question_saved->option_a }}</p>
-                                    <p>b) {{ $question_saved->option_b }}</p>
-                                    <p class="correct_answer">c) {{ $question_saved->option_c }}</p>
+                                @else
+                                    {{--  --}}
                                 @endif
-                            @else
-                                {{--  --}}
-                            @endif
-                        @endforeach
-                    @else
-                        <p><b>Answer:</b> {{ $question->answer }}</p>
-                    @endif()
+                            @endforeach
+                        @else
+                            <p><b>Answer:</b> {{ $question->answer }}</p>
+                        @endif()
+                    </div>
                 </div>
-            </div>
+            @else
+                {{-- FALSE --}}
+                <div class="question-container false-question">
+                    <div class="question">
+                        {{ $question->question }}
+                    </div>
+                    <div class="answer">
+                        @if ($question->correct_answer != '-')
+                            @foreach ($questions_saved as $key => $question_saved)
+                                @if ($question_saved->id == $question->id_question)
+                                    @if ($question_saved->correct_answer == 'option_a')
+                                        @if ($question_saved->correct_answer == 'option_a')
+                                        @else
+                                        @endif
+                                        <p class="correct_answer">a) {{ $question_saved->option_a }}</p>
+                                        <p>b) {{ $question_saved->option_b }}</p>
+                                        <p>c) {{ $question_saved->option_c }}</p>
+                                    @elseif ($question_saved->correct_answer == 'option_b')
+                                        <p>a) {{ $question_saved->option_a }}</p>
+                                        <p class="correct_answer">b) {{ $question_saved->option_b }}</p>
+                                        <p>c) {{ $question_saved->option_c }}</p>
+                                    @elseif ($question_saved->correct_answer == 'option_c')
+                                        <p>a) {{ $question_saved->option_a }}</p>
+                                        <p>b) {{ $question_saved->option_b }}</p>
+                                        <p class="correct_answer">c) {{ $question_saved->option_c }}</p>
+                                    @endif
+                                @else
+                                    {{--  --}}
+                                @endif
+                            @endforeach
+                        @else
+                            <p><b>Answer:</b> {{ $question->answer }}</p>
+                        @endif()
+                    </div>
+                </div>
+            @endif
         @endforeach
     </div>
 @endsection
