@@ -338,10 +338,12 @@ class examUserController extends Controller
         $user_name = $exam_user[0]->user_name;
         $control_number = $exam_user[0]->control_number;
         $exam_id = $exam_user[0]->id_exam;
+        $correct_answers = $exam_user[0]->correct_answer;
+        $incorrect_answers = $exam_user[0]->incorrect_answer;
 
         $questions_saved = questionsExam::where('exam_id', $exam_id)->orderBy('id', 'ASC')->get();
         $user_questions = questions_users::where('control_number', $control_number)->orderBy('id', 'ASC')->get();
 
-        return view('examuser.review_exam', compact('questions_saved', 'user_questions', 'control_number', 'user_name'));
+        return view('examuser.review_exam', compact('incorrect_answers', 'correct_answers', 'questions_saved', 'user_questions', 'control_number', 'user_name'));
     }
 }

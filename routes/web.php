@@ -25,6 +25,7 @@ use App\Http\Controllers\QuestionExamController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResourceCategoryController;
 use App\Http\Controllers\SchedulerController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use PHPUnit\Framework\Attributes\Group;
 
 Auth::routes(); //<--- Este necesita de una clase (importarla arriba)
@@ -204,6 +205,20 @@ Route::controller(RequestController::class)->Group(function () {
     Route::get('/request/update/{id}', 'updated')->name('request.update');
     Route::get('/request/destroy/{id}', 'destroy')->name('request.remove');
 });
+/* #endregion */
+
+/* #region Email Verification  */
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fullfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
 /* #endregion */
 
 /* #region CUSTOM MIDDLEWARE FOR SOME TABLES (Controllers) */

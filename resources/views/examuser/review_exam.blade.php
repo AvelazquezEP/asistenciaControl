@@ -53,11 +53,21 @@
         {{-- user_questions --> QUESTIONS USERS --}}
         {{-- questions_saved --> EXAM QUESTIONS --}}
         <div class="header_section">
-            <div>
-                <p><b>Name:</b> {{ $user_name }}</p>
+            <div class="left-side">
+                <div>
+                    <p><b>Name:</b> {{ $user_name }}</p>
+                </div>
+                <div>
+                    <p><b>Control Number:</b> {{ $control_number }}</p>
+                </div>
             </div>
-            <div>
-                <p><b>Control Number:</b> {{ $control_number }}</p>
+            <div class="right-side">
+                <div>
+                    <p><b>Correct:</b> {{ $correct_answers }}</p>
+                </div>
+                <div>
+                    <p><b>Incorrect:</b> {{ $incorrect_answers }}</p>
+                </div>
             </div>
         </div>
         @foreach ($user_questions as $key => $question)
