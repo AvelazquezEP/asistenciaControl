@@ -37,6 +37,7 @@ class QuestionExamController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
+            // Possible INPUTS
             /* #region INPUT VALIDATE */
             // 'number_of_question' => 'required',
             // 'question' => 'required',
